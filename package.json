@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node dist/server.js",
-    "dev": "ts-node --project tsconfig.server.json src/server.ts",
+    "start": "NODE_ENV=production node dist/server/server.js",
+    "dev": "ts-node --project tsconfig.server.json server/server.ts",
 
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "next build",
