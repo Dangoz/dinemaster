@@ -22,10 +22,10 @@ export default class UserModel {
 
   // insert a new user given user data
   async createUser(user: any, hash: string): Promise<IUser> {
-    const { firstName, lastName, email } = user;
+    const { username, email } = user;
     const newUser = await this._prisma.user.create({
       data: {
-        username: `${firstName} ${lastName}`,
+        username: username,
         email: email,
         password: hash
       }
