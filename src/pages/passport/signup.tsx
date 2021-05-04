@@ -1,4 +1,4 @@
-import landingStyles from "../styles/landing/landing.module.css";
+import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
 
 const signup = () => {
@@ -36,7 +36,7 @@ const signup = () => {
           value="Sign Up"
         />
 
-        <Link href="/signin" ><div className={`${landingStyles.blackRegister}`}>Sign In</div></Link>
+        <Link href="/passport/signin" ><div className={`${landingStyles.blackRegister}`}>Sign In</div></Link>
       </form>
 
     </div>

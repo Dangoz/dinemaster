@@ -14,21 +14,23 @@
   margin: 0 auto;
 }
 
-.logo {
-  
-  margin-left: auto;
-  margin-right: auto;
-
+.head {
   grid-row: 1 / 2;
   text-align: center;
+  font-size: 17.5px;
+  margin-top: 75px;
+}
+
+.logo {
+  width: 45%;
+  padding-bottom: 20px;
 }
 
 .options {
-  margin-left: auto;
-  margin-right: auto;
-  
-  text-align: center;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
   display: grid;
+  grid-row: 2 / 3;
 }
 
 .coloredLink {

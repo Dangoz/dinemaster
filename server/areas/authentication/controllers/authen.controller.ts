@@ -21,7 +21,7 @@ class AuthenticationController implements IController {
 
   private showLandingPage = (req: express.Request, res: express.Response) => {
     console.log('showing landing page');
-    return nextApp.render(req, res, '/landing', { id: 'uuid0000001' })
+    return nextApp.render(req, res, '/passport/landing', { id: 'uuid0000001' })
   };
 
   // login as existing user;
@@ -34,7 +34,7 @@ class AuthenticationController implements IController {
       }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.redirect("/b");
+        return res.redirect("/home");
       });
     })(req, res, next);
   };
@@ -43,12 +43,12 @@ class AuthenticationController implements IController {
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (await this.service.findUserByEmail(req.body.email)) {
 
-      nextApp.render(req, res, '/signup', { id: 'uuid0000001' })
+      nextApp.render(req, res, '/passport/signup', { id: 'uuid0000001' })
       return;
     }
     
     this.service.createUser(req.body);
-    nextApp.render(req, res, '/signin', { id: 'uuid0000001' })
+    nextApp.render(req, res, '/passport/signin', { id: 'uuid0000001' })
   };
 
 }
