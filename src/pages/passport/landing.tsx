@@ -1,8 +1,10 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
-
+import { checkUser } from "../../api/require.authen";
 
 const landing = () => {
+  checkUser()
+
   return (
 
     <>

@@ -28,6 +28,20 @@
   margin: auto;
 }
 
+.options img:not(.plus, .message) {
+  width: 32px;
+  height: 32px;
+
+}
+.plus {
+  width: 60px;
+  height: 60px;
+}
+.message {
+  width: 32px;
+  height: 28px;
+
+}
 .options img {
   cursor: pointer;
   margin-left: 30px;

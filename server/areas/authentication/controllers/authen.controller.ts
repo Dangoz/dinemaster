@@ -4,6 +4,7 @@ import { forwardAuthenticated, ensureAuthenticated } from "../../../middlewares/
 import passport from "passport";
 import { AuthenticationService } from "../services/authen.service";
 import nextApp from "../../../config/next.app";
+import IUser from "../../../interfaces/user.interface";
 
 class AuthenticationController implements IController {
   public path = '/';
@@ -14,9 +15,10 @@ class AuthenticationController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, forwardAuthenticated, this.showLandingPage);
+    this.router.get('/', forwardAuthenticated, this.showLandingPage);
     this.router.post(`/register`, this.registration);
     this.router.post(`/login`, this.login);
+    this.router.get(`/user/:id`, ensureAuthenticated, this.userProfile);
   }
 
   private showLandingPage = (req: express.Request, res: express.Response) => {
@@ -50,6 +52,13 @@ class AuthenticationController implements IController {
     this.service.createUser(req.body);
     nextApp.render(req, res, '/passport/signin', { id: 'uuid0000001' })
   };
+
+  private userProfile = async (req: express.Request, res: express.Response) => {
+    
+    console.log(`profile return! ${req.user.username}`);
+    const user = req.user;
+    res.status(200).json(user);
+  }
 
 }
 

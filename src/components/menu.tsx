@@ -7,11 +7,11 @@ const Menu = () => {
     <div className={MenuStyle.wrapper}>
 
       <ul className={MenuStyle.options}>
-        <li><Link href="/home"><img src="/menu/home.svg" alt="home"></img></Link></li>
-        <li><Link href="/search"><img src="/menu/search.svg" alt="search"></img></Link></li>
-        <li><Link href="/post"><img src="/menu/plus.svg" alt="plus"></img></Link></li>
-        <li><Link href="/message"><img src="/menu/message.svg" alt="message"></img></Link></li>
-        <li><Link href="/profile"><img src="/menu/profile.svg" alt="profile"></img></Link></li>
+        <li><Link href="/home"><img src="/menu/home.png" alt="home"></img></Link></li>
+        <li><Link href="/search"><img src="/menu/search.png" alt="search"></img></Link></li>
+        <li><Link href="/post"><img className={MenuStyle.plus} src="/menu/plus.png" alt="plus"></img></Link></li>
+        <li><Link href="/message"><img className={MenuStyle.message} src="/menu/message.png" alt="message"></img></Link></li>
+        <li><Link href="/profile"><img src="/menu/profile.png" alt="profile"></img></Link></li>
       </ul>
 
     </div>

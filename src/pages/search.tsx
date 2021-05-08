@@ -1,12 +1,24 @@
 import Menu from "../components/menu";
+import api from "../config/axios";
+import { requireAuthen } from "../api/require.authen";
 
-const search = () => {
+const search = ({ user }) => {
   return (
     <>
-      Search seaRCHHH
+      Search seaRCHHH / {user.username} !
         <Menu/>
       </>
   )
 }
 
-export default search
+export const getServerSideProps = requireAuthen(async function(ctx, user) {
+
+  return {
+    props: {
+      user
+    }
+  }
+})
+
+export default search;
+

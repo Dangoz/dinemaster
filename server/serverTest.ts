@@ -10,6 +10,12 @@ const app = next({ dev });
 
 const port = process.env.PORT || 3000;
 
+// useDebond
+// axios 
+
+// socket.io
+// websocket
+
 (async () => {
   try {
     await app.prepare();
@@ -19,9 +25,7 @@ const port = process.env.PORT || 3000;
     server.use(express.urlencoded({ extended: true }));
 
     const handle = app.getRequestHandler();
-    server.all('*', (req: express.Request, res: express.Response) => {
-      return handle(req, res)
-    });
+    
 
     server.get('/hey', (req: express.Request, res: express.Response) => {
       console.log('hey');
@@ -31,6 +35,10 @@ const port = process.env.PORT || 3000;
     server.get('/b', (req: express.Request, res: express.Response) => {
       return app.render(req, res, '/b', { id: 'uuid666666' })
     })
+
+    server.all('*', (req: express.Request, res: express.Response) => {
+      return handle(req, res)
+    });
     // server.use('/', new AuthenticationController(new AuthenticationService()).router);
 
     server.listen(port, (err?: any) => {

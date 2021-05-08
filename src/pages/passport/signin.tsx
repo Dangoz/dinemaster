@@ -1,11 +1,14 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
+import router from "next/router"
+import { checkUser } from "../../api/require.authen";
 
 const signin = () => {
+  checkUser();
+
   return (
     <div className={landingStyles.wrapper}>
 
-      {/* <img className={landingStyles.logo} src="/logo_white_vertical.svg" alt="BG" /> */}
       <div className={landingStyles.head}>
         <img className={landingStyles.logo} src="/logo_white_vertical.svg" alt="logo" />
         <br />Stay Posted, Stay Fresh
@@ -34,6 +37,8 @@ const signin = () => {
           <input className={landingStyles.coloredLink}
             type="submit"
             value="Log In"
+            onClick={() => {}}
+            onSubmit={() => {}}
           />
 
           <Link href="/passport/signup" ><div className={landingStyles.black}>new User? Sign Up</div></Link>

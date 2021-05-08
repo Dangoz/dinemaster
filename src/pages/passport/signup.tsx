@@ -1,7 +1,10 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
+import { checkUser } from "../../api/require.authen";
 
 const signup = () => {
+  checkUser();
+
   return (
     <div className={landingStyles.white}>
       <form className={landingStyles.registerForm} method="POST" action="/register">
