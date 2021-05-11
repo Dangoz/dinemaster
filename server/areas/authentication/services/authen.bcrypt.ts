@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 
 // salt/hash encryption for passwords
 export default class Bcrypt {
-  saltRounds: number = 10;
+  private saltRounds: number = 10;
 
   public async encrypt(password): Promise<string> {
     try {

@@ -9,7 +9,7 @@ export const requireAuthen: (cb) => GetServerSideProps = (cb) => {
     // using cookie to request a user
     const response = await api({
       method: 'get',
-      url: '/user/WoW12312313123',
+      url: '/user',
       headers: ctx.req.headers.cookie ? { cookie: ctx.req.headers.cookie } : undefined
     })
 
@@ -33,7 +33,7 @@ export const checkUser: () => void = () => {
   console.log('checking user...');
   api({
     method: 'get',
-    url: '/user/WoW12312313123',
+    url: '/user',
     withCredentials: true
   }).then(response => {
 

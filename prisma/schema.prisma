@@ -18,6 +18,22 @@ model User {
   password  String 
   createdAt DateTime  @default(now()) @map("create_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
+  posts     Post[]
 
   @@map(name: "user")
+}
+
+model Post {
+  id        String  @id @default(uuid())
+  message   String  @map("content")
+  source    String
+  createdAt DateTime  @default(now()) @map("create_at")
+  userId    String
+  User      User  @relation(fields: [userId], references: [id])
+  // comments  Int   @default(0) 
+  // commentList Comment[]
+  // likes     Int   @default(0)
+  // likesList Likes[]
+  
+  @@map(name: "post")
 }

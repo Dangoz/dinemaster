@@ -1,6 +1,3 @@
-// import IPost from "./post.interface";
-// import * as express from "express";
-
 export default interface IUser {
   id: string;
   username: string;

@@ -18,12 +18,12 @@ class AuthenticationController implements IController {
     this.router.get('/', forwardAuthenticated, this.showLandingPage);
     this.router.post(`/register`, this.registration);
     this.router.post(`/login`, this.login);
-    this.router.get(`/user/:id`, ensureAuthenticated, this.userProfile);
+    this.router.get(`/user`, ensureAuthenticated, this.userProfile);
   }
 
   private showLandingPage = (req: express.Request, res: express.Response) => {
     console.log('showing landing page');
-    return nextApp.render(req, res, '/passport/landing', { id: 'uuid0000001' })
+    return nextApp.render(req, res, '/passport/landing')
   };
 
   // login as existing user;
@@ -45,12 +45,12 @@ class AuthenticationController implements IController {
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (await this.service.findUserByEmail(req.body.email)) {
 
-      nextApp.render(req, res, '/passport/signup', { id: 'uuid0000001' })
+      nextApp.render(req, res, '/passport/signup')
       return;
     }
     
     this.service.createUser(req.body);
-    nextApp.render(req, res, '/passport/signin', { id: 'uuid0000001' })
+    nextApp.render(req, res, '/passport/signin')
   };
 
   private userProfile = async (req: express.Request, res: express.Response) => {

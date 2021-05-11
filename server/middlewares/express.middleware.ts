@@ -11,6 +11,7 @@ module.exports = (app, nextApp) => {
   // Static File Serving and Post Body Parsing
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use(express.urlencoded({ extended: true }));
+  app.use(express.json());
 
   // app.use(function(req, res, next) {
   //   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');

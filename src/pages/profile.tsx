@@ -30,11 +30,11 @@ const profile = ({ user }) => {
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>
-              <button className={postState !== 'post' && ProfileStyle.optionInactive}
+              <button className={postState !== 'post' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
                   setPostState('post')
                 }}>Posts</button>
-              <button className={postState !== 'visit' && ProfileStyle.optionInactive}
+              <button className={postState !== 'visit' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
                   setPostState('visit')
                 }}>Visits</button>
@@ -42,41 +42,21 @@ const profile = ({ user }) => {
 
             <div className={ProfileStyle.post}>
 
-              {postData.map(data => {
+              {/* {postData.map(data => {
                 <div className={ProfileStyle.post_post}>
                   <ContentLoader>
                     < rect y="0" x="0" width="200" height="150" rx="30px" />
                   </ContentLoader>
                 </div>
-              })}
+              })} */}
 
 
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
+              {/* <div className={ProfileStyle.post_post}>
+                <ContentLoader key="1">
                   < rect x="0" width="200" height="150" rx="30px" />
                 </ContentLoader>
               </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect y="0" x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
+               <div className={ProfileStyle.post_post}>
                 <ContentLoader>
                   < rect x="0" width="200" height="150" rx="30px" />
                 </ContentLoader>
@@ -128,6 +108,16 @@ const profile = ({ user }) => {
               </div>
               <div className={ProfileStyle.post_post}>
                 <ContentLoader>
+                  < rect y="0" x="0" width="200" height="150" rx="30px" />
+                </ContentLoader>
+              </div>
+              <div className={ProfileStyle.post_post}>
+                <ContentLoader>
+                  < rect x="0" width="200" height="150" rx="30px" />
+                </ContentLoader>
+              </div>
+              <div className={ProfileStyle.post_post}>
+                <ContentLoader>
                   < rect x="0" width="200" height="150" rx="30px" />
                 </ContentLoader>
               </div>
@@ -141,6 +131,16 @@ const profile = ({ user }) => {
                   < rect x="0" width="200" height="150" rx="30px" />
                 </ContentLoader>
               </div>
+              <div className={ProfileStyle.post_post}>
+                <ContentLoader>
+                  < rect x="0" width="200" height="150" rx="30px" />
+                </ContentLoader>
+              </div>
+              <div className={ProfileStyle.post_post}>
+                <ContentLoader>
+                  < rect x="0" width="200" height="150" rx="30px" />
+                </ContentLoader>
+              </div> */}
 
             </div>
           </div>
