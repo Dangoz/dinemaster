@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Post from "../api/post";
 
 const post = ({ user }) => {
-
+  const result = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (
     <>
@@ -15,8 +15,17 @@ const post = ({ user }) => {
       }}>
         <input type="textarea" name="message"></input>
         <input type="file" accept="image/*" name="image"></input>
-        <br/><button type="submit" value="Create">Create</button>
+        <br /><button type="submit" value="Create">Create</button>
       </form>
+
+      <div>
+        hello
+        {result.map((item, index) => (
+          
+          <div key={index}>{item}</div>
+          // console.log("hi: " + item);
+        ))}
+      </div>
 
       <Menu />
     </>

@@ -51,4 +51,20 @@ export default class UserModel {
       }
     })
   }
+
+  async updateBio(id: string, bio: string): Promise<IUser> {
+    const user = this._prisma.user.update({
+      where: { id },
+      data: { bio }
+    })
+    return user; 
+  }
+
+  async updatePhoto(id: string, photo: string): Promise<IUser> {
+    const user = this._prisma.user.update({
+      where: { id },
+      data: { photo }
+    })
+    return user; 
+  }
 }

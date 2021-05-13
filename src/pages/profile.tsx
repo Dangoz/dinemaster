@@ -1,7 +1,8 @@
 import ProfileStyle from "../styles/profile.module.css";
 import { requireAuthen } from "../api/require.authen";
-import { GetServerSideProps } from "next";
+import Bio from "../components/profile/bio";
 import Menu from "../components/menu";
+import Photo from "../components/profile/photo"
 import api from "../config/axios";
 import ContentLoader from "react-content-loader";
 import { useState } from "react";
@@ -19,14 +20,14 @@ const profile = ({ user }) => {
         </div>
 
         <div className={ProfileStyle.content}>
-          <img className={ProfileStyle.thumbnail} src="/thumbnail.png"></img>
+          <Photo id={user.id} photo={user.photo}/>
 
           <div className={ProfileStyle.follow}>
             <div className={ProfileStyle.follower}>100<br />Followers</div>
             <div className={ProfileStyle.following}>50<br />Following</div>
           </div>
 
-          <div className={ProfileStyle.bio}>Are you hungry? <br /> let's find a place to eat!</div>
+          <Bio id={user.id} bio={user.bio} />
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>

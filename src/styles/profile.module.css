@@ -29,7 +29,7 @@
   display: grid;
   grid-template-rows: 55px 50px 50px auto;
 }
-.thumbnail {
+.photo {
   width: 145px;
   height: 145px;
   margin-left: auto;
@@ -38,8 +38,38 @@
   position: relative;
   top: -95px;
   border: 1px solid #c4c4c4;
-  /* border-style: none; */
   border-radius: 20px;
+}
+.photo img {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+}
+.photo img:hover {
+  opacity: 75%;
+}
+.photo:hover {
+  border-style: solid;
+  border-width: 5px;
+  border-color: black;
+  border-radius: 25px;
+}
+.photo:hover > .addButton {
+  opacity: 100%;
+}
+.photo:hover > img {
+  opacity: 90%;
+}
+.addButton {
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+}
+.addInput {
+  display: none;
 }
 
 .follow {
@@ -61,8 +91,25 @@
 
 .bio {
   font-size: 15px;
-  padding-top: 20px;
+  padding-top: 15px;
   grid-row: 3 / 4;
+  /* background-color: red; */
+  width: 390px;
+  height: 50px;
+
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bio:hover {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 15px;
+}
+.bioInput {
+  padding-top: 0;
+  padding-left: 15px
 }
 .posts {
   margin-top: 25px;

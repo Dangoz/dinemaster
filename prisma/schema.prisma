@@ -14,6 +14,8 @@ generator client {
 model User {
   id        String  @id @default(uuid())
   username  String
+  photo     String  @default("/thumbnail.png")
+  bio       String  @default("explore and conquer.. food")
   email     String  @unique 
   password  String 
   createdAt DateTime  @default(now()) @map("create_at")
