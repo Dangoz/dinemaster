@@ -6,6 +6,11 @@ import { url } from "node:inspector";
 
 export default class Post {
 
+  /**
+   * create Image post
+   * @param event 
+   * @param user 
+   */
   static async createImagePost(event: FormEvent<HTMLFormElement>, user: IUser) {
     event.preventDefault();
 
@@ -31,5 +36,30 @@ export default class Post {
 
     // @ts-ignore reset form 
     event.target.reset();
+  }
+
+  /**
+   * 
+   * @param id 
+   * @returns 
+   */
+  static async getUserPosts(id: string): Promise<IPost[]> {
+    const response = await api.get(`/post/user?id=${id}`);
+    console.log(response);
+    return response.data;;
+  }
+
+  /**
+   * 
+   */
+   static async getPosts(id: string): Promise<IPost[]> {
+    const response = await api({
+      method: 'get',
+      url: `/post?id=${id}`,
+      withCredentials: true
+    });
+    const posts = response.data.posts;
+ 
+    return posts;
   }
 }

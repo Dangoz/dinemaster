@@ -28,7 +28,7 @@ const Bio = ({ id, bio }) => {
 
   return (
     <>
-      { edit && <input onMouseOut={movedOut}
+      { edit && <input onMouseOut={movedOut} maxLength={50}
       onKeyDown={enterKey}
       onChange={editContent}
       value={content} className={ProfileStyle.bio + " " + ProfileStyle.bioInput}/>}

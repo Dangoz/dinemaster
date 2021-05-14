@@ -1,0 +1,50 @@
+.logo {
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: auto;
+  align-items: center;
+  width: 250px;
+  height: auto;
+}
+.userRec {
+  margin-top: 10px;
+  /* text-align: center; */
+}
+.userRecText {
+  text-align: center;
+  position: relative;
+  left: -165px;
+  transition: 1s;
+}
+
+
+.post {
+  position: relative;
+  top: 20px;
+  grid-row: 2 / 3;
+  grid-column: 1 / 4;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-rows: auto;
+  /* grid-auto-rows: 100px; */
+  /* grid-gap: 1rem; */
+  padding-left: 2em;
+  padding-right: 1em;
+
+  /* background-color: lightseagreen; */
+}
+.post_post {
+  width: 200px;
+  height: 150px;
+  /* background-color: red; */
+  border-radius: 15px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+@media (min-width: 800px) {
+  .userRecText {
+    left: -315px;
+  }
+}

@@ -3,6 +3,7 @@ import express from "express";
 import { ensureAuthenticated } from "../../../middlewares/authen.middleware";
 import S3 from "../config/awsS3";
 import PostService from "../services/post.service";
+import IPost from "../../../interfaces/post.interface";
 
 class PostController implements IController {
   public path = '/post';
@@ -14,6 +15,8 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
+    this.router.get(`${this.path}`, ensureAuthenticated, this.getPosts);
+    this.router.get(`${this.path}/user`, ensureAuthenticated, this.getUserPosts);
     this.router.post(`${this.path}/create`, ensureAuthenticated, this.createPost);
     this.router.get('/s3url', this.createUrl);
   }
@@ -29,6 +32,19 @@ class PostController implements IController {
   private createUrl = async (req: express.Request, res: express.Response) => {
     const uploadUrl = await S3.generateUploadUrl();
     res.status(200).json({ uploadUrl });
+  }
+
+  private getPosts = async (req: express.Request, res: express.Response) => {
+    // const userId: string = req.query.id.toString();
+    const posts: IPost[] = await this.postService.getPosts(req.user.id);
+    console.log(`posts: ${posts[0].message}`)
+    res.status(200).json({ posts })
+  }
+
+  private getUserPosts = async (req: express.Request, res: express.Response) => {
+    // const userId: string = req.query.id.toString();
+    const posts: IPost[] = await this.postService.getUserPosts(req.user.id)
+    res.status(200).json({ posts });
   }
 
 }

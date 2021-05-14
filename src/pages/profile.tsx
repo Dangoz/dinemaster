@@ -3,15 +3,28 @@ import { requireAuthen } from "../api/require.authen";
 import Bio from "../components/profile/bio";
 import Menu from "../components/menu";
 import Photo from "../components/profile/photo"
-import api from "../config/axios";
+import Post from "../api/post";
 import ContentLoader from "react-content-loader";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
-  const [postData, setPostData] = useState([
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-  ]);
+  const [posts, setposts] = useState(null);
+  let load = [];
+  for (let i = 0; i < 20; i++) {
+    load.push(<div key={i} className={ProfileStyle.post_post}>
+      <ContentLoader>
+        < rect y="0" x="0" width="200" height="150" rx="30px" />
+      </ContentLoader>
+    </div>);
+  }
+
+  useEffect(() => {
+    Post.getUserPosts(user.id)
+      .then(data => setposts(data))
+  }, [])
+
+
   return (
     <>
       <div className={ProfileStyle.wrapper}>
@@ -20,7 +33,7 @@ const profile = ({ user }) => {
         </div>
 
         <div className={ProfileStyle.content}>
-          <Photo id={user.id} photo={user.photo}/>
+          <Photo id={user.id} photo={user.photo} />
 
           <div className={ProfileStyle.follow}>
             <div className={ProfileStyle.follower}>100<br />Followers</div>
@@ -41,114 +54,20 @@ const profile = ({ user }) => {
                 }}>Visits</button>
             </div>
 
+
             <div className={ProfileStyle.post}>
-
-              {/* {postData.map(data => {
-                <div className={ProfileStyle.post_post}>
-                  <ContentLoader>
-                    < rect y="0" x="0" width="200" height="150" rx="30px" />
-                  </ContentLoader>
-                </div>
-              })} */}
-
-
-              {/* <div className={ProfileStyle.post_post}>
-                <ContentLoader key="1">
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-               <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect y="0" x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect y="0" x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect y="0" x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div>
-              <div className={ProfileStyle.post_post}>
-                <ContentLoader>
-                  < rect x="0" width="200" height="150" rx="30px" />
-                </ContentLoader>
-              </div> */}
-
+              {posts ? posts.map((post, index) => (
+                <img key={index} className={ProfileStyle.post_post} src={post.source} />
+              )) :
+                load
+              }
             </div>
+
           </div>
 
         </div>
 
-        </div>
+      </div>
 
 
       <Menu />

@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -12,30 +12,77 @@ generator client {
 }
 
 model User {
-  id        String  @id @default(uuid())
+  id        String         @id @default(uuid())
   username  String
-  photo     String  @default("/thumbnail.png")
-  bio       String  @default("explore and conquer.. food")
-  email     String  @unique 
-  password  String 
-  createdAt DateTime  @default(now()) @map("create_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
+  photo     String         @default("/thumbnail.png")
+  bio       String         @default("explore and conquer.. food")
+  email     String         @unique
+  password  String
+  createdAt DateTime       @default(now()) @map("create_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
   posts     Post[]
+  likes     Likes[]
+  following Relationship[] @relation("follower")
+  follower  Relationship[] @relation("followed")
 
   @@map(name: "user")
 }
 
 model Post {
-  id        String  @id @default(uuid())
-  message   String  @map("content")
+  id        String     @id @default(uuid())
+  message   String     @map("content")
   source    String
-  createdAt DateTime  @default(now()) @map("create_at")
+  createdAt DateTime   @default(now()) @map("create_at")
   userId    String
-  User      User  @relation(fields: [userId], references: [id])
-  // comments  Int   @default(0) 
+  User      User       @relation(fields: [userId], references: [id])
+  likes     Int        @default(0)
+  likesList Likes[]
+  tags      Post_Tag[]
+  // comments  Int   @default(0)
   // commentList Comment[]
-  // likes     Int   @default(0)
-  // likesList Likes[]
-  
+
   @@map(name: "post")
+}
+
+model Likes {
+  id     String @id @default(uuid())
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+  postId String
+  Post   Post   @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
+  @@map(name: "likes")
+}
+
+model Relationship {
+  id         String @id @default(uuid())
+  followerId String
+  follower   User   @relation("follower", fields: [followerId], references: [id])
+  followedId String
+  followed   User   @relation("followed", fields: [followedId], references: [id])
+
+  @@unique([followerId, followedId])
+  @@map("relationship")
+}
+
+model Tag {
+  id    String     @id @default(uuid())
+  name  String
+  hit   Int
+  posts Post_Tag[]
+
+  // @@index([hit])
+  @@map("tag")
+}
+
+model Post_Tag {
+  id     String @id @default(uuid())
+  postId String
+  Post   Post   @relation(fields: [postId], references: [id])
+  tagId  String
+  Tag    Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([postId, tagId])
+  @@map("post_tag")
 }

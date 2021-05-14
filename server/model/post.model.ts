@@ -16,12 +16,25 @@ export default class PostModel {
     return newPost;
   }
 
-  // async getUserPosts(userId: string): Promise<IPost[]> {
-  //   const posts = await this._prisma.post.findMany({
-  //     where: { userId }
-  //   })
-  //   return posts;
-  // }
+  async getUserPosts(userId: string): Promise<IPost[]> {
+    const posts = await this._prisma.post.findMany({
+      where: { userId },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    return posts;
+  }
+
+  async getPostsRecent(): Promise<IPost[]> {
+    const posts = await this._prisma.post.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: 20
+    })
+    return posts
+  }
 
   // async getPostById(id: string): Promise<IPost> {
   //   const post = await this._prisma.post.findUnique({
