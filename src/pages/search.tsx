@@ -5,7 +5,7 @@ import { requireAuthen } from "../api/require.authen";
 const search = ({ user }) => {
   return (
     <>
-      Search seaRCHHH / {user.username} !
+      <input type="text" placeholder="Search"></input>
         <Menu/>
       </>
   )

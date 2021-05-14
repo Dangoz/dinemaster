@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
-  const [posts, setposts] = useState(null);
+  const [posts, setPosts] = useState(null);
   let load = [];
   for (let i = 0; i < 20; i++) {
     load.push(<div key={i} className={ProfileStyle.post_post}>
@@ -21,7 +21,7 @@ const profile = ({ user }) => {
 
   useEffect(() => {
     Post.getUserPosts(user.id)
-      .then(data => setposts(data))
+      .then(data => setPosts(data))
   }, [])
 
 

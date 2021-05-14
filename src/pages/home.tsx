@@ -9,7 +9,7 @@ import IPost from "../interface/post.interface"
 import ContentLoader from "react-content-loader";
 
 const home = ({ user }) => {
-  const [posts, setposts] = useState(null);
+  const [posts, setPosts] = useState(null);
   let load = [];
   for (let i = 0; i < 20; i++) {
     load.push(<div key={i} className={HomeStyle.post_post}>
@@ -21,7 +21,7 @@ const home = ({ user }) => {
 
   useEffect(() => {
     Post.getPosts(user.id)
-      .then(data => setposts(data))
+      .then(data => setPosts(data))
   }, [])
 
   return (
@@ -40,19 +40,6 @@ const home = ({ user }) => {
           )) :
           load
           }
-          {/* {posts ? <img className={HomeStyle.post_post} src={posts[0].source} />
-            : <div className={HomeStyle.post_post}>
-            <ContentLoader>
-              < rect y="0" x="0" width="200" height="150" rx="30px" />
-            </ContentLoader>
-          </div>}
-          {posts ? <img className={HomeStyle.post_post} src={posts[1].source} />
-            : <div className={HomeStyle.post_post}>
-            <ContentLoader>
-              < rect y="0" x="0" width="200" height="150" rx="30px" />
-            </ContentLoader>
-          </div>} */}
-
         </div>
 
       </div>

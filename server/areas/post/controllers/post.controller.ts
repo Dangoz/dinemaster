@@ -15,7 +15,7 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, ensureAuthenticated, this.getPosts);
+    this.router.get(`${this.path}/home`, ensureAuthenticated, this.getPosts);
     this.router.get(`${this.path}/user`, ensureAuthenticated, this.getUserPosts);
     this.router.post(`${this.path}/create`, ensureAuthenticated, this.createPost);
     this.router.get('/s3url', this.createUrl);

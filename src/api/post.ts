@@ -44,9 +44,14 @@ export default class Post {
    * @returns 
    */
   static async getUserPosts(id: string): Promise<IPost[]> {
-    const response = await api.get(`/post/user?id=${id}`);
-    console.log(response);
-    return response.data;;
+    const response = await api({
+      method: 'get',
+      url: `/post/user?id=${id}`,
+      withCredentials: true
+    });
+    const posts = response.data.posts;
+ 
+    return posts;
   }
 
   /**
@@ -55,7 +60,7 @@ export default class Post {
    static async getPosts(id: string): Promise<IPost[]> {
     const response = await api({
       method: 'get',
-      url: `/post?id=${id}`,
+      url: `/post/home?id=${id}`,
       withCredentials: true
     });
     const posts = response.data.posts;
