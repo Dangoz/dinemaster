@@ -25,13 +25,18 @@ class PostController implements IController {
     const postData = req.body;
     const status = await this.postService.createPost(postData, req.user.id, res);
     status
-      ? res.status(200).json({ message: "post created" }) 
+      ? res.status(200).json({ message: "post created" })
       : res.status(300).json({ error: "post not created" })
   }
 
   private createUrl = async (req: express.Request, res: express.Response) => {
-    const uploadUrl = await S3.generateUploadUrl();
-    res.status(200).json({ uploadUrl });
+    try {
+      console.log("GETTING URL")
+      const uploadUrl = await S3.generateUploadUrl();
+      res.status(200).json({ uploadUrl });
+    } catch (err) {
+
+    }
   }
 
   private getPosts = async (req: express.Request, res: express.Response) => {
