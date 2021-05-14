@@ -16,7 +16,8 @@ export default class Post {
 
     // get upload url from server
     console.log("getting url")
-    const uploadUrl = (await api.get('/s3url')).data.uploadUrl;
+    const response = await api.get('/s3url')
+    const uploadUrl = response.data.uploadUrl;
 
     // upload image to s3
     console.log("uploading image")
