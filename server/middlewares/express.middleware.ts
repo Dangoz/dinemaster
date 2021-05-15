@@ -3,11 +3,12 @@ import path from "path";
 import session from "express-session";
 import cors from "cors";
 import Redis from "ioredis";
+import morgan from "morgan";
 
 
 const MemoryStore = require('memorystore')(session);
 
-module.exports = (app, nextApp) => {
+module.exports = (app) => {
   // Static File Serving and Post Body Parsing
   app.use(express.static(path.join(__dirname, "..", "public")));
   app.use(express.urlencoded({ extended: true }));
@@ -19,7 +20,10 @@ module.exports = (app, nextApp) => {
   //   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   //   next();
   // })
-  // app.use(cors());
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  }));
 
 
   // Session Configuration
@@ -42,4 +46,6 @@ module.exports = (app, nextApp) => {
       },
     })
   );
+
+  app.use(morgan("tiny"));
 };

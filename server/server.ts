@@ -4,17 +4,12 @@ import AuthenticationController from "./areas/authentication/controllers/authen.
 import PostController from "./areas/post/controllers/post.controller";
 import UserController from "./areas/user/controllers/user.controller";
 
-import nextApp from "./config/next.app";
+// import nextApp from "./config/next.app";
 
-const serve = async () => {
-  await nextApp.prepare();
-
-  const server = new App(nextApp, [
+  const server = new App([
     new AuthenticationController(new AuthenticationService()),
     new PostController(),
     new UserController()
   ]);
   
   server.start();
-}
-serve();

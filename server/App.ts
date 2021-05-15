@@ -5,9 +5,10 @@ import Controller from "./interfaces/controller.interface";
 
 class App {
   private _app: express.Application;
-  private readonly _port: number | string = process.env.PORT || 3000;
+  private readonly _port: number | string = process.env.PORT || 5000;
 
-  constructor(private nextApp: NextServer, controllers: Controller[]) {
+  constructor(controllers: Controller[]) {
+    // private nextApp: NextServer, controllers: Controller[]) {
     this._app = express();
 
 
@@ -22,18 +23,13 @@ class App {
   }
 
   private initializeMiddlewares() {
-    require("./middlewares/express.middleware")(this._app, this.nextApp);
+    require("./middlewares/express.middleware")(this._app);
     require("./middlewares/passport.middleware")(this._app);
   }
 
   private initializeControllers(controllers: Controller[]) {
     controllers.forEach((controller) => {
       this._app.use("/", controller.router);
-    });
-
-    const handle = this.nextApp.getRequestHandler();
-    this._app.all('*', (req: express.Request, res: express.Response) => {
-      return handle(req, res)
     });
   }
 }
