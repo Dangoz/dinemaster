@@ -1,5 +1,5 @@
 import express from "express";
-import { NextServer } from "next/dist/server/next";
+// import { NextServer } from "next/dist/server/next";
 // import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
 
@@ -27,6 +27,14 @@ class App {
   }
 
   private initializeControllers(controllers: Controller[]) {
+    this._app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+      if (req.headers['X-Forwarded-Proto'] != 'https') {
+        res.redirect(`https://${req.headers.host}${req.url}`);
+      } else {
+        next();
+      }
+    });
+
     controllers.forEach((controller) => {
       this._app.use("/", controller.router);
     });
