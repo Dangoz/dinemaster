@@ -3,8 +3,8 @@ import axiosCookieJarSupport from "axios-cookiejar-support";
 import tough from "tough-cookie";
 
 const baseUrl: string = process.env.NODE_ENV ===
-  "production" ? 'https://dine-master.herokuapp.com' : 'http://localhost:5000';
-  // 'https://dinemaster.net' : 'http://localhost:3000';
+  "production" ? 'http://localhost:5000' : 'http://localhost:5000';
+  // 'https://dine-master.herokuapp.com' : 'http://localhost:5000';
 
 const api = axios.create({
   baseURL: baseUrl,
