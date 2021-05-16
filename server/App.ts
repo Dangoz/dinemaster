@@ -1,5 +1,4 @@
 import express from "express";
-import { NextServer } from "next/dist/server/next";
 // import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
 
@@ -31,7 +30,7 @@ class App {
 
     // enforce ssl, redirect http to https
     this._app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (req.headers['X-Forwarded-Proto'] != 'https' && process.env.NODE_ENV !== 'development') {
+      if (req.headers['x-forwarded-proto'] === 'http') {
         res.redirect(`https://${req.headers.host}${req.url}`);
       } else {
         next();
