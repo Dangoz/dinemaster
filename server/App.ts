@@ -28,7 +28,7 @@ class App {
 
   private initializeControllers(controllers: Controller[]) {
     this._app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-      if (req.headers['X-Forwarded-Proto'] === 'http' && process.env.NODE_ENV !== 'development') {
+      if (req.headers['x-forwarded-proto'] === 'http') {
         res.redirect(`https://${req.headers.host}${req.url}`);
       } else {
         next();
