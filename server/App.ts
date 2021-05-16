@@ -1,5 +1,5 @@
 import express from "express";
-// import { NextServer } from "next/dist/server/next";
+import { NextServer } from "next/dist/server/next";
 // import errorMiddleware from "./middleware/error.middleware";
 import Controller from "./interfaces/controller.interface";
 
