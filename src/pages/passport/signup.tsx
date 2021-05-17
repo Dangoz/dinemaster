@@ -1,13 +1,16 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
-import { checkUser } from "../../api/require.authen";
+import { checkUser, register } from "../../api/require.authen";
+import { useEffect } from "react";
 
 const signup = () => {
-  checkUser();
+  useEffect(() => {
+    checkUser();
+  }, [])
 
   return (
     <div className={landingStyles.white}>
-      <form className={landingStyles.registerForm} method="POST" action="/register">
+      <form className={landingStyles.registerForm} onSubmit={register}>
 
         <label className={landingStyles.registerLabel}>Username</label><br />
         <input className={landingStyles.landingInput + " " + landingStyles.registerInput}

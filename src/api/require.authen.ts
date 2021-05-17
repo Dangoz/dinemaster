@@ -45,3 +45,40 @@ export const checkUser: () => void = () => {
     }
   })
 }
+
+export const login = (event) => {
+  event.preventDefault();
+  api.post('/auth/login', {
+    email: event.target[0].value,
+    password: event.target[1].value
+  },
+    { withCredentials: true }).then(response => {
+
+      console.log(response.status);
+      if (response.status == 200) {
+        return router.push('/home');
+      }
+
+      event.target.reset();
+      return response.data.err;
+    })
+}
+
+export const register = (event) => {
+  event.preventDefault();
+  api.post('/auth/register', {
+    email: event.target[1].value,
+    password: event.target[2].value,
+    username: event.target[0].value,
+  },
+    { withCredentials: true }).then(response => {
+
+      console.log(response.status);
+      if (response.status == 200) { 
+        return router.push('/passport/signin');
+      }
+
+      event.target.reset();
+      return response.data.err;
+    })
+}

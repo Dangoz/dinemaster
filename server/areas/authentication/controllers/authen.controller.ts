@@ -3,8 +3,6 @@ import IController from "../../../interfaces/controller.interface";
 import { forwardAuthenticated, ensureAuthenticated } from "../../../middlewares/authen.middleware";
 import passport from "passport";
 import { AuthenticationService } from "../services/authen.service";
-import nextApp from "../../../config/next.app";
-import IUser from "../../../interfaces/user.interface";
 
 class AuthenticationController implements IController {
   public path = '/';
@@ -15,16 +13,10 @@ class AuthenticationController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get('/', forwardAuthenticated, this.showLandingPage);
-    this.router.post(`/register`, this.registration);
-    this.router.post(`/login`, this.login);
+    this.router.post(`/auth/register`, this.registration);
+    this.router.post(`/auth/login`, this.login);
     this.router.get(`/user`, ensureAuthenticated, this.userProfile);
   }
-
-  private showLandingPage = (req: express.Request, res: express.Response) => {
-    console.log('showing landing page');
-    return nextApp.render(req, res, '/passport/landing')
-  };
 
   // login as existing user;
   private login = (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -32,11 +24,11 @@ class AuthenticationController implements IController {
       if (err) { return next(err); }
       if (!user) {
         
-        return res.redirect("/"); 
+        res.status(299).json({ err: "invalid credentials" });
       }
       req.logIn(user, function(err) {
         if (err) { return next(err); }
-        return res.redirect("/home");
+        res.status(200).json({ message: 'authenticated' });
       });
     })(req, res, next);
   };
@@ -45,12 +37,10 @@ class AuthenticationController implements IController {
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (await this.service.findUserByEmail(req.body.email)) {
 
-      nextApp.render(req, res, '/passport/signup')
-      return;
+      return res.status(299).json({ err: "email already exists" });
     }
-    
-    this.service.createUser(req.body);
-    nextApp.render(req, res, '/passport/signin')
+    await this.service.createUser(req.body);
+    return res.status(200).json({ message: "user created" });
   };
 
   private userProfile = async (req: express.Request, res: express.Response) => {

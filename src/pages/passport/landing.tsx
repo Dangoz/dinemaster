@@ -1,9 +1,12 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
 import { checkUser } from "../../api/require.authen";
+import { useEffect } from "react";
 
 const landing = () => {
-  checkUser()
+  useEffect(() => {
+    checkUser();
+  }, [])
 
   return (
 

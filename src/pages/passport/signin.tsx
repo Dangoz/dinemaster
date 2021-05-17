@@ -1,10 +1,13 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
 import router from "next/router"
-import { checkUser } from "../../api/require.authen";
+import { checkUser, login } from "../../api/require.authen";
+import { useEffect } from "react";
 
 const signin = () => {
-  checkUser();
+  useEffect(() => {
+    checkUser();
+  }, [])
 
   return (
     <div className={landingStyles.wrapper}>
@@ -17,7 +20,7 @@ const signin = () => {
 
       <div className={landingStyles.options}>
 
-        <form className={landingStyles.signinForm} method="POST" action="/login">
+        <form className={landingStyles.signinForm} onSubmit={login} >
 
           <input className={landingStyles.landingInput}
             type="email"
@@ -37,8 +40,6 @@ const signin = () => {
           <input className={landingStyles.coloredLink}
             type="submit"
             value="Log In"
-            onClick={() => {}}
-            onSubmit={() => {}}
           />
 
           <Link href="/passport/signup" ><div className={landingStyles.black}>new User? Sign Up</div></Link>
