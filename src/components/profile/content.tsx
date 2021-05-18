@@ -1,8 +1,9 @@
-import HomeStyle from "../../styles/home/home.module.css";
-import { useState, useEffect, useRef } from "react";
+import ProfileStyle from "../../styles/profile.module.css";
+import { useState, useEffect } from "react";
 import Post from "../../api/post";
 import StackGrid, { transitions } from "react-stack-grid";
-import Item from "./item";
+import Item from "../home/item";
+const { fadeUp, scaleDown } = transitions;
 
 const Content = ({ userId }) => {
   const [posts, setPosts] = useState(null);
@@ -16,10 +17,10 @@ const Content = ({ userId }) => {
 
   return (
     <>
-      <StackGrid className={HomeStyle.content}
-        columnWidth={225}
-        gutterWidth={15}
-        gutterHeight={13}
+      <StackGrid className={ProfileStyle.postContent}
+        columnWidth={200}
+        gutterWidth={60}
+        gutterHeight={20}
         component="div"
         itemComponent="div"
         vendorPrefix={true}

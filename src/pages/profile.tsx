@@ -2,7 +2,8 @@ import ProfileStyle from "../styles/profile.module.css";
 import { requireAuthen } from "../api/require.authen";
 import Bio from "../components/profile/bio";
 import Menu from "../components/menu";
-import Photo from "../components/profile/photo"
+import Photo from "../components/profile/photo";
+import Content from "../components/profile/content";
 import Post from "../api/post";
 import ContentLoader from "react-content-loader";
 import { useState, useEffect } from "react";
@@ -10,14 +11,6 @@ import { useState, useEffect } from "react";
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
   const [posts, setPosts] = useState(null);
-  let load = [];
-  // for (let i = 0; i < 20; i++) {
-  //   load.push(<div key={i} className={ProfileStyle.post_post}>
-  //     <ContentLoader>
-  //       < rect y="0" x="0" width="200" height="150" rx="30px" />
-  //     </ContentLoader>
-  //   </div>);
-  // }
 
   useEffect(() => {
     Post.getUserPosts(user.id)
@@ -55,13 +48,7 @@ const profile = ({ user }) => {
             </div>
 
 
-            <div className={ProfileStyle.post}>
-              {posts ? posts.map((post, index) => (
-                <img key={index} className={ProfileStyle.post_post} src={post.source} />
-              )) :
-                load
-              }
-            </div>
+            <Content userId={user.id}/>
 
           </div>
 
