@@ -18,30 +18,24 @@
 }
 
 
-.post {
+.posts {
   position: relative;
   top: 20px;
   grid-row: 2 / 3;
   grid-column: 1 / 4;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-template-rows: auto;
-  /* grid-auto-rows: 100px; */
-  /* grid-gap: 1rem; */
-  padding-left: 2em;
-  padding-right: 1em;
-
-  /* background-color: lightseagreen; */
+  
   margin-bottom: 85px;
 }
 .post_post {
   width: 200px;
   height: 150px;
-  /* background-color: red; */
-  border-radius: 15px;
-  margin-top: 15px;
-  cursor: pointer;
+}
+.content {
+
+}
+.item {
+  width: 252px;
+  /* height: 300px; */
 }
 
 @media (min-width: 800px) {

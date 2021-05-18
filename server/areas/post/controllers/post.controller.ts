@@ -35,7 +35,7 @@ class PostController implements IController {
       const uploadUrl = await S3.generateUploadUrl();
       res.status(200).json({ uploadUrl });
     } catch (err) {
-
+      console.log(err);
     }
   }
 

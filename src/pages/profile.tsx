@@ -11,13 +11,13 @@ const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
   const [posts, setPosts] = useState(null);
   let load = [];
-  for (let i = 0; i < 20; i++) {
-    load.push(<div key={i} className={ProfileStyle.post_post}>
-      <ContentLoader>
-        < rect y="0" x="0" width="200" height="150" rx="30px" />
-      </ContentLoader>
-    </div>);
-  }
+  // for (let i = 0; i < 20; i++) {
+  //   load.push(<div key={i} className={ProfileStyle.post_post}>
+  //     <ContentLoader>
+  //       < rect y="0" x="0" width="200" height="150" rx="30px" />
+  //     </ContentLoader>
+  //   </div>);
+  // }
 
   useEffect(() => {
     Post.getUserPosts(user.id)

@@ -1,6 +1,6 @@
 import aws from "aws-sdk";
 import Bcrypt from "../../authentication/services/authen.bcrypt";
-
+require("dotenv").config();
 export default class S3 {
   private static region: string = "us-west-2";
   private static bucketName: string = "dinemaster0";
