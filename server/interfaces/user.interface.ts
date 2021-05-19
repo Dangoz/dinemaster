@@ -1,12 +1,15 @@
+import IPost from "../interfaces/post.interface";
+
 export default interface IUser {
   id: string;
   username: string;
   email: string;
   password: string;
-  // posts?: Array<IPost>;
-  following?: Array<string>;
-  reposts?: Array<string>;
+  followers?: number;
+  following?: number;
   followedByUser?: boolean;
+
+  posts?: Array<IPost>;
 }
 
 // extend Express.User with IUser properties

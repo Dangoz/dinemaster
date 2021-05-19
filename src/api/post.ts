@@ -2,7 +2,6 @@ import IPost from "../interface/post.interface";
 import IUser from "../interface/user.interface"
 import api from "../config/axios";
 import { FormEvent } from "react";
-import { url } from "node:inspector";
 
 export default class Post {
 
@@ -40,14 +39,14 @@ export default class Post {
   }
 
   /**
-   * 
+   * get a user's posts
    * @param id 
    * @returns 
    */
   static async getUserPosts(id: string): Promise<IPost[]> {
     const response = await api({
       method: 'get',
-      url: `/post/user?id=${id}`,
+      url: `/post/user/${id}`,
       withCredentials: true
     });
     const posts = response.data.posts;
@@ -56,12 +55,12 @@ export default class Post {
   }
 
   /**
-   * 
+   * get home page posts for a user
    */
    static async getPosts(id: string): Promise<IPost[]> {
     const response = await api({
       method: 'get',
-      url: `/post/home?id=${id}`,
+      url: `/post/home/${id}`,
       withCredentials: true
     });
     const posts = response.data.posts;

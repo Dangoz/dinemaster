@@ -6,7 +6,8 @@ export default interface IUser {
   email: string;
   // password: string;
   // posts?: Array<IPost>;
-  follower?: Array<string>;
-  following?: Array<string>;
+  follower?: number;
+  following?: number;
   followedByUser?: boolean;
+  
 }

@@ -146,19 +146,33 @@
   grid-row: 2 / 3;
   grid-column: 1 / 4;
   margin-top: 20px;
+  display: block;
+}
+.postContent > div {
+  height: 230px;
+  display: block;
+  border-radius: 8px;
 }
 .postContent div {
-  height: 230px;
-  /* width: 174px; */
+  background-color: black;
 }
 .postContent div img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  border-radius: inherit;
   object-fit: cover;
 }
 
 @media (min-width: 800px) {
   .wrapper {
-
     background-size: auto;
     background-repeat: repeat;
+  }
+}
+
+@media (max-width: 600px) {
+  .bio {
+    width: 300px;
   }
 }

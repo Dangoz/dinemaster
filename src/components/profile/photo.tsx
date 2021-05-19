@@ -5,7 +5,6 @@ import User from "../../api/user";
 
 const photo = ({ id, photo }) => {
   const uploadInput = useRef(null);
-  // const [file, setFile] = useState();
   const [source, setSource] = useState(photo);
 
   const clickUpload = e => {

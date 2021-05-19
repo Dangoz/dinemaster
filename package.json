@@ -17,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@prisma/client": "^2.21.2",
     "aws-sdk": "^2.904.0",
     "axios": "^0.21.1",

@@ -15,10 +15,10 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}/home`, ensureAuthenticated, this.getPosts);
-    this.router.get(`${this.path}/user`, ensureAuthenticated, this.getUserPosts);
+    this.router.get(`${this.path}/home/:uid`, ensureAuthenticated, this.getPosts);
+    this.router.get(`${this.path}/user/:uid`, ensureAuthenticated, this.getUserPosts);
     this.router.post(`${this.path}/create`, ensureAuthenticated, this.createPost);
-    this.router.get('/s3url', this.createUrl);
+    this.router.get('/s3url', ensureAuthenticated, this.createUrl);
   }
 
   private createPost = async (req: express.Request, res: express.Response) => {
@@ -40,15 +40,12 @@ class PostController implements IController {
   }
 
   private getPosts = async (req: express.Request, res: express.Response) => {
-    // const userId: string = req.query.id.toString();
-    const posts: IPost[] = await this.postService.getPosts(req.user.id);
-    console.log(`posts: ${posts[0].message}`)
+    const posts: IPost[] = await this.postService.getPosts(req.params.id);
     res.status(200).json({ posts })
   }
 
   private getUserPosts = async (req: express.Request, res: express.Response) => {
-    // const userId: string = req.query.id.toString();
-    const posts: IPost[] = await this.postService.getUserPosts(req.user.id)
+    const posts: IPost[] = await this.postService.getUserPosts(req.params.id)
     res.status(200).json({ posts });
   }
 

@@ -2,7 +2,7 @@ import HomeStyle from "../../styles/home/home.module.css";
 import { useState, useEffect, useRef } from "react";
 import Post from "../../api/post";
 import StackGrid, { transitions } from "react-stack-grid";
-import Item from "./item";
+import ImageItem from "../imageItem";
 
 const Content = ({ userId }) => {
   const [posts, setPosts] = useState(null);
@@ -17,8 +17,8 @@ const Content = ({ userId }) => {
   return (
     <>
       <StackGrid className={HomeStyle.content}
-        columnWidth={225}
-        gutterWidth={15}
+        columnWidth={230}
+        gutterWidth={25}
         gutterHeight={13}
         component="div"
         itemComponent="div"
@@ -34,7 +34,7 @@ const Content = ({ userId }) => {
         >
 
         {posts ? posts.map((post, index) => (
-          <Item key={index} post={post}/>
+          <ImageItem key={index} post={post}/>
         )) :
           []
         }

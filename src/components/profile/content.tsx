@@ -1,8 +1,9 @@
 import ProfileStyle from "../../styles/profile.module.css";
+
 import { useState, useEffect } from "react";
 import Post from "../../api/post";
 import StackGrid, { transitions } from "react-stack-grid";
-import Item from "../home/item";
+import ImageItem from "../imageItem";
 const { fadeUp, scaleDown } = transitions;
 
 const Content = ({ userId }) => {
@@ -35,7 +36,7 @@ const Content = ({ userId }) => {
         >
 
         {posts ? posts.map((post, index) => (
-          <Item key={index} post={post}/>
+          <ImageItem key={index} post={post}/>
         )) :
           []
         }

@@ -7,7 +7,6 @@
   height: 140px;
   /* background-color: green; */
   transition: 1s;
-
   border: 1px solid black;
   border-radius: 15px;
 }
@@ -67,5 +66,14 @@
   }
   .left {
     left: 767.5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .box {
+    width: 400px;
+  }
+  .left {
+    left: 367.5px;
   }
 }

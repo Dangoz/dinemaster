@@ -8,6 +8,8 @@ import Post from "../api/post";
 import ContentLoader from "react-content-loader";
 import { useState, useEffect } from "react";
 
+import IUser from "../interface/user.interface"
+
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
   const [posts, setPosts] = useState(null);
@@ -29,8 +31,8 @@ const profile = ({ user }) => {
           <Photo id={user.id} photo={user.photo} />
 
           <div className={ProfileStyle.follow}>
-            <div className={ProfileStyle.follower}>100<br />Followers</div>
-            <div className={ProfileStyle.following}>50<br />Following</div>
+            <div className={ProfileStyle.follower}>{}<br />Followers</div>
+            <div className={ProfileStyle.following}>{}<br />Following</div>
           </div>
 
           <Bio id={user.id} bio={user.bio} />
