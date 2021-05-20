@@ -9,7 +9,7 @@ const api = axios.create({
   baseURL: baseUrl,
   headers: {
     'Content-Type': 'application/json'
-  },
+  }
 })
 
 // axiosCookieJarSupport(api);

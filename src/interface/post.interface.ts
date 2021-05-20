@@ -5,10 +5,10 @@ export default interface IPost {
   message: string;
   source: string;
   userId: string;
-  createdAt?: Date;
-  // commentList?: Array<IComment>;
-  likes?: number;
+  createdAt: Date;
+  likes: number;
+  likedByUser: boolean;
   comments?: number;
   username?: string;
-  likedByUser?: boolean;
+  // commentList?: Array<IComment>;
 }

@@ -19,7 +19,7 @@ export class AuthenticationService {
     }
   }
 
-  async findUserByEmail(email: string): Promise<IUser> {
+  async getUserByEmail(email: string): Promise<IUser> {
     return await this._db.getUserByEmail(email);
   }
 

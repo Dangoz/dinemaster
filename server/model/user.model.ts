@@ -5,10 +5,15 @@ export default class UserModel {
   private _prisma: PrismaClient = new PrismaClient();
 
   // get user by input email
-  async getUserByEmail(email: string): Promise<IUser> {
+  async getUserByEmail(email: string, relationship: boolean = true): Promise<IUser> {
     const user = await this._prisma.user.findUnique({
-      where: { email }
+      where: { email },
+      ...(relationship && { include: {
+        following: { select: { followedId: true } },
+        follower: { select: { followerId: true } }
+      }}),
     });
+
     return user;
   }
 

@@ -67,4 +67,6 @@ export default class Post {
  
     return posts;
   }
+
+  
 }

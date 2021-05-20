@@ -3,6 +3,7 @@ import IController from "../../../interfaces/controller.interface";
 import { forwardAuthenticated, ensureAuthenticated } from "../../../middlewares/authen.middleware";
 import passport from "passport";
 import { AuthenticationService } from "../services/authen.service";
+import IUser from "../../../interfaces/user.interface";
 
 class AuthenticationController implements IController {
   public path = '/';
@@ -35,7 +36,7 @@ class AuthenticationController implements IController {
 
   // register new user
   private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if (await this.service.findUserByEmail(req.body.email)) {
+    if (await this.service.getUserByEmail(req.body.email)) {
 
       return res.status(299).json({ err: "email already exists" });
     }
@@ -45,8 +46,8 @@ class AuthenticationController implements IController {
 
   private userProfile = async (req: express.Request, res: express.Response) => {
     
-    console.log(`profile return! ${req.user.username}`);
-    const user = req.user;
+    const user: IUser = req.user;
+    console.log(`profile return: ${JSON.stringify(user, null, 2)}`);
     res.status(200).json(user);
   }
 

@@ -21,19 +21,30 @@ export default class PostModel {
       where: { userId },
       orderBy: {
         createdAt: 'desc'
+      },
+      include: {
+        likesList: {
+          where: { userId }
+        }
       }
     })
     return posts;
   }
 
-  async getPostsRecent(): Promise<IPost[]> {
+  async getPostsRecent(userId: string): Promise<IPost[]> {
     const posts = await this._prisma.post.findMany({
       orderBy: {
         createdAt: 'desc'
       },
-      take: 20
+      include: {
+        likesList: {
+          where: { userId }
+        }
+      },
+      take: 20,
+      skip: 0
     })
-    return posts
+    return posts;
   }
 
   // async getPostById(id: string): Promise<IPost> {

@@ -31,8 +31,8 @@ const profile = ({ user }) => {
           <Photo id={user.id} photo={user.photo} />
 
           <div className={ProfileStyle.follow}>
-            <div className={ProfileStyle.follower}>{}<br />Followers</div>
-            <div className={ProfileStyle.following}>{}<br />Following</div>
+            <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
+            <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
 
           <Bio id={user.id} bio={user.bio} />

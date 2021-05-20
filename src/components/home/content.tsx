@@ -34,7 +34,7 @@ const Content = ({ userId }) => {
         >
 
         {posts ? posts.map((post, index) => (
-          <ImageItem key={index} post={post}/>
+          <ImageItem key={index} post={post} userId={userId}/>
         )) :
           []
         }

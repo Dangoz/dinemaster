@@ -2,7 +2,7 @@ import api from "../config/axios";
 
 export default class User {
 
-  static async updateBio(id, bio) {
+  static async updateBio(id, bio): Promise<void> {
     const data = { id, bio };
     const response = await api.put('/user/bio', data);
   }
@@ -24,5 +24,14 @@ export default class User {
     const data = { id, url: fileUrl }
     api.put('/user/photo', data);
     return fileUrl
+  }
+
+  // like or unlike a post
+  static async likeUnlikePost(userId: string, postId: string, likeToggle: boolean) {
+    
+    const data = { userId, postId, likeToggle };
+    const likeUrl = `/user/post/likeUnlike`;
+    const response = await api.post(likeUrl, data);
+    // return response; 
   }
 }

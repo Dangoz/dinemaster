@@ -2,6 +2,7 @@ import HomeStyle from "../styles/home/home.module.css";
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useState } from "react";
+import User from "../api/user";
 
 const styles = {
   likedIcon: {
@@ -21,25 +22,23 @@ const styles = {
   }
 };
 
-const ImageItem = ({ post }) => {
-  const [liked, setLiked] = useState(false);
+const ImageItem = ({ post, userId }) => {
+  const [liked, setLiked] = useState(post.likedByUser);
 
-  const like = (event) => {
-    console.log('like')
+  const likeUnlike = async (event, likeToggle: boolean) => {
+    User.likeUnlikePost(userId, post.id, likeToggle);
+    setLiked(likeToggle);
   }
 
-  const unLike = (event) => {
-    console.log('unlike')
-  }
   return (
     <>
       <div className={HomeStyle.itemBox} >
 
         <img className={HomeStyle.item} src={post.source}/>
         
-        {liked && <FavoriteIcon className={HomeStyle.likeIcon} style={styles.likedIcon} onClick={unLike}/>}
+        {liked && <FavoriteIcon className={HomeStyle.likeIcon} style={styles.likedIcon} onClick={(e) => likeUnlike(e, false)}/>}
 
-        {!liked && <div onClick={like}>
+        {!liked && <div onClick={(e) => likeUnlike(e, true)}>
           <FavoriteIcon className={HomeStyle.likeIcon} style={styles.iconInner} />
           <FavoriteBorderIcon className={HomeStyle.likeIcon} style={styles.iconBorder}/>
         </div>}

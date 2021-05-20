@@ -1,6 +1,7 @@
 import PostModel from "../../../model/post.model";
 import express from "express";
 import IPost from "../../../interfaces/post.interface";
+import PostViewModel from "../../../viewmodel/post.viewmodel";
 
 export default class PostService {
   private _postdb: PostModel = new PostModel();
@@ -12,12 +13,20 @@ export default class PostService {
   }
 
   async getPosts(userId: string): Promise<IPost[]> {
-    const posts = await this._postdb.getPostsRecent();
+    let posts = await this._postdb.getPostsRecent(userId);
+
+    for (let post of posts) {
+      post = await PostViewModel.build(post);
+    }
     return posts;
   }
 
   async getUserPosts(userId: string): Promise<IPost[]> {
     const posts = await this._postdb.getUserPosts(userId);
+
+    for (let post of posts) {
+      post = await PostViewModel.build(post);
+    }
     return posts;
   }
 }
