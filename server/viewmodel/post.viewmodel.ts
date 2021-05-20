@@ -18,7 +18,7 @@ export default class PostViewModel implements IPost {
   private constructor(post: IPost) {
     this.id = post.id;
     this.message = post.message;
-    this.source = post.message;
+    this.source = post.source;
     this.userId = post.userId;
     this.createdAt = post.createdAt;
     this.likes = post.likes;

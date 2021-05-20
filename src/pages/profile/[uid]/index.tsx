@@ -1,17 +1,16 @@
-import ProfileStyle from "../styles/profile.module.css";
-import { requireAuthen } from "../api/require.authen";
-import Bio from "../components/profile/bio";
-import Menu from "../components/menu";
-import Photo from "../components/profile/photo";
-import Content from "../components/profile/content";
-import Post from "../api/post";
-import ContentLoader from "react-content-loader";
+import { GetServerSidePropsContext } from "next";
+import ProfileStyle from "../../../styles/profile.module.css";
+import User from "../../../api/user";
+import { requireAuthen } from "../../../api/require.authen";
+import Bio from "../../../components/profile/bio";
+import Menu from "../../../components/menu";
+import Photo from "../../../components/profile/photo";
+import Content from "../../../components/profile/content";
 import { useState, useEffect } from "react";
 
-import IUser from "../interface/user.interface"
-
-const profile = ({ user }) => {
+const profile = ({ user, visitor }) => {
   const [postState, setPostState] = useState('post');
+  const visitorStatus = user.id !== visitor.id;
 
   return (
     <>
@@ -21,14 +20,14 @@ const profile = ({ user }) => {
         </div>
 
         <div className={ProfileStyle.content}>
-          <Photo id={user.id} photo={user.photo} />
+          <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus}/>
 
           <div className={ProfileStyle.follow}>
             <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
             <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
 
-          <Bio id={user.id} bio={user.bio} />
+          <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus}/>
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>
@@ -59,11 +58,14 @@ const profile = ({ user }) => {
 
 export default profile
 
-export const getServerSideProps = requireAuthen(async function (ctx, user) {
+export const getServerSideProps = requireAuthen(async function (context: GetServerSidePropsContext, visitor) {
+  const id: string = context.params.uid.toString();
+  const user = await User.getUser(context, id);
 
   return {
     props: {
-      user
+      user,
+      visitor
     }
   }
 })

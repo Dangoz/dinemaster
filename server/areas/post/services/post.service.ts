@@ -15,17 +15,17 @@ export default class PostService {
   async getPosts(userId: string): Promise<IPost[]> {
     let posts = await this._postdb.getPostsRecent(userId);
 
-    for (let post of posts) {
-      post = await PostViewModel.build(post);
+    for (let i = 0; i < posts.length; i++) {
+      posts[i] = await PostViewModel.build(posts[i]);
     }
     return posts;
   }
 
   async getUserPosts(userId: string): Promise<IPost[]> {
-    const posts = await this._postdb.getUserPosts(userId);
+    let posts = await this._postdb.getUserPosts(userId);
 
-    for (let post of posts) {
-      post = await PostViewModel.build(post);
+    for (let i = 0; i < posts.length; i++) {
+      posts[i] = await PostViewModel.build(posts[i]);
     }
     return posts;
   }

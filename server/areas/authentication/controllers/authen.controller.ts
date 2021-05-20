@@ -16,7 +16,7 @@ class AuthenticationController implements IController {
   private initializeRoutes() {
     this.router.post(`/auth/register`, this.registration);
     this.router.post(`/auth/login`, this.login);
-    this.router.get(`/user`, ensureAuthenticated, this.userProfile);
+    this.router.get(`/user`, ensureAuthenticated, this.user);
   }
 
   // login as existing user;
@@ -44,7 +44,7 @@ class AuthenticationController implements IController {
     return res.status(200).json({ message: "user created" });
   };
 
-  private userProfile = async (req: express.Request, res: express.Response) => {
+  private user = async (req: express.Request, res: express.Response) => {
     
     const user: IUser = req.user;
     console.log(`profile return: ${JSON.stringify(user, null, 2)}`);

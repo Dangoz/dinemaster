@@ -11,9 +11,8 @@ const Content = ({ userId }) => {
   const [animation, setAnimation] = useState(0);
 
   useEffect(() => {
-    Post.getPosts(userId)
+    Post.getUserPosts(userId)
       .then(data => setPosts(data))
-
   }, [])
 
   return (

@@ -2,7 +2,7 @@ import ProfileStyle from "../../styles/profile.module.css";
 import { useState } from "react";
 import User from "../../api/user";
 
-const Bio = ({ id, bio }) => {
+const Bio = ({ id, bio, visitorStatus = false }) => {
   const [edit, setEdit] = useState(false);
   const [content, setContent] = useState(bio);
 
@@ -24,6 +24,14 @@ const Bio = ({ id, bio }) => {
 
   const showInput = event => {
     setEdit(true)
+  }
+
+  if (visitorStatus) {
+    return (
+      <>
+        <div onClick={showInput} className={ProfileStyle.bioVisitor}>{content}</div>
+      </>
+    )
   }
 
   return (

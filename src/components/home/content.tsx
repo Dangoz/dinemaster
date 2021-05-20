@@ -17,13 +17,14 @@ const Content = ({ userId }) => {
   return (
     <>
       <StackGrid className={HomeStyle.content}
-        columnWidth={230}
+        columnWidth={205}
         gutterWidth={25}
         gutterHeight={13}
         component="div"
         itemComponent="div"
         vendorPrefix={true}
         monitorImagesLoaded={true}
+
         // appear={fadeUp.leaved}
         // appear={scaleDown.appear}
         // appeared={scaleDown.appeared}

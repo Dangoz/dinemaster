@@ -1,6 +1,15 @@
 import api from "../config/axios";
+import IUser from "../interface/user.interface"
+import { GetServerSidePropsContext } from "next";
 
 export default class User {
+
+  static async getUser(ctx: GetServerSidePropsContext, id: string): Promise<IUser> {
+    const response = await api.get(
+      `/user/profile/${id}`, 
+     { headers: ctx.req.headers.cookie ? { cookie: ctx.req.headers.cookie } : undefined});
+    return response.data.user;
+  }
 
   static async updateBio(id, bio): Promise<void> {
     const data = { id, bio };
@@ -27,11 +36,20 @@ export default class User {
   }
 
   // like or unlike a post
-  static async likeUnlikePost(userId: string, postId: string, likeToggle: boolean) {
+  static async likeUnlikePost(userId: string, postId: string, likeToggle: boolean): Promise<void> {
     
     const data = { userId, postId, likeToggle };
     const likeUrl = `/user/post/likeUnlike`;
     const response = await api.post(likeUrl, data);
     // return response; 
   }
+
+  static async FollowUnfollowUser(userId: string, targetUserId: string, followToggle: boolean) {
+
+  }
+
+  static async suggestUser(userId: string): Promise<IUser[]> {
+    const response = await api.get(`/user/suggest-follow/${userId}`);
+    return response.data.users;
+  } 
 }

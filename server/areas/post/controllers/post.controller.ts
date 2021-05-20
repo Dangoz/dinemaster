@@ -40,12 +40,12 @@ class PostController implements IController {
   }
 
   private getPosts = async (req: express.Request, res: express.Response) => {
-    const posts: IPost[] = await this.postService.getPosts(req.params.id);
+    const posts: IPost[] = await this.postService.getPosts(req.params.uid);
     res.status(200).json({ posts })
   }
 
   private getUserPosts = async (req: express.Request, res: express.Response) => {
-    const posts: IPost[] = await this.postService.getUserPosts(req.params.id)
+    const posts: IPost[] = await this.postService.getUserPosts(req.params.uid)
     res.status(200).json({ posts });
   }
 

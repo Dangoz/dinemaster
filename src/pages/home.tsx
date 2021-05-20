@@ -9,7 +9,7 @@ import HomeStyle from "../styles/home/home.module.css";
 
 
 const home = ({ user }) => {
-
+  console.log(`suggesting for5 : ${user.id}`);
   return (
     <>
       <div>
@@ -17,7 +17,8 @@ const home = ({ user }) => {
 
         <div className={HomeStyle.userRec}>
           <div className={HomeStyle.userRecText}>Recommended User</div>
-          <Swiper />
+
+          <Swiper userId={user.id}/>
         </div>
       </div>
 

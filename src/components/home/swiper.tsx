@@ -1,8 +1,11 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
-import { useState, useRef } from "react";
+import UserCard from "./userCard";
+import User from "../../api/user";
+import { useState, useRef, useEffect } from "react";
 
-const Swiper = () => {
+const Swiper = ({ userId }) => {
   const scroll = useRef(null);
+  const [users, setUsers] = useState(null);
 
   const rightButton = async event => {
     const start = scroll.current.scrollLeft;
@@ -28,26 +31,24 @@ const Swiper = () => {
     }, 10)
   }
 
+  useEffect(() => {
+    User.suggestUser(userId)
+      .then(users => {
+        console.log(JSON.stringify(users, null, 2))
+        setUsers(users);
+      })
+  }, [])
+
   return (
     <div className={SwiperStyle.box}>
-      
+
       <div className={SwiperStyle.container} ref={element => scroll.current = element}>
         <div className={SwiperStyle.wrapper}>
-          <div className={SwiperStyle.item}> item 1 </div>
-          <div className={SwiperStyle.item}> item 2 </div>
-          <div className={SwiperStyle.item}> item 3 </div>
-          <div className={SwiperStyle.item}> item 4 </div>
-          <div className={SwiperStyle.item}> item 5 </div>
-          <div className={SwiperStyle.item}> item 1 </div>
-          <div className={SwiperStyle.item}> item 2 </div>
-          <div className={SwiperStyle.item}> item 3 </div>
-          <div className={SwiperStyle.item}> item 4 </div>
-          <div className={SwiperStyle.item}> item 5 </div>
-          <div className={SwiperStyle.item}> item 1 </div>
-          <div className={SwiperStyle.item}> item 2 </div>
-          <div className={SwiperStyle.item}> item 3 </div>
-          <div className={SwiperStyle.item}> item 4 </div>
-          <div className={SwiperStyle.item}> item 5 </div>
+
+          { users && users.map(user => (
+            <UserCard key={user.id} user={user} />
+          ))}
+
         </div>
       </div>
 
