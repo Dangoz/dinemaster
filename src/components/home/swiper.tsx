@@ -34,7 +34,6 @@ const Swiper = ({ userId }) => {
   useEffect(() => {
     User.suggestUser(userId)
       .then(users => {
-        console.log(JSON.stringify(users, null, 2))
         setUsers(users);
       })
   }, [])

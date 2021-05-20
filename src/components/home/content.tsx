@@ -5,6 +5,7 @@ import StackGrid, { transitions } from "react-stack-grid";
 import ImageItem from "../imageItem";
 
 const Content = ({ userId }) => {
+  const [isMobile, setIsMobile] = useState(null);
   const [posts, setPosts] = useState(null);
   const [animation, setAnimation] = useState(0);
 
@@ -12,12 +13,14 @@ const Content = ({ userId }) => {
     Post.getPosts(userId)
       .then(data => setPosts(data))
 
+    // detect if device is mobile
+    setIsMobile(require("../../config/isMobile")(navigator.userAgent));
   }, [])
 
   return (
     <>
       <StackGrid className={HomeStyle.content}
-        columnWidth={205}
+        columnWidth={isMobile ? 155: 205}
         gutterWidth={25}
         gutterHeight={13}
         component="div"
@@ -32,10 +35,10 @@ const Content = ({ userId }) => {
         // entered={scaleDown.entered}
         // leaved={scaleDown.leaved}
         duration={animation}
-        >
+      >
 
         {posts ? posts.map((post, index) => (
-          <ImageItem key={index} post={post} userId={userId}/>
+          <ImageItem key={index} post={post} userId={userId} />
         )) :
           []
         }

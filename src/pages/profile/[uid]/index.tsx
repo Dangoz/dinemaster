@@ -20,14 +20,14 @@ const profile = ({ user, visitor }) => {
         </div>
 
         <div className={ProfileStyle.content}>
-          <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus}/>
+          <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
 
           <div className={ProfileStyle.follow}>
             <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
             <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
 
-          <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus}/>
+          <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus} />
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>
@@ -42,7 +42,7 @@ const profile = ({ user, visitor }) => {
             </div>
 
 
-            <Content userId={user.id}/>
+            <Content userId={user.id} />
 
           </div>
 
@@ -59,6 +59,7 @@ const profile = ({ user, visitor }) => {
 export default profile
 
 export const getServerSideProps = requireAuthen(async function (context: GetServerSidePropsContext, visitor) {
+  // fetch user profile from server
   const id: string = context.params.uid.toString();
   const user = await User.getUser(context, id);
 

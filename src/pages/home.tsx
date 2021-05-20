@@ -9,20 +9,22 @@ import HomeStyle from "../styles/home/home.module.css";
 
 
 const home = ({ user }) => {
-  console.log(`suggesting for5 : ${user.id}`);
+
   return (
     <>
       <div>
-        <img className={HomeStyle.logo} src="/logo_black_horizontal.svg"></img>
+        <div className={HomeStyle.logo}>
+          <img src="/logo_black_horizontal.svg"></img>
+        </div>
 
         <div className={HomeStyle.userRec}>
-          <div className={HomeStyle.userRecText}>Recommended User</div>
+          <div className={HomeStyle.userRecText}>Suggested for You</div>
 
-          <Swiper userId={user.id}/>
+          <Swiper userId={user.id} />
         </div>
       </div>
 
-      <Content userId={user.id}/>
+      <Content userId={user.id} />
 
       <Menu />
     </>

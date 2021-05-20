@@ -1,10 +1,13 @@
 .logo {
-  margin-top: 20px;
-  margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.logo img {
   margin-right: auto;
-  align-items: center;
   width: 250px;
-  height: auto;
+  position: relative;
+  left: -42px;
 }
 .userRec {
   margin-top: 10px;
@@ -13,7 +16,7 @@
 .userRecText {
   text-align: center;
   position: relative;
-  left: -165px;
+  left: -100px;
   transition: 1s;
 }
 
@@ -50,10 +53,27 @@
 .itemBox:hover .likeIcon {
   opacity: 100%;
 }
-
-
-@media (min-width: 800px) {
+@media (min-width: 441px) {
   .userRecText {
-    left: -315px;
+    left: -150px;
+  }
+  .logo img {
+    left: -92px;
+  }
+} 
+@media (min-width: 670px) {
+  .userRecText {
+    left: -265px;
+  }
+  .logo img {
+    left: -207px;
+  }
+}
+@media (min-width: 905px) {
+  .userRecText {
+    left: -365px;
+  }
+  .logo img {
+    left: -307px;
   }
 }
