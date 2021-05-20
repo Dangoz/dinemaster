@@ -2,7 +2,7 @@ import IPost from "../interfaces/post.interface";
 
 /**
  * process post data for client side application
- * matching view model properties
+ * matching view model properties with client interface
  */
 export default class PostViewModel implements IPost {
   id: string;
@@ -39,7 +39,6 @@ export default class PostViewModel implements IPost {
 
   private static async mapLikedByUser(post: IPost): Promise<IPost> {
     post.likedByUser = post.likesList.length == 1;
-    delete post.likesList;
     return post;
   }
 }

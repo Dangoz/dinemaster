@@ -4,10 +4,9 @@ export default interface IUser {
   bio: string;
   photo: string;
   email: string;
-  // password: string;
-  // posts?: Array<IPost>;
   follower?: number;
   following?: number;
   followedByUser?: boolean;
   
+  // posts?: Array<IPost>;
 }

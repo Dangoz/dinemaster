@@ -3,8 +3,8 @@ import IPost from "../interfaces/post.interface";
 export default interface IUser {
   id: string;
   username: string;
-  photo: string;
   bio: string;
+  photo: string;
   email: string;
   password?: string;
   follower?: { followerId: string }[];

@@ -30,11 +30,15 @@ const ImageItem = ({ post, userId }) => {
     setLiked(likeToggle);
   }
 
+  const openPost = async (event) => {
+    console.log("open post!")
+  }
+
   return (
     <>
       <div className={HomeStyle.itemBox} >
 
-        <img className={HomeStyle.item} src={post.source}/>
+        <img className={HomeStyle.item} src={post.source} onClick={openPost}/>
         
         {liked && <FavoriteIcon className={HomeStyle.likeIcon} style={styles.likedIcon} onClick={(e) => likeUnlike(e, false)}/>}
 
