@@ -3,7 +3,7 @@ import IPost from "../interface/post.interface";
 
 export default class Search {
 
-  static async search(): Promise<IPost> {
+  static async search(): Promise<void> {
 
   }
 }

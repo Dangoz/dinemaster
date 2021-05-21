@@ -41,19 +41,21 @@ const post = ({ user }) => {
 
   return (
     <>
+      <div className={PostStyle.wrapper}>
+        <h2 className={PostStyle.title}>New Post</h2>
+        <form className={PostStyle.formWrapper} onSubmit={e => e.preventDefault()}>
+          <div className={PostStyle.postArea}>
+            <img className={PostStyle.preview} src={preview}/>
+            <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange}/>
+            <input className={PostStyle.content} type="textarea" name="message" placeholder="Enter content here..." onChange={captionChange}/>
+          </div>
 
-      <form onSubmit={e => e.preventDefault()}>
-        <input type="textarea" name="message" placeholder="Caption" onChange={captionChange}/>
-        <br/>
-        <img className={PostStyle.preview} src={preview}/>
-        {/* <br/> */}
-        <input type="file" accept="image/*" name="image" onChange={fileChange}/>
-        <br/>
+          <TagForm pushTag={pushTag} removeTag={removeTag}/>
 
-        <TagForm pushTag={pushTag} removeTag={removeTag}/>
-
-        <button type="submit" value="Create" onMouseDown={createPost}>Create</button>
-      </form>
+          <button className={PostStyle.greenBtn} type="submit" value="Create" onMouseDown={createPost}>Create</button>
+        </form>
+      </div>
+      
 
 
       <Menu />

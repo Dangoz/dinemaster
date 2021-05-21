@@ -37,14 +37,15 @@ const TagForm = ({ pushTag, removeTag }) => {
 
   return (
     <>
-      <div>
+      <div className={PostStyle.tagWrapper}>
+        <h3 className={PostStyle.tagTitle}>Tags</h3>
         <ul className={PostStyle.tagList}>
           {tags.length >= 1 && tags.map(tag => (
             <li className={PostStyle.tagListItem} onClick={event => removeFormTag(event, tag)} key={tag}>#{tag}</li>
           ))}
         </ul>
-        <input type="text" placeholder="Tags" maxLength={35} onKeyDown={tagKeyDown} value={formValue} onChange={editForm}/>
-        <div>{`${count}/10`}</div>
+        <div className={PostStyle.count}>{`${count}/10`}</div>
+        <input className={PostStyle.typeTags} type="text" placeholder="Please type tags here" maxLength={35} onKeyDown={tagKeyDown} value={formValue} onChange={editForm} />
       </div>
     </>
   )
