@@ -23,6 +23,7 @@ export default class UserViewModel implements IUser {
 
     this.follower = user.follower;
     this.following = user.following;
+    this.followedByUser = user.followedByUser;
   }
 
   /**
@@ -31,12 +32,14 @@ export default class UserViewModel implements IUser {
    * @param options - options for mapping optional user attributes
    * 
    */
-  static async build(user: IUser, options?: {}): Promise<UserViewModel> {
+  static async build(user: IUser, options?: { mapLikedBy?: boolean }): Promise<UserViewModel> {
+    if (options) user = await this.mapLikedByUser(user);
 
     return new UserViewModel(user);
   }
 
-  private static async mapLikedByUser(user: IUser) {
-
+  private static async mapLikedByUser(user: IUser): Promise<IUser> {
+    user.followedByUser = user.follower.length == 1;
+    return user;
   }
 }

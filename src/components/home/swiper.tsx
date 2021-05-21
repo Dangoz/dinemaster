@@ -46,7 +46,7 @@ const Swiper = ({ userId }) => {
         <div className={SwiperStyle.wrapper}>
 
           { users && users.map(user => (
-            <UserCard key={user.id} user={user} />
+            <UserCard key={user.id} user={user} userId={user.id}/>
           ))}
 
         </div>
