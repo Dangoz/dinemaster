@@ -1,7 +1,9 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
 import Link from "next/link";
 
+
 const UserCard = ({ user }) => {
+
   return (
     <>
       <div className={SwiperStyle.item}>
@@ -11,7 +13,9 @@ const UserCard = ({ user }) => {
 
         <div className={SwiperStyle.username}>{user.username}</div>
         <div className={SwiperStyle.bio}>{user.bio}</div>
-        <button className={SwiperStyle.followButton}>Follow</button>
+
+        {/* <button className={SwiperStyle.followButton}>Follow</button> */}
+        <button className={SwiperStyle.followedButton}>Followed</button>
       </div>
     </>
   )

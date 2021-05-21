@@ -172,12 +172,6 @@
   }
 }
 
-@media (max-width: 600px) {
-  .bio {
-    width: 300px;
-  }
-}
-
 /* visitor css */
 
 .bioVisitor {
@@ -197,4 +191,13 @@
 }
 .photoVisitor img:hover {
   opacity: 100%;
+}
+
+@media (max-width: 600px) {
+  .bio {
+    width: 300px;
+  }
+  .bioVisitor {
+    width: 300px;
+  }
 }

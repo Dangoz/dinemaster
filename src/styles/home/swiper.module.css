@@ -4,18 +4,21 @@
   margin-right: auto;
   width: 340px;
   height: 140px;
-  /* background-color: green; */
   transition: 1s;
   border: 1px solid black;
   border-radius: 15px;
+  border: none;
+  z-index: 7;
+  /* background-color: red; */
+}
+.box:hover div {
+  opacity: 100%;
 }
 .container {
-  
   width: 100%;
   height: 100%;
   overflow-y: hidden;
   overflow-x: visible;
-  /* background-color: green; */
   display: block;
   position: relative;
 }
@@ -37,20 +40,27 @@
   cursor: pointer;
 }
 .right {
+  outline: none;
   width: 30px;
   height: 30px;
   position: relative;
   z-index: 1;
-  bottom: 80px;
+  bottom: 100px;
+  user-select: none;
+  transition: 1s;
+  opacity: 0%;
 }
 .left {
+  user-select: none;
+  outline: none;
   width: 30px;
   height: 30px;
   position: relative;
   z-index: 1;
-  bottom: 110px;
+  bottom: 130px;
   left: 307.5px;
   transition: 1s;
+  opacity: 0%;
 }
 @media (min-width: 441px) {
   .box {
@@ -79,28 +89,47 @@
 
 /* user card */
 .item {
-   width: 100px;
-
-  background: lightblue;
-  margin: 30px;
-  /* align-items: center; */
+  margin-left: -10px;
+  padding: 15px;
+  width: 150px;
+  /* background: lightblue; */
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto;
 }
 .photo {
+  grid-row: 1 / 2;
   width: 63px;
   height: 63px;
   object-fit: cover;
   cursor: pointer;
   border-radius: 6px;
+  margin: auto;
+
+  box-shadow: 0px 0px 1.5px black;
 }
 .username {
-  display: none;
-  width: 100px;
-  overflow-y: initial;
+  padding-top: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  grid-row: 2 / 3;
+  /* background-color: red; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bio {
-  display: none;
+  font-size: 10px;
+  font-weight: 400;
+  grid-row: 3 / 4;
+  /* background-color: purple; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 5px;
 }
 .followButton {
+  grid-row: 4 / 5;
   font-size: 10px;
   width: 60px;
   height: 15px;
@@ -109,4 +138,17 @@
   background-color: #3b3b3b;
   color: white;
   cursor: pointer;
+  margin: auto;
+}
+.followedButton {
+  grid-row: 4 / 5;
+  font-size: 10px;
+  width: 60px;
+  height: 15px;
+  border-radius: 2.5px;
+  border: none;
+  background-color: #3b3b3b;
+  color: white;
+  cursor: pointer;
+  margin: auto;
 }
