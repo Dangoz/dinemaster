@@ -1,5 +1,5 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
-import UserCard from "./userCard";
+import UserCard from "../home/userCard";
 import User from "../../api/user";
 import { useState, useRef, useEffect } from "react";
 

@@ -1,0 +1,53 @@
+.wrapper {
+  display: grid;
+  margin: 20px;
+}
+
+.search {
+  font-size: medium;
+  background-color: #ECECEC;
+  border-radius: 29px;
+  border: none #ECECEC;
+  margin-left: 0px;
+  height: 47px;
+}
+
+
+.closeFri {
+  margin-top: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  background-color: grey;
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 100px;
+}
+
+.itemImg {
+  height: 60px;
+  width: 60px;
+  background-color: white;
+  margin: 5px;
+}
+
+.itemName {
+  margin: 5px;
+  background-color: white;
+}
+
+.itemTime {
+  background-color: white;
+  margin: 5px;
+}
+
+@media (min-width: 800px) {
+  .wrapper {
+    width: 800px;  
+    margin: 0 auto;
+  }
+
+  
+}

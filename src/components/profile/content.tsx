@@ -7,19 +7,23 @@ import ImageItem from "../imageItem";
 const { fadeUp, scaleDown } = transitions;
 
 const Content = ({ userId }) => {
+  const [isMobile, setIsMobile] = useState(null);
   const [posts, setPosts] = useState(null);
-  const [animation, setAnimation] = useState(0);
+  const [animation, setAnimation] = useState(0.1);
 
   useEffect(() => {
     Post.getUserPosts(userId)
       .then(data => setPosts(data))
+
+    // detect if device is mobile
+    setIsMobile(require("../../config/isMobile")(navigator.userAgent));
   }, [])
 
   return (
     <>
       <StackGrid className={ProfileStyle.postContent}
-        columnWidth={200}
-        gutterWidth={60}
+        columnWidth={isMobile ? 150 : 200}
+        gutterWidth={isMobile ? 20 : 60}
         gutterHeight={20}
         component="div"
         itemComponent="div"
@@ -32,7 +36,7 @@ const Content = ({ userId }) => {
         // entered={scaleDown.entered}
         // leaved={scaleDown.leaved}
         duration={animation}
-        >
+      >
 
         {posts ? posts.map((post, index) => (
           <ImageItem key={index} post={post} userId={userId} />

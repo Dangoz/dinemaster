@@ -35,7 +35,7 @@ export default class UserService {
   async suggestFollow(userId: string): Promise<IUser[]> {
     let users = await this._userdb.suggestFollow(userId);
     for (let i = 0; i < users.length; i++) {
-      users[i] = await UserViewModel.build(users[i]);
+      users[i] = await UserViewModel.build(users[i], {});
     }
     return users;
   }
