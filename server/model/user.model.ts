@@ -91,6 +91,16 @@ export default class UserModel {
           }
         }
       },
+      include: {
+        follower: {
+          where: {
+            followerId: userId
+          },
+          select: {
+            followerId: true
+          }
+        }
+      },
       take: 16
     })
     return users;

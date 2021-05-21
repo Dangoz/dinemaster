@@ -45,7 +45,7 @@ class UserController implements IController {
   }
 
   private suggestFollow = async (req: express.Request, res: express.Response) => {
-    const users: IUser[] = await this.userService.suggestFollow(req.params.uid)
+    const users: IUser[] = await this.userService.suggestFollow(req.params.uid);
     res.status(200).json({ users }); 
   }
 }
