@@ -209,13 +209,13 @@
   height: 25px;
   border-radius: 2.5px;
   border: none;
-  background-color: #3b3b3b;
+  background-color: black;
   color: white;
   cursor: pointer;
 
-  position: relative;
-  top: -335px;
-  left: 135px;
+  position: absolute;
+  top: 200px;
+  right: 100px;
 }
 .followedButton {
   font-size: 10px;
@@ -227,9 +227,9 @@
   color: white;
   cursor: pointer;
   
-  position: relative;
-  top: -335px;
-  left: 135px;
+  position: absolute;
+  top: 200px;
+  right: 100px;
 }
 .loading {
   width: 100px;
@@ -239,8 +239,8 @@
   background-color: #3b3b3b;
   color: white;
 
-  position: relative;
-  top: -335px;
-  left: 135px;
+  position: absolute;
+  top: 200px;
+  right: 100px;
   margin: auto;
 }

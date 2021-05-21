@@ -7,11 +7,12 @@ const FollowUnfollow = ({ user, hostId, style }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const followUnfollow = async (event, followToggle: boolean) => {
+    
     setIsLoading(true);
     const status = await User.followUnfollowUser(user.id, hostId, followToggle);
     status != 200 ? setFollowStatus(!followToggle)
       : setFollowStatus(followToggle);
-      setIsLoading(false);
+    setIsLoading(false);
   }
 
   return (

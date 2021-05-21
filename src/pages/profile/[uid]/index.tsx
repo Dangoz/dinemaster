@@ -24,9 +24,10 @@ const profile = ({ user, visitor }) => {
         <div className={ProfileStyle.content}>
           <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
 
-          {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>}
+          {/* {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>} */}
 
           <div className={ProfileStyle.follow}>
+          {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>}
             <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
             <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
