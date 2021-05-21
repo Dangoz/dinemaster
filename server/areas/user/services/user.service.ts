@@ -1,11 +1,13 @@
 import IUser from "../../../interfaces/user.interface";
 import UserModel from "../../../model/user.model";
 import LikesModel from "../../../model/likes.model";
+import RelationshipModel from "../../../model/relationship.model";
 import UserViewModel from "../../../viewmodel/user.viewmodel";
 
 export default class UserService {
   private _userdb: UserModel = new UserModel();
   private _likesdb: LikesModel = new LikesModel();
+  private _relationshipdb: RelationshipModel = new RelationshipModel();
 
   async getUserProfile(id: string): Promise<IUser> {
     let user = await this._userdb.getUserById(id);
@@ -30,6 +32,15 @@ export default class UserService {
       ? await this._likesdb.like(userId, postId)
       : await this._likesdb.unlike(userId, postId);
     return;
+  }
+
+  async followUnfollow(userId: string, hostId: string, followToggle: boolean): Promise<boolean> {
+    console.log(`userId: ${userId}, hostId: ${hostId}`);
+    const response = followToggle
+      ? await this._relationshipdb.followUser(userId, hostId)
+      : await this._relationshipdb.unfollowUser(userId, hostId);
+    if (response) return true;
+    return false;
   }
 
   async suggestFollow(userId: string): Promise<IUser[]> {

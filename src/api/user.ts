@@ -44,8 +44,11 @@ export default class User {
     // return response; 
   }
 
-  static async FollowUnfollowUser(userId: string, targetUserId: string, followToggle: boolean) {
-
+  static async followUnfollowUser(userId: string, hostId: string, followToggle: boolean): Promise<number> {
+    const data = { userId, hostId, followToggle };
+    const followUrl = `/user/followUnfollow`;
+    const response = await api.post(followUrl, data);
+    return response.status;
   }
 
   static async suggestUser(userId: string): Promise<IUser[]> {
