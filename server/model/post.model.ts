@@ -9,10 +9,7 @@ export default class PostModel {
       data: {
         message: postData.message,
         source: postData.source,
-        userId: id,
-        tags: {
-          create: [ { tagId: '123' } ]
-        }
+        userId: id
       }
     })
 
