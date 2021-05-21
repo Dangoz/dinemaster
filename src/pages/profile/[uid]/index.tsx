@@ -8,26 +8,44 @@ import Photo from "../../../components/profile/photo";
 import Content from "../../../components/profile/content";
 import { useState, useEffect } from "react";
 
-const profile = ({ user, visitor }) => {
+const profile = ({ userId, visitor }) => {
   const [postState, setPostState] = useState('post');
-  const visitorStatus = user.id !== visitor.id;
+  const [user, setUser] = useState(null)
+  const [visitorStatus, setVisitorStatus] = useState(null);
+
+  useEffect(() => {
+    // fetch user profile from server
+    User.getUser(userId)
+      .then(user => {
+        setUser(user);
+        setVisitorStatus(user.id !== visitor.id);
+      })
+  }, [])
+
+  // if(!user) {
+  //   return (
+  //     <div>
+  //       HELLO LOADING
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
       <div className={ProfileStyle.wrapper}>
         <div className={ProfileStyle.imageBackground}>
-          <div className={ProfileStyle.username}> {user.username} </div>
+        {user&&<div className={ProfileStyle.username}> {user.username} </div>}
         </div>
 
         <div className={ProfileStyle.content}>
-          <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
+        {user&&<Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />}
 
           <div className={ProfileStyle.follow}>
-            <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
-            <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
+          {user&&<div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>}
+            {user&&<div className={ProfileStyle.following}>{user.following.length}<br />Following</div>}
           </div>
 
-          <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus} />
+          {user&&<Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus} />}
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>
@@ -42,7 +60,7 @@ const profile = ({ user, visitor }) => {
             </div>
 
 
-            <Content userId={user.id} />
+            {user&& <Content userId={user.id} />}
 
           </div>
 
@@ -59,13 +77,11 @@ const profile = ({ user, visitor }) => {
 export default profile
 
 export const getServerSideProps = requireAuthen(async function (context: GetServerSidePropsContext, visitor) {
-  // fetch user profile from server
-  const id: string = context.params.uid.toString();
-  const user = await User.getUser(context, id);
+  const userId: string = context.params.uid.toString();
 
   return {
     props: {
-      user,
+      userId,
       visitor
     }
   }
