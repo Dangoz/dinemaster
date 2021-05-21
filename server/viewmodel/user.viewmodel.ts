@@ -40,6 +40,7 @@ export default class UserViewModel implements IUser {
 
   private static async mapLikedByUser(user: IUser): Promise<IUser> {
     user.followedByUser = user.follower.length == 1;
+    // user.followedByUser = user.follower.map(follower => follower.followerId).indexOf(userId);
     return user;
   }
 }

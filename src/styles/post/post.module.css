@@ -1,0 +1,16 @@
+.preview {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.tagList {
+  display: grid;
+  grid-template-columns: auto;
+}
+.tagListItem {
+  cursor: pointer;
+}
+.tagListItem:hover {
+  text-decoration: line-through;
+}

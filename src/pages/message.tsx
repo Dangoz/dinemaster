@@ -19,7 +19,7 @@ const message = ({ user }) => {
         <input className={MessageStyle.search} type="text" placeholder="Search"></input>
 
         <div className={MessageStyle.closeFri}>
-          <div className={MessageStyle.closeFriText}>Close Friends</div>
+          <div className={MessageStyle.closeFriText}>{}</div>
           <Swiper userId={user.id}/>
         </div>
 

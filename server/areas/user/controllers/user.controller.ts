@@ -18,6 +18,7 @@ class UserController implements IController {
     this.router.put(`${this.path}/bio`, ensureAuthenticated, this.updateBio);
     this.router.put(`${this.path}/photo`, ensureAuthenticated, this.updatePhoto);
     this.router.post(`${this.path}/post/likeUnlike`, ensureAuthenticated, this.likeUnlike);
+    this.router.post(`${this.path}/followUnfollow`, ensureAuthenticated, this.followUnfollow);
     this.router.get(`${this.path}/suggest-follow/:uid`, ensureAuthenticated, this.suggestFollow);
   }
 
@@ -42,6 +43,13 @@ class UserController implements IController {
     const { userId, postId, likeToggle } = req.body;
     await this.userService.likeUnlike(userId, postId, likeToggle);
     res.status(200).json({ message: `${likeToggle ? 'like' : 'unlike'} a post` });
+  }
+
+  private followUnfollow = async (req: express.Request, res: express.Response) => {
+    const { userId, hostId, followToggle } = req.body;
+    const status = await this.userService.followUnfollow(userId, hostId, followToggle);
+    status ? res.status(200).json({ message: `${followToggle ? `follow` : `unfollow`}ed a post` })
+      : res.status(300).json({ err: `${followToggle ? `follow` : `unfollow`} failed` });
   }
 
   private suggestFollow = async (req: express.Request, res: express.Response) => {

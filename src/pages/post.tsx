@@ -1,22 +1,58 @@
-import PostStyle from "../styles/post.module.css"
+import PostStyle from "../styles/post/post.module.css"
 import Menu from "../components/menu";
+import TagForm from "../components/post/tagForm";
 import { requireAuthen } from "../api/require.authen";
 import { useState, useEffect } from "react";
 import Post from "../api/post";
 
 const post = ({ user }) => {
+  const [preview, setPreview] = useState('/logo_black_vertical.svg');
+  const [caption, setCaption] = useState(null);
+  const [file, setFile] = useState(null);
+  const [tags, setTags] = useState([]);
  
-
-  const submitPost = async (event) => {
-    const url = await Post.createImagePost(event, user);
+  const createPost = async (event) => {
+    console.log('creating post! with: ' + tags)
+    event.preventDefault();
+    const data = { caption, file, tags }
+    const response = await Post.createImagePost(data, user);
   }
+
+  const pushTag = (tag) => {
+    setTags([...tags, tag]);
+  }
+
+  const removeTag = (tag) => {
+    const index = tags.indexOf(tag);
+    let remainingTags = tags;
+    remainingTags.splice(index, 1);
+
+    setTags(remainingTags);
+  }
+
+  const captionChange = async (event) => {
+    setCaption(event.target.value);
+  }
+
+  const fileChange = async (event) => {
+    setPreview(URL.createObjectURL(event.target.files[0]));
+    setFile(event.target.files[0]);
+  }
+
   return (
     <>
 
-      <form onSubmit={submitPost}>
-        <input type="textarea" name="message" placeholder="Caption"></input>
-        <input type="file" accept="image/*" name="image"></input>
-        <br/><button type="submit" value="Create">Create</button>
+      <form onSubmit={e => e.preventDefault()}>
+        <input type="textarea" name="message" placeholder="Caption" onChange={captionChange}/>
+        <br/>
+        <img className={PostStyle.preview} src={preview}/>
+        {/* <br/> */}
+        <input type="file" accept="image/*" name="image" onChange={fileChange}/>
+        <br/>
+
+        <TagForm pushTag={pushTag} removeTag={removeTag}/>
+
+        <button type="submit" value="Create" onMouseDown={createPost}>Create</button>
       </form>
 
 

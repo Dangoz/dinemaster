@@ -10,8 +10,7 @@ export default class Post {
    * @param event 
    * @param user 
    */
-  static async createImagePost(event: FormEvent<HTMLFormElement>, user: IUser) {
-    event.preventDefault();
+  static async createImagePost(data, user: IUser) {
 
     // get upload url from server
     console.log("getting url")
@@ -22,20 +21,18 @@ export default class Post {
     console.log("uploading image")
     const { config: { url } } = await api.put(
       uploadUrl,
-      event.target[1].files[0],
+      data.file,
       { headers: { "Content-Type": "multipart/form-data" } }
     )
 
     // make create post request to server
     console.log("creating post")
     await api.post('/post/create', {
-      message: event.target[0].value,
+      message: data.caption,
       source: url.split('?')[0],
-      userId: user.id
+      userId: user.id,
+      tags: data.tags
     });
-
-    // @ts-ignore reset form 
-    event.target.reset();
   }
 
   /**
