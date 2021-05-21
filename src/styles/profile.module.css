@@ -44,6 +44,7 @@
   height: 100%;
   width: 100%;
   border-radius: 20px;
+  object-fit: cover;
 }
 .photo img:hover {
   opacity: 75%;
@@ -118,7 +119,7 @@
   display: grid;
   grid-template-columns: auto 300px auto;
   grid-template-rows: 36px auto;
-  margin-bottom: 85px;
+  margin-bottom: 100px;
 }
 .options {
   grid-row: 1 / 2;
@@ -142,36 +143,58 @@
   background-color: black;
   color: white;
 }
-.post {
-  position: relative;
-  top: 20px;
+.postContent {
   grid-row: 2 / 3;
   grid-column: 1 / 4;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-template-rows: auto;
-  /* grid-auto-rows: 100px; */
-  /* grid-gap: 1rem; */
-  padding-left: 2em;
-  padding-right: 1em;
-
-  /* background-color: lightseagreen; */
+  margin-top: 20px;
+  display: block;
 }
-.post_post {
-  width: 200px;
-  height: 180px;
-
+.postContent > div {
+  height: 230px;
+  display: block;
+  border-radius: 8px;
 }
-
-
-
-
+.postContent div {
+  background-color: black;
+}
+.postContent div img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  border-radius: inherit;
+  object-fit: cover;
+}
 
 @media (min-width: 800px) {
   .wrapper {
-
     background-size: auto;
     background-repeat: repeat;
   }
+}
+
+@media (max-width: 600px) {
+  .bio {
+    width: 300px;
+  }
+}
+
+/* visitor css */
+
+.bioVisitor {
+  font-size: 15px;
+  padding-top: 15px;
+  grid-row: 3 / 4;
+  /* background-color: red; */
+  width: 390px;
+  height: 50px;
+
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.photoVisitor:hover {
+  border: none;
+}
+.photoVisitor img:hover {
+  opacity: 100%;
 }

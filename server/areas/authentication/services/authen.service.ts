@@ -1,4 +1,4 @@
-
+import UserViewModel from "../../../viewmodel/user.viewmodel";
 import UserModel from "../../../model/user.model";
 import Bcrypt from "./authen.bcrypt";
 import IUser from "../../../interfaces/user.interface";
@@ -11,16 +11,19 @@ export class AuthenticationService {
   private _bcrypt: Bcrypt = new Bcrypt();
 
   async getUserByEmailAndPassword(email: string, password: string): Promise<IUser> {
-    const user = await this._db.getUserByEmail(email);
+    let user = await this._db.getUserByEmail(email);
     if (user) {
       if (await this._bcrypt.validate(password, user.password)) {
+        user = await UserViewModel.build(user);
         return user;
       }
     }
   }
 
-  async findUserByEmail(email: string): Promise<IUser> {
-    return await this._db.getUserByEmail(email);
+  async getUserByEmail(email: string): Promise<IUser> {
+    let user = await this._db.getUserByEmail(email);
+    user = await UserViewModel.build(user);
+    return user;
   }
 
   async createUser(user: any): Promise<IUser> {

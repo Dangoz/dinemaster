@@ -3,9 +3,8 @@ import ProfileStyle from "../../styles/profile.module.css";
 import { useRef, useState } from "react";
 import User from "../../api/user";
 
-const photo = ({ id, photo }) => {
+const photo = ({ id, photo, visitorStatus = false }) => {
   const uploadInput = useRef(null);
-  // const [file, setFile] = useState();
   const [source, setSource] = useState(photo);
 
   const clickUpload = e => {
@@ -18,15 +17,23 @@ const photo = ({ id, photo }) => {
     setSource(url);
   }
 
+  if (visitorStatus) {
+    return (
+      <>
+        <div className={ProfileStyle.photoVisitor + " " + ProfileStyle.photo}><img src={source} /></div>
+      </>
+    )
+  }
+
   return (
     <>
       <input className={ProfileStyle.addInput} type="file" accept="image/*"
-          name="image" ref={element => uploadInput.current = element} 
-          onChange={uploadFile}/>
+        name="image" ref={element => uploadInput.current = element}
+        onChange={uploadFile} />
 
       <div className={ProfileStyle.photo}>
 
-        { true && <input className={ProfileStyle.addButton} type="image" src="/add.png"
+        {true && <input className={ProfileStyle.addButton} type="image" src="/add.png"
           onClick={clickUpload} />}
 
         <img src={source} />

@@ -5,17 +5,30 @@ export default class UserModel {
   private _prisma: PrismaClient = new PrismaClient();
 
   // get user by input email
-  async getUserByEmail(email: string): Promise<IUser> {
+  async getUserByEmail(email: string, relationship: boolean = true): Promise<IUser> {
     const user = await this._prisma.user.findUnique({
-      where: { email }
+      where: { email },
+      ...(relationship && {
+        include: {
+          following: { select: { followedId: true } },
+          follower: { select: { followerId: true } }
+        }
+      }),
     });
+
     return user;
   }
 
   // get user by input id
-  async getUserById(id: string): Promise<IUser> {
+  async getUserById(id: string, relationship: boolean = true): Promise<IUser> {
     const user = await this._prisma.user.findUnique({
-      where: { id }
+      where: { id },
+      ...(relationship && {
+        include: {
+          following: { select: { followedId: true } },
+          follower: { select: { followerId: true } }
+        }
+      }),
     });
     return user;
   }
@@ -57,7 +70,7 @@ export default class UserModel {
       where: { id },
       data: { bio }
     })
-    return user; 
+    return user;
   }
 
   async updatePhoto(id: string, photo: string): Promise<IUser> {
@@ -65,6 +78,21 @@ export default class UserModel {
       where: { id },
       data: { photo }
     })
-    return user; 
+    return user;
+  }
+
+  async suggestFollow(userId: string): Promise<IUser[]> {
+    const users = await this._prisma.user.findMany({
+      where: {
+        id: { not: userId },
+        follower: {
+          none: {
+            followerId: userId
+          }
+        }
+      },
+      take: 16
+    })
+    return users;
   }
 }

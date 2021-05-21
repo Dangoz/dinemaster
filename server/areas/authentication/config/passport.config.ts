@@ -40,7 +40,7 @@ export default class PassportConfig {
   // return config function for passport.deserailize()
   private deserialize(): (email: string, done) => Promise<void> {
     return async (email: string, done): Promise<void> => {
-      let user =  await this.authenService.findUserByEmail(email);
+      let user =  await this.authenService.getUserByEmail(email);
       user ? done(null, user) : done({ message: "User not found" }, null);
     }
   }

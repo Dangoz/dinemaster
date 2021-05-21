@@ -1,12 +1,17 @@
+import IPost from "../interfaces/post.interface";
+
 export default interface IUser {
   id: string;
   username: string;
+  bio: string;
+  photo: string;
   email: string;
-  password: string;
-  // posts?: Array<IPost>;
-  following?: Array<string>;
-  reposts?: Array<string>;
+  password?: string;
+  follower?: { followerId: string }[];
+  following?: { followedId: string }[];
   followedByUser?: boolean;
+
+  posts?: Array<IPost>;
 }
 
 // extend Express.User with IUser properties
@@ -15,6 +20,8 @@ declare global {
     interface User {
       id: string;
       username: string;
+      photo: string;
+      bio: string;
       email: string;
       password: string;
     }

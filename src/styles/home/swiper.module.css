@@ -7,7 +7,6 @@
   height: 140px;
   /* background-color: green; */
   transition: 1s;
-
   border: 1px solid black;
   border-radius: 15px;
 }
@@ -28,12 +27,6 @@
   box-sizing: border-box;
   /* background-color: lightcyan; */
   display: inline-flex;
-}
-.item {
-  width: 100px;
-  height: 100px;
-  background: lightblue;
-  margin: 30px;
 }
 .SwipeButton {
   background: rgba(0, 0 ,0, 0.35);
@@ -68,4 +61,37 @@
   .left {
     left: 767.5px;
   }
+}
+
+@media (max-width: 600px) {
+  .box {
+    width: 400px;
+  }
+  .left {
+    left: 367.5px;
+  }
+}
+
+/* user card */
+.item {
+  /* width: 100px;
+  height: 100px; */
+  background: lightblue;
+  /* margin: 30px; */
+}
+.photo {
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+  cursor: pointer;
+}
+.username {
+  width: 100px;
+  overflow-y: initial;
+}
+.bio {
+
+}
+.followButton {
+
 }
