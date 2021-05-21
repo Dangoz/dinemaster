@@ -1,11 +1,22 @@
 import Menu from "../components/menu";
-import api from "../config/axios";
+// import 
 import { requireAuthen } from "../api/require.authen";
+import Content from "../components/search/content";
+import { useState } from "react";
 
 const search = ({ user }) => {
+  const [query, setQuery] = useState('');
+
+  const parseQuery = async (event) => {
+    setQuery(event.target.value);
+
+  }
+
   return (
     <>
-      <input type="text" placeholder="Search"></input>
+      <input type="text" placeholder="Search" value={query} onChange={parseQuery}></input>
+
+      <Content userId={user.id} />
         <Menu/>
       </>
   )

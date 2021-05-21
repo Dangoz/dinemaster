@@ -69,7 +69,7 @@ model Relationship {
 model Tag {
   id    String     @id @default(uuid())
   name  String
-  hit   Int
+  hit   Int        @default(0)
   posts Post_Tag[]
 
   // @@index([hit])

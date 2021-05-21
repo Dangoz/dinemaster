@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "tag" ALTER COLUMN "hit" SET DEFAULT 0;
