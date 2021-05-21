@@ -7,12 +7,15 @@ import Post from "../api/post";
 
 const post = ({ user }) => {
   const [preview, setPreview] = useState('/logo_black_vertical.svg');
+  const [caption, setCaption] = useState(null);
+  const [file, setFile] = useState(null);
   const [tags, setTags] = useState([]);
  
   const createPost = async (event) => {
     console.log('creating post! with: ' + tags)
     event.preventDefault();
-    // const url = await Post.createImagePost(event, user);
+    const data = { caption, file, tags }
+    const response = await Post.createImagePost(data, user);
   }
 
   const pushTag = (tag) => {
@@ -27,15 +30,20 @@ const post = ({ user }) => {
     setTags(remainingTags);
   }
 
+  const captionChange = async (event) => {
+    setCaption(event.target.value);
+  }
+
   const fileChange = async (event) => {
     setPreview(URL.createObjectURL(event.target.files[0]));
+    setFile(event.target.files[0]);
   }
 
   return (
     <>
 
       <form onSubmit={e => e.preventDefault()}>
-        <input type="textarea" name="message" placeholder="Caption" />
+        <input type="textarea" name="message" placeholder="Caption" onChange={captionChange}/>
         <br/>
         <img className={PostStyle.preview} src={preview}/>
         {/* <br/> */}
