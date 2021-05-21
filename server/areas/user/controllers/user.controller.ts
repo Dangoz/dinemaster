@@ -47,7 +47,6 @@ class UserController implements IController {
 
   private followUnfollow = async (req: express.Request, res: express.Response) => {
     const { userId, hostId, followToggle } = req.body;
-    console.log(`userId: ${userId}, hostId: ${hostId}`);
     const status = await this.userService.followUnfollow(userId, hostId, followToggle);
     status ? res.status(200).json({ message: `${followToggle ? `follow` : `unfollow`}ed a post` })
       : res.status(300).json({ err: `${followToggle ? `follow` : `unfollow`} failed` });

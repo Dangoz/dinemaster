@@ -201,3 +201,46 @@
     width: 300px;
   }
 }
+
+/* followUnfollow */
+.followButton {
+  font-size: 10px;
+  width: 100px;
+  height: 25px;
+  border-radius: 2.5px;
+  border: none;
+  background-color: #3b3b3b;
+  color: white;
+  cursor: pointer;
+
+  position: relative;
+  top: -335px;
+  left: 135px;
+}
+.followedButton {
+  font-size: 10px;
+  width: 100px;
+  height: 25px;
+  border-radius: 2.5px;
+  border: none;
+  background-color: #0096fa;
+  color: white;
+  cursor: pointer;
+  
+  position: relative;
+  top: -335px;
+  left: 135px;
+}
+.loading {
+  width: 100px;
+  height: 25px;
+  border-radius: 2.5px;
+  border: none;
+  background-color: #3b3b3b;
+  color: white;
+
+  position: relative;
+  top: -335px;
+  left: 135px;
+  margin: auto;
+}

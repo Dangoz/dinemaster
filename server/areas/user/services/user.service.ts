@@ -35,7 +35,6 @@ export default class UserService {
   }
 
   async followUnfollow(userId: string, hostId: string, followToggle: boolean): Promise<boolean> {
-    console.log(`userId: ${userId}, hostId: ${hostId}`);
     const response = followToggle
       ? await this._relationshipdb.followUser(userId, hostId)
       : await this._relationshipdb.unfollowUser(userId, hostId);

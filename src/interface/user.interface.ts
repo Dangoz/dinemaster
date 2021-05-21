@@ -4,8 +4,8 @@ export default interface IUser {
   bio: string;
   photo: string;
   email: string;
-  follower?: number;
-  following?: number;
+  follower?: { followerId: string }[];
+  following?: { followedId: string }[];
   followedByUser?: boolean;
   
   // posts?: Array<IPost>;

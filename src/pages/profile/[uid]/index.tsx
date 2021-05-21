@@ -6,12 +6,14 @@ import Bio from "../../../components/profile/bio";
 import Menu from "../../../components/menu";
 import Photo from "../../../components/profile/photo";
 import Content from "../../../components/profile/content";
+import FollowUnfollow from "../../../components/shared/followUnfollow";
 import { useState, useEffect } from "react";
 
 const profile = ({ user, visitor }) => {
   const [postState, setPostState] = useState('post');
   const visitorStatus = user.id !== visitor.id;
-
+  
+  useEffect(() => { console.log(JSON.stringify(user, null, 2))},[])
   return (
     <>
       <div className={ProfileStyle.wrapper}>
@@ -21,6 +23,8 @@ const profile = ({ user, visitor }) => {
 
         <div className={ProfileStyle.content}>
           <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
+
+          {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>}
 
           <div className={ProfileStyle.follow}>
             <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
@@ -62,6 +66,7 @@ export const getServerSideProps = requireAuthen(async function (context: GetServ
   // fetch user profile from server
   const id: string = context.params.uid.toString();
   const user = await User.getUser(context, id);
+  user.followedByUser = user.follower.map(follower => follower.followerId).indexOf(visitor.id) !== -1;
 
   return {
     props: {
