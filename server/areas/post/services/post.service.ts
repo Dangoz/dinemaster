@@ -10,11 +10,13 @@ export default class PostService {
   private _tagdb: TagModel = new TagModel();
   private _post_tagdb: Post_TagModel = new Post_TagModel();
 
-  async createPost(postData, userId: string, res: express.Response): Promise<boolean> {
+  async createPost(postData, userId: string): Promise<boolean> {
+    const newPost = await this._postdb.createPost(postData, userId);
+    
     const tags = await this._tagdb.getOrCreateTagsByNames(postData.tags);
     const tagIds = tags.map(tag => tag.id);
-    const newPost = await this._postdb.createPost(postData, userId);
     await this._post_tagdb.tagsToPost(newPost.id, tagIds);
+
     if (newPost === undefined) return false;
     return true;
   }

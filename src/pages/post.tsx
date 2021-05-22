@@ -7,7 +7,7 @@ import Post from "../api/post";
 
 const post = ({ user }) => {
   const [preview, setPreview] = useState('/logo_black_vertical.svg');
-  const [caption, setCaption] = useState(null);
+  const [caption, setCaption] = useState('');
   const [file, setFile] = useState(null);
   const [tags, setTags] = useState([]);
  
