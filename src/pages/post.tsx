@@ -32,6 +32,7 @@ const post = ({ user }) => {
 
   const captionChange = async (event) => {
     setCaption(event.target.value);
+    console.log(caption);
   }
 
   const fileChange = async (event) => {
@@ -47,7 +48,8 @@ const post = ({ user }) => {
           <div className={PostStyle.postArea}>
             <img className={PostStyle.preview} src={preview}/>
             <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange}/>
-            <input className={PostStyle.content} type="textarea" name="message" placeholder="Enter content here..." onChange={captionChange}/>
+            <textarea className={PostStyle.content} name="message" placeholder="Enter content here..." onChange={captionChange} value={caption} maxLength={200}/>
+            <div>{`${caption ? caption.length : 0}/200`}</div>
           </div>
 
           <TagForm pushTag={pushTag} removeTag={removeTag}/>
