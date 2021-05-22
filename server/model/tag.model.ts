@@ -6,7 +6,7 @@ export default class TagModel {
   async getOrCreateTagsByNames(names: string[]): Promise<Tag[]> {
 
     // find tags
-    let tags = await this.getTagsByNames(names);
+    const tags = await this.getTagsByNames(names);
 
     // filter out names for creation
     const existingNames = tags.map(tag => tag.name);
@@ -19,9 +19,9 @@ export default class TagModel {
       data
     })
 
-    tags = tags.concat(await this.getTagsByNames(newNames));
+    const newTags = await this.getTagsByNames(newNames);
 
-    return tags;
+    return [...tags, ...newTags];
   }
 
   async getTagsByNames(names: string[]): Promise<Tag[]> {
