@@ -23,7 +23,7 @@ class UserController implements IController {
   }
 
   private userProfile = async (req: express.Request, res: express.Response) => {
-    const user: IUser = await this.userService.getUserProfile(req.params.uid);
+    const user: IUser = await this.userService.getUserProfile(req.params.uid, req.user.id);
     res.status(200).json({ user });
   }
 
