@@ -10,8 +10,13 @@ import FollowUnfollow from "../../../components/shared/followUnfollow";
 import { useState, useEffect } from "react";
 
 const profile = ({ user, visitor }) => {
+  const [followerCount, setFollowerCount] = useState(user.follower.length);
   const [postState, setPostState] = useState('post');
   const visitorStatus = user.id !== visitor.id;
+
+  const changeCount = async (changeToggle: boolean) => {
+    changeToggle ? setFollowerCount(followerCount + 1) : setFollowerCount(followerCount - 1); 
+  }
 
   useEffect(() => { console.log(JSON.stringify(user, null, 2)) }, [])
   return (
@@ -27,8 +32,8 @@ const profile = ({ user, visitor }) => {
           {/* {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>} */}
 
           <div className={ProfileStyle.follow}>
-            {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle} />}
-            <div className={ProfileStyle.follower}>{user.follower.length}<br />Followers</div>
+            {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle} changeCount={changeCount}/>}
+            <div className={ProfileStyle.follower}>{followerCount}<br />Followers</div>
             <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
 
