@@ -35,4 +35,8 @@ const FollowUnfollow = ({ user, hostId, style, changeCount }) => {
   )
 }
 
+FollowUnfollow.defaultProps = {
+  changeCount: null
+}
+
 export default FollowUnfollow
