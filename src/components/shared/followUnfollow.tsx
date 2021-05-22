@@ -2,17 +2,19 @@ import { useState } from "react";
 import ContentLoader from "react-content-loader";
 import User from "../../api/user";
 
-const FollowUnfollow = ({ user, hostId, style }) => {
+const FollowUnfollow = ({ user, hostId, style, changeCount }) => {
   const [followStatus, setFollowStatus] = useState(user.followedByUser);
   const [isLoading, setIsLoading] = useState(false);
 
   const followUnfollow = async (event, followToggle: boolean) => {
-    
+
     setIsLoading(true);
     const status = await User.followUnfollowUser(user.id, hostId, followToggle);
     status != 200 ? setFollowStatus(!followToggle)
       : setFollowStatus(followToggle);
     setIsLoading(false);
+
+    if (changeCount) changeCount(followToggle);
   }
 
   return (
@@ -31,6 +33,10 @@ const FollowUnfollow = ({ user, hostId, style }) => {
         </div>}
     </>
   )
+}
+
+FollowUnfollow.defaultProps = {
+  changeCount: null
 }
 
 export default FollowUnfollow

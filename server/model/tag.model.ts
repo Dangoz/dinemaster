@@ -6,32 +6,31 @@ export default class TagModel {
   async getOrCreateTagsByNames(names: string[]): Promise<Tag[]> {
 
     // find tags
-    let tags = await this._prisma.tag.findMany({
-      where: {
-        name: { in: names }
-      }
-    })
+    const tags = await this.getTagsByNames(names);
 
     // filter out names for creation
     const existingNames = tags.map(tag => tag.name);
     const newNames: string[] = names.filter(name => existingNames.indexOf(name) === - 1);
-    const data: { name: string, hit: number }[] = newNames.map(name => { return { name, hit: 0 } })
+    if (newNames.length === 0) return tags;
 
     // create new tags
-    const newTags = await this._prisma.tag.createMany({
+    const data: { name: string, hit: number }[] = newNames.map(name => { return { name, hit: 0 } })
+    await this._prisma.tag.createMany({
       data
     })
 
-    tags.concat(await this._prisma.tag.findMany({
-      where: {
-        name: { in: newNames }
-      }
-    }))
+    const newTags = await this.getTagsByNames(newNames);
 
-    return tags;
+    return [...tags, ...newTags];
   }
 
   async getTagsByNames(names: string[]): Promise<Tag[]> {
-    return;
+    return await this._prisma.tag.findMany({
+      where: {
+        name: { in: names }
+      }
+    });
   }
+
+
 }

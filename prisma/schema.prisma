@@ -68,7 +68,7 @@ model Relationship {
 
 model Tag {
   id    String     @id @default(uuid())
-  name  String
+  name  String     @unique
   hit   Int        @default(0)
   posts Post_Tag[]
 
