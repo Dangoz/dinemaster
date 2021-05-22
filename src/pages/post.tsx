@@ -32,6 +32,7 @@ const post = ({ user }) => {
 
   const captionChange = async (event) => {
     setCaption(event.target.value);
+    console.log(caption);
   }
 
   const fileChange = async (event) => {
@@ -41,19 +42,22 @@ const post = ({ user }) => {
 
   return (
     <>
+      <div className={PostStyle.wrapper}>
+        <h2 className={PostStyle.title}>New Post</h2>
+        <form className={PostStyle.formWrapper} onSubmit={e => e.preventDefault()}>
+          <div className={PostStyle.postArea}>
+            <img className={PostStyle.preview} src={preview}/>
+            <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange}/>
+            <textarea className={PostStyle.content} name="message" placeholder="Enter content here..." onChange={captionChange} value={caption} maxLength={200}/>
+            <div>{`${caption ? caption.length : 0}/200`}</div>
+          </div>
 
-      <form onSubmit={e => e.preventDefault()}>
-        <input type="textarea" name="message" placeholder="Caption" onChange={captionChange}/>
-        <br/>
-        <img className={PostStyle.preview} src={preview}/>
-        {/* <br/> */}
-        <input type="file" accept="image/*" name="image" onChange={fileChange}/>
-        <br/>
+          <TagForm pushTag={pushTag} removeTag={removeTag}/>
 
-        <TagForm pushTag={pushTag} removeTag={removeTag}/>
-
-        <button type="submit" value="Create" onMouseDown={createPost}>Create</button>
-      </form>
+          <button className={PostStyle.greenBtn} type="submit" value="Create" onMouseDown={createPost}>Create</button>
+        </form>
+      </div>
+      
 
 
       <Menu />
