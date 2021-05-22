@@ -9,9 +9,9 @@ export default class UserService {
   private _likesdb: LikesModel = new LikesModel();
   private _relationshipdb: RelationshipModel = new RelationshipModel();
 
-  async getUserProfile(id: string): Promise<IUser> {
+  async getUserProfile(id: string, userId: string): Promise<IUser> {
     let user = await this._userdb.getUserById(id);
-    user = await UserViewModel.build(user);
+    user = await UserViewModel.build(user, { mapFollowedBy: userId});
     return user;
   }
 
@@ -45,7 +45,7 @@ export default class UserService {
   async suggestFollow(userId: string): Promise<IUser[]> {
     let users = await this._userdb.suggestFollow(userId);
     for (let i = 0; i < users.length; i++) {
-      users[i] = await UserViewModel.build(users[i], { mapLikedBy: true });
+      users[i] = await UserViewModel.build(users[i], { mapFollowedBy: userId });
     }
     return users;
   }
