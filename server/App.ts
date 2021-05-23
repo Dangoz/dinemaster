@@ -10,15 +10,17 @@ class App {
   constructor(private nextApp: NextServer, controllers: Controller[]) {
     this._app = express();
 
-
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
   }
 
   public start() {
-    this._app.listen(this._port, () => {
+    const server = this._app.listen(this._port, () => {
       console.log(`App listening on the port ${this._port}`);
     });
+
+    // initializing socket, socket events
+    require("./middlewares/socket.middleware")(server);
   }
 
   private initializeMiddlewares() {

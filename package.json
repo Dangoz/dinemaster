@@ -39,6 +39,8 @@
     "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.2",
     "react-stack-grid": "^0.7.1",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2",
     "tough-cookie": "^4.0.0"
   },
   "devDependencies": {

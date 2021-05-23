@@ -24,6 +24,7 @@ model User {
   likes     Likes[]
   following Relationship[] @relation("follower")
   follower  Relationship[] @relation("followed")
+  chatrooms User_Room[]
 
   @@map(name: "user")
 }
@@ -85,4 +86,22 @@ model Post_Tag {
 
   @@unique([postId, tagId])
   @@map("post_tag")
+}
+
+model Room {
+  id String @id @default(uuid())
+  userRoom User_Room[]
+
+  @@map("room")
+}
+
+model User_Room {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  roomId String
+  room   Room   @relation(fields: [roomId], references: [id])
+
+  @@unique([userId, roomId])
+  @@map("chatroom")
 }
