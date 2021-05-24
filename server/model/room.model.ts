@@ -1,10 +1,10 @@
-import { PrismaClient, Room } from "@prisma/client";
+import { Room } from "@prisma/client";
+import prisma from "./prisma.client";
 
 export default class RoomModel {
-  private _prisma: PrismaClient = new PrismaClient();
 
   async createRoom(): Promise<Room> {
-    const room = await this._prisma.room.create({
+    const room = await prisma.room.create({
       data: {}
     })
     return room;

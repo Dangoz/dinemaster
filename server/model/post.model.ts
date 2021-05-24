@@ -1,11 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "./prisma.client";
 import IPost from "../interfaces/post.interface";
 
 export default class PostModel {
-  private _prisma: PrismaClient = new PrismaClient();
 
   async createPost(postData, id: string): Promise<IPost> {
-    const newPost = await this._prisma.post.create({
+    const newPost = await prisma.post.create({
       data: {
         message: postData.message,
         source: postData.source,
@@ -17,7 +16,7 @@ export default class PostModel {
   }
 
   async getUserPosts(userId: string): Promise<IPost[]> {
-    const posts = await this._prisma.post.findMany({
+    const posts = await prisma.post.findMany({
       where: { userId },
       orderBy: {
         createdAt: 'desc'
@@ -32,7 +31,7 @@ export default class PostModel {
   }
 
   async getPostsRecent(userId: string): Promise<IPost[]> {
-    const posts = await this._prisma.post.findMany({
+    const posts = await prisma.post.findMany({
       orderBy: {
         createdAt: 'desc'
       },

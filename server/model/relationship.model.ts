@@ -1,11 +1,11 @@
-import { PrismaClient, Relationship } from "@prisma/client";
+import { Relationship } from "@prisma/client";
+import prisma from "./prisma.client";
 
 export default class RelationshipModel {
-  private _prisma: PrismaClient = new PrismaClient();
 
   // create new relationship
   async followUser(followedId: string, followerId: string): Promise<Relationship> {
-    const result = await this._prisma.relationship.create({
+    const result = await prisma.relationship.create({
       data: {
         followerId,
         followedId
@@ -17,7 +17,7 @@ export default class RelationshipModel {
 
   // delete a relationship
   async unfollowUser(followedId: string, followerId: string): Promise<Relationship> {
-    const result = await this._prisma.relationship.delete({
+    const result = await prisma.relationship.delete({
       where: {
         followerId_followedId: {
           followerId,
