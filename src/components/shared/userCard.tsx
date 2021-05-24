@@ -1,10 +1,9 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
-import FollowUnfollow from "../shared/followUnfollow";
+import FollowUnfollow from "./followUnfollow";
+import MessageButton from "./messageButton";
 import Link from "next/link";
-import { useState } from "react";
 
-
-const UserCard = ({ user, hostId }) => {
+const UserCard = ({ user, hostId, button }) => {
 
   return (
     <>
@@ -16,8 +15,11 @@ const UserCard = ({ user, hostId }) => {
         <div className={SwiperStyle.username}>{user.username}</div>
         <div className={SwiperStyle.bio}>{user.bio}</div>
 
+        {button === "follow" &&
+          <FollowUnfollow user={user} hostId={hostId} style={SwiperStyle} />}
 
-        <FollowUnfollow user={user} hostId={hostId} style={SwiperStyle}/>
+        {button === 'message' &&
+          <MessageButton user={user} hostId={hostId} style={SwiperStyle} />}
 
       </div>
     </>

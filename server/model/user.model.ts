@@ -33,6 +33,15 @@ export default class UserModel {
     return user;
   }
 
+  async getUserByIdList(idList: string[]): Promise<IUser[]> {
+    const users = await this._prisma.user.findMany({
+      where: {
+        id: { in: idList }
+      }
+    })
+    return users;
+  }
+
   // insert a new user given user data
   async createUser(user: any, hash: string): Promise<IUser> {
     const { username, email } = user;
@@ -44,14 +53,6 @@ export default class UserModel {
       }
     })
     return newUser;
-  }
-
-  // given email, delete a user from table user
-  async deleteUser(email: string): Promise<IUser> {
-    const user = await this._prisma.user.delete({
-      where: { email }
-    });
-    return user;
   }
 
   // get users by keyword
@@ -81,7 +82,7 @@ export default class UserModel {
     return user;
   }
 
-  async suggestFollow(userId: string): Promise<IUser[]> {
+  async suggestFollow(userId: string, suggestNum: number = 16): Promise<IUser[]> {
     const users = await this._prisma.user.findMany({
       where: {
         id: { not: userId },
@@ -101,7 +102,7 @@ export default class UserModel {
           }
         }
       },
-      take: 16
+      take: suggestNum
     })
     return users;
   }

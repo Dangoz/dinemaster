@@ -18,6 +18,7 @@ const signup = () => {
           id="username"
           name="username"
           placeholder=""
+          required
         /><br />
 
         <label className={landingStyles.registerLabel2}>Email</label><br />
@@ -26,6 +27,7 @@ const signup = () => {
           id="email"
           name="email"
           placeholder=""
+          required
         /> <br />
 
         <label className={landingStyles.registerLabel}>Password</label><br />
@@ -34,6 +36,7 @@ const signup = () => {
           id="password"
           name="password"
           placeholder=""
+          required
         /> <br />
 
 
