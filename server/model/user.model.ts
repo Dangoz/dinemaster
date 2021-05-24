@@ -1,12 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "./prisma.client";
 import IUser from "../interfaces/user.interface";
 
 export default class UserModel {
-  private _prisma: PrismaClient = new PrismaClient();
 
   // get user by input email
   async getUserByEmail(email: string, relationship: boolean = true): Promise<IUser> {
-    const user = await this._prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
       ...(relationship && {
         include: {
@@ -21,7 +20,7 @@ export default class UserModel {
 
   // get user by input id
   async getUserById(id: string, relationship: boolean = true): Promise<IUser> {
-    const user = await this._prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { id },
       ...(relationship && {
         include: {
@@ -34,7 +33,7 @@ export default class UserModel {
   }
 
   async getUserByIdList(idList: string[]): Promise<IUser[]> {
-    const users = await this._prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where: {
         id: { in: idList }
       }
@@ -45,7 +44,7 @@ export default class UserModel {
   // insert a new user given user data
   async createUser(user: any, hash: string): Promise<IUser> {
     const { username, email } = user;
-    const newUser = await this._prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         username: username,
         email: email,
@@ -57,7 +56,7 @@ export default class UserModel {
 
   // get users by keyword
   async getUsersByKeyword(keyword: string): Promise<IUser[]> {
-    return await this._prisma.user.findMany({
+    return await prisma.user.findMany({
       where: {
         username: {
           contains: keyword
@@ -67,7 +66,7 @@ export default class UserModel {
   }
 
   async updateBio(id: string, bio: string): Promise<IUser> {
-    const user = this._prisma.user.update({
+    const user = prisma.user.update({
       where: { id },
       data: { bio }
     })
@@ -75,7 +74,7 @@ export default class UserModel {
   }
 
   async updatePhoto(id: string, photo: string): Promise<IUser> {
-    const user = this._prisma.user.update({
+    const user = prisma.user.update({
       where: { id },
       data: { photo }
     })
@@ -83,7 +82,7 @@ export default class UserModel {
   }
 
   async suggestFollow(userId: string, suggestNum: number = 16): Promise<IUser[]> {
-    const users = await this._prisma.user.findMany({
+    const users = await prisma.user.findMany({
       where: {
         id: { not: userId },
         follower: {
