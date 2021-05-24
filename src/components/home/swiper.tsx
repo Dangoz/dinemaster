@@ -1,5 +1,5 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
-import UserCard from "./userCard";
+import UserCard from "../shared/userCard";
 import User from "../../api/user";
 import { useState, useRef, useEffect } from "react";
 
@@ -46,7 +46,7 @@ const Swiper = ({ userId }) => {
         <div className={SwiperStyle.wrapper}>
 
           { users && users.map(user => (
-            <UserCard key={user.id} user={user} hostId={userId}/>
+            <UserCard key={user.id} user={user} hostId={userId} button="follow"/>
           ))}
 
         </div>

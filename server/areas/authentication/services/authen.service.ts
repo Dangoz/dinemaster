@@ -22,7 +22,7 @@ export class AuthenticationService {
 
   async getUserByEmail(email: string): Promise<IUser> {
     let user = await this._db.getUserByEmail(email);
-    user = await UserViewModel.build(user);
+    if (user) user = await UserViewModel.build(user);
     return user;
   }
 

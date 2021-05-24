@@ -33,7 +33,7 @@ const message = ({ user }) => {
 
         <div className={MessageStyle.closeFri}>
           <div className={MessageStyle.closeFriText}>{}</div>
-          <Swiper userId={user.id}/>
+          <Swiper userId={user.id} userFollowing={user.following}/>
         </div>
 
         <div className={MessageStyle.item} onClick={e => {openChat(e, '123')}}>

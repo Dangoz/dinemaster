@@ -1,9 +1,10 @@
 import SwiperStyle from "../../styles/home/swiper.module.css";
-import UserCard from "../home/userCard";
+import UserCard from "../shared/userCard";
 import User from "../../api/user";
+import Message from "../../api/message";
 import { useState, useRef, useEffect } from "react";
 
-const Swiper = ({ userId }) => {
+const Swiper = ({ userId, userFollowing }) => {
   const scroll = useRef(null);
   const [users, setUsers] = useState(null);
 
@@ -32,11 +33,18 @@ const Swiper = ({ userId }) => {
   }
 
   useEffect(() => {
-    User.suggestUser(userId)
+    const followingIds = userFollowing.map(following => following.followedId);
+    Message.generateDefaultSwiper(userId, followingIds)
       .then(users => {
         setUsers(users);
         console.log(JSON.stringify(users, null, 2))
       })
+    // User.suggestUser(userId)
+    //   .then(users => {
+    //     setUsers(users);
+    //     console.log(JSON.stringify(users, null, 2))
+    //   })
+
   }, [])
 
   return (
@@ -46,7 +54,7 @@ const Swiper = ({ userId }) => {
         <div className={SwiperStyle.wrapper}>
 
           { users && users.map(user => (
-            <UserCard key={user.id} user={user} hostId={user.id}/>
+            <UserCard key={user.id} user={user} hostId={user.id} button={'message'}/>
           ))}
 
         </div>
