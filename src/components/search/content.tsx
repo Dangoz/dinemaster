@@ -10,7 +10,7 @@ const Content = ({ userId }) => {
   const [animation, setAnimation] = useState(0);
 
   useEffect(() => {
-    Post.getPosts(userId)
+    Post.getPosts(userId, 0, 20)
       .then(data => setPosts(data))
 
     // detect if device is mobile

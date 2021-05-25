@@ -53,10 +53,10 @@ export default class Post {
   /**
    * get home page posts for a user
    */
-   static async getPosts(id: string): Promise<IPost[]> {
+   static async getPosts(id: string, size: number, limit: number): Promise<IPost[]> {
     const response = await api({
       method: 'get',
-      url: `/post/home/${id}`,
+      url: `/post/home/${id}?size=${size}&limit=${limit}`,
       withCredentials: true
     });
     const posts = response.data.posts;

@@ -30,7 +30,7 @@ export default class PostModel {
     return posts;
   }
 
-  async getPostsRecent(userId: string): Promise<IPost[]> {
+  async getPostsRecent(userId: string, size: number, limit: number = 20): Promise<IPost[]> {
     const posts = await prisma.post.findMany({
       orderBy: {
         createdAt: 'desc'
@@ -40,8 +40,8 @@ export default class PostModel {
           where: { userId }
         }
       },
-      take: 20,
-      skip: 0
+      take: limit,
+      skip: size * limit
     })
     return posts;
   }
