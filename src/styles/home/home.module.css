@@ -22,8 +22,7 @@
 
 .content {
   margin-top: 15px;
-  margin-bottom: 100px;
-  /* margin: '0 auto'; */
+  margin-bottom: 25px;
 }
 .itemBox {
   /* background-color: lightblue; */
@@ -53,6 +52,38 @@
 .itemBox:hover .likeIcon {
   opacity: 100%;
 }
+.loadMore {
+  width: 100vw;
+  margin-bottom: 80px;
+  text-align: center;
+}
+.loadMoreButton {
+  /* display: block; */
+  width: 100px;
+  height: 25px;
+  font-size: 12px;
+
+  /* margin:auto; */
+  border-radius: 3px;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.loadMoreProgress {
+  color: black;
+}
+.theEndButton {
+  width: 120px;
+  height: 25px;
+  font-size: 12px;
+
+  border-radius: 3px;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
 @media (min-width: 441px) {
   .userRecText {
     left: -150px;
