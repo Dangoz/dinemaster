@@ -11,7 +11,7 @@ const Content = ({ userId }) => {
   const gridRef = useRef(null);
 
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
@@ -19,19 +19,18 @@ const Content = ({ userId }) => {
     // detect if device is mobile
     setIsMobile(require("../../config/isMobile")(navigator.userAgent));
     loadMorePosts();
-
   }, [])
 
   const loadMorePosts = () => {
     setIsLoading(true);
 
-    Post.getPosts(userId, size, 3)
+    Post.getPosts(userId, size, 10)
       .then(data => {
 
         console.log("posts",posts,"data",data);
         setPosts(posts => [...posts, ...data]);
         setSize(size + 1);
-        setHasMore(data.length > 0);
+        setHasMore(data.length > 9);
         gridRef.current.updateLayout();
         setIsLoading(false);
       })

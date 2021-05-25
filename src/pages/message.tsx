@@ -17,11 +17,8 @@ const message = ({ user }) => {
 
   const openChat = async (event, userId) => {
     console.log('opened chat');
-    if( user.id = '666ba4a2-d434-4dbb-9d01-8fda07305eb7')
-      userId = '6632082d-a426-441f-a8bb-7d9949540c29';
-    if ( user.id = '6632082d-a426-441f-a8bb-7d9949540c29')
-      userId = '666ba4a2-d434-4dbb-9d01-8fda07305eb7';
-    router.push(`/message/${userId}`)
+
+    // router.push(`/message/${userId}`)
   }
 
   return (

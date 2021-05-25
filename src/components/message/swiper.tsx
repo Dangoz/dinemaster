@@ -39,12 +39,6 @@ const Swiper = ({ userId, userFollowing }) => {
         setUsers(users);
         console.log(JSON.stringify(users, null, 2))
       })
-    // User.suggestUser(userId)
-    //   .then(users => {
-    //     setUsers(users);
-    //     console.log(JSON.stringify(users, null, 2))
-    //   })
-
   }, [])
 
   return (
