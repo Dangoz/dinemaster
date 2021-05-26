@@ -32,7 +32,7 @@ export default class Sort {
     for (let array of frequency) {
       result.push(array[0]);
     }
-    console.log('frequency', frequency);
+
     return result;
   }
 

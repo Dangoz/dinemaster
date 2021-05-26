@@ -18,7 +18,6 @@ const messageRoom = ({ user, visitor, }) => {
   const [chat, setChat] = useState<IMessage[]>([]);
 
   useEffect(() => {
-    console.log([user.id, visitor.id])
     Message.getRoom(user.id, visitor.id)
       .then(room => {
         setRoom(room);
@@ -34,6 +33,11 @@ const messageRoom = ({ user, visitor, }) => {
           setChat(chat => [...chat, newMessage]);
         })
       })
+
+    return () => {
+      socket.off('rec history');
+      socket.off('recmsg');
+    }
 
   }, [])
 
@@ -55,13 +59,14 @@ const messageRoom = ({ user, visitor, }) => {
     }
   }
   const backToMessage = (event) => {
+    socket.emit('leave room', room);
     router.push("/message");
   }
 
   return (
     <>
       {visitor.username} arrived at {user.username} <br />
-      <ArrowBackIosIcon onClick={backToMessage} className={ChatStyle.backButton}/>
+      <ArrowBackIosIcon onClick={backToMessage} className={ChatStyle.backButton} />
       <input type="text" placeholder="message" value={message} onChange={handleChange} onKeyDown={enterKey} />
 
       <input type="button" onClick={handleSubmit} value='send' /> <br />
@@ -69,7 +74,7 @@ const messageRoom = ({ user, visitor, }) => {
       {chat.map((msg, index) => (
         msg.userId === visitor.id
           ? <div key={index}>
-            <img src={visitor.photo} className={ChatStyle.myProfilePhoto + " " + ChatStyle.profilePhoto}/>
+            <img src={visitor.photo} className={ChatStyle.myProfilePhoto + " " + ChatStyle.profilePhoto} />
             <div className={ChatStyle.myChat}> {msg.message} </div>
           </div>
           : <div key={index}>

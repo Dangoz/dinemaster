@@ -10,14 +10,8 @@ import socket from "../config/socket";
 
 const message = ({ user }) => {
 
-  // useEffect(() => {
-
-  // }, [])
-
   const openChat = async (event, userId) => {
-    console.log('opened chat');
 
-    // router.push(`/message/${userId}`)
   }
 
   return (
