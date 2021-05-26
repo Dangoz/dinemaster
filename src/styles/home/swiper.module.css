@@ -183,3 +183,7 @@
   cursor: pointer;
   margin: auto;
 }
+.meButton {
+  background-color: lightpink;
+  cursor: default;
+}

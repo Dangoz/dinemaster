@@ -12,6 +12,7 @@ import { CircularProgress } from "@material-ui/core";
 
 
 const messageRoom = ({ user, visitor, }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [room, setRoom] = useState(null);
   const [message, setMessage] = useState('');
   const [chat, setChat] = useState<IMessage[]>([]);

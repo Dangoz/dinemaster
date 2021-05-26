@@ -10,10 +10,9 @@ import socket from "../config/socket";
 
 const message = ({ user }) => {
 
-  useEffect(() => {
-    socket.emit('connection');
+  // useEffect(() => {
 
-  }, [])
+  // }, [])
 
   const openChat = async (event, userId) => {
     console.log('opened chat');

@@ -64,7 +64,7 @@ const Swiper = ({ userId, userFollowing }) => {
           <div className={SwiperStyle.wrapper}>
 
             {!isLoading && users && users.map(user => (
-              <UserCard key={user.id} user={user} hostId={user.id} button={'message'} />
+              <UserCard key={user.id} user={user} hostId={userId} button={'message'} />
             ))}
 
           </div>
