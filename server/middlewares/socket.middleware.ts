@@ -15,6 +15,10 @@ module.exports = (app) => {
       socket.join(room);
     })
 
+    socket.on('leave room', (room) => {
+      socket.leave(room);
+    })
+
     socket.on('sendmsg', ({ room, message, userId, createdAt }) => {
       console.log(message);
       messagedb.createMessage(message, userId, room, createdAt)
