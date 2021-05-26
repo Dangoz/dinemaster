@@ -19,10 +19,11 @@ const MessageButton = ({ user, hostId, style }) => {
           <rect x="0" y="0" rx="0" ry="0" width="64" height="15" />
         </ContentLoader>
 
-        : <div>
-          <button onClick={Message}
-            className={style.messageButton}>Message</button>
-        </div>}
+        : (user.id !== hostId)
+          ? <div><button className={style.messageButton}>ME</button></div>
+          : <div>
+            <button onClick={Message} className={style.messageButton}>Message</button>
+          </div>}
     </>
   )
 }

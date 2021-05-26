@@ -3,6 +3,7 @@ import UserModel from "../../../model/user.model";
 import RoomModel from "../../../model/room.model";
 import User_RoomModel from "../../../model/user_room.model";
 import UserViewModel from "../../../viewmodel/user.viewmodel";
+import Sort from "../../util/sort";
 
 export default class MessageService {
   private _roomdb: RoomModel = new RoomModel();
@@ -32,6 +33,30 @@ export default class MessageService {
       users[i] = await UserViewModel.build(users[i]);
     }
     console.log("users", users);
+    return users;
+  }
+
+  async searchUser(queryList: string[]): Promise<IUser[]> {
+    let users: IUser[] = [];
+
+    // optional - split out each letter for case senitive search
+    for (let query of queryList) {
+      queryList = [...queryList, ...query.split("")]
+    }
+    console.log(queryList);
+    // parse users by each query keyword
+    for (let query of queryList) {
+      users = [...users, ...await this._userdb.getUsersByKeyword(query)]
+    }
+
+    // sort by frequency
+    users = await Sort.sortByFrequency(users);
+
+    // slice, build and return the 16 most relevant result
+    users = users.slice(0, 16);
+    for (let i = 0; i < users.length; i++) {
+      users[i] = await UserViewModel.build(users[i]);
+    }
     return users;
   }
 }

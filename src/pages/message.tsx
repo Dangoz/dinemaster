@@ -26,7 +26,7 @@ const message = ({ user }) => {
       <div className={MessageStyle.wrapper}>
         <h2 className={MessageStyle.title}>Messages</h2>
 
-        <input className={MessageStyle.search} type="text" placeholder="Search"></input>
+
 
         <div className={MessageStyle.closeFri}>
           <div className={MessageStyle.closeFriText}>{}</div>

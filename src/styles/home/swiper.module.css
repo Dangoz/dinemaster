@@ -1,5 +1,4 @@
 .box {
-
   margin-left: auto;
   margin-right: auto;
   width: 340px;
@@ -60,6 +59,13 @@
   left: 307.5px;
   transition: 1s;
   opacity: 0%;
+}
+.CircularProgressContainer {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media (min-width: 441px) {
   .box {
