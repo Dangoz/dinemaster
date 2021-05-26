@@ -56,11 +56,26 @@ export default class UserModel {
 
   // get users by keyword
   async getUsersByKeyword(keyword: string): Promise<IUser[]> {
+    let keywordReverseCase =
+      keyword === keyword.toLowerCase()
+        ? keyword.toUpperCase()
+        : keyword.toLowerCase()
+
     return await prisma.user.findMany({
       where: {
-        username: {
-          contains: keyword
-        }
+        OR: [
+          {
+            username: {
+              contains: keyword
+            },
+          },
+          {
+            username: {
+              contains: keywordReverseCase
+            },
+          }
+
+        ]
       }
     })
   }

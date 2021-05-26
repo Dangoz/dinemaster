@@ -1,8 +1,9 @@
 import { Server } from "socket.io";
-
+import MessageModel from "../model/message.model";
 
 module.exports = (app) => {
   console.log('initializing socket');
+  const messagedb = new MessageModel();
   const io = new Server(app);
 
   io.on('connection', socket => {
@@ -14,9 +15,17 @@ module.exports = (app) => {
       socket.join(room);
     })
 
-    socket.on('sendmsg', ({ room, msg }) => {
-      console.log(msg);
-      io.to(room).emit('recmsg', { msg });
+    socket.on('sendmsg', ({ room, message, userId, createdAt }) => {
+      console.log(message);
+      messagedb.createMessage(message, userId, room, createdAt)
+      socket.to(room).emit('recmsg', { message, userId, roomId: room, createdAt });
+    })
+
+    socket.on('msg history', ({ room }) => {
+      messagedb.getMessagesByRoom(room).
+        then(messages => {
+          socket.emit('rec history', ({ messages }))
+        })
     })
   })
 }

@@ -16,4 +16,9 @@ export default class Message {
       { followingIds });
     return response.data.users;
   }
+
+  static async searchUser(queryList: string[]): Promise<IUser[]> {
+    const response = await api.post('/message/search', { queryList });
+    return response.data.users;
+  }
 }

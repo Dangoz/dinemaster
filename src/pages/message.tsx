@@ -1,7 +1,7 @@
 import Menu from "../components/menu";
 import { useEffect, useState, useRef } from "react";
 import { requireAuthen } from "../api/require.authen";
-import MessageStyle from "../styles/message.module.css";
+import MessageStyle from "../styles/message/message.module.css";
 import Swiper from "../components/message/swiper";
 import router from "next/router";
 import Link from "next/link";
@@ -10,10 +10,9 @@ import socket from "../config/socket";
 
 const message = ({ user }) => {
 
-  useEffect(() => {
-    socket.emit('connection');
+  // useEffect(() => {
 
-  }, [])
+  // }, [])
 
   const openChat = async (event, userId) => {
     console.log('opened chat');
@@ -26,7 +25,7 @@ const message = ({ user }) => {
       <div className={MessageStyle.wrapper}>
         <h2 className={MessageStyle.title}>Messages</h2>
 
-        <input className={MessageStyle.search} type="text" placeholder="Search"></input>
+
 
         <div className={MessageStyle.closeFri}>
           <div className={MessageStyle.closeFriText}>{}</div>

@@ -18,6 +18,7 @@ const signup = () => {
           id="username"
           name="username"
           placeholder=""
+          maxLength={50}
           required
         /><br />
 
@@ -27,6 +28,7 @@ const signup = () => {
           id="email"
           name="email"
           placeholder=""
+          maxLength={50}
           required
         /> <br />
 
@@ -36,6 +38,7 @@ const signup = () => {
           id="password"
           name="password"
           placeholder=""
+          maxLength={50}
           required
         /> <br />
 
