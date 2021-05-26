@@ -1,7 +1,7 @@
 import Menu from "../components/menu";
 import { useEffect, useState, useRef } from "react";
 import { requireAuthen } from "../api/require.authen";
-import MessageStyle from "../styles/message.module.css";
+import MessageStyle from "../styles/message/message.module.css";
 import Swiper from "../components/message/swiper";
 import router from "next/router";
 import Link from "next/link";

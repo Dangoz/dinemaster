@@ -1,4 +1,4 @@
-import MessageStyle from "../../styles/message.module.css";
+import MessageStyle from "../../styles/message/message.module.css";
 import Message from "../../api/message";
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
@@ -15,10 +15,8 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
     setIsLoading(true);
 
     const queryList = query.trim().split(" ").filter(word => word != "")
-    console.log(queryList)
     Message.searchUser(queryList)
     .then(users => {
-      console.log(users);
       setUsers(users);
       setIsLoading(false);
     })

@@ -26,6 +26,7 @@ model User {
   follower  Relationship[] @relation("followed")
   chatrooms User_Room[]
 
+  Message Message[]
   @@map(name: "user")
 }
 
@@ -89,10 +90,11 @@ model Post_Tag {
 }
 
 model Room {
-  id String @id @default(uuid())
+  id       String      @id @default(uuid())
   userRoom User_Room[]
 
   @@map("room")
+  Message Message[]
 }
 
 model User_Room {
@@ -104,4 +106,14 @@ model User_Room {
 
   @@unique([userId, roomId])
   @@map("chatroom")
+}
+
+model Message {
+  id       String   @id @default(uuid())
+  message  String
+  createdAt DateTime @default(now())
+  userId   String
+  User     User     @relation(fields: [userId], references: [id])
+  roomId   String
+  Room     Room     @relation(fields: [roomId], references: [id])
 }
