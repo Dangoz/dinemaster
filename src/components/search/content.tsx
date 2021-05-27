@@ -10,7 +10,6 @@ const Content = ({ userId, posts }) => {
   const [animation, setAnimation] = useState(0.45);
   const gridRef = useRef(null);
 
-  // const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -18,27 +17,26 @@ const Content = ({ userId, posts }) => {
   useEffect(() => {
     // detect if device is mobile
     setIsMobile(require("../../config/isMobile")(navigator.userAgent));
-    // loadMorePosts();
   }, [])
 
   useEffect(() => {
     console.log('posts', posts);
   }, [posts])
 
-  const loadMorePosts = () => {
-    // setIsLoading(true);
+  // const loadMorePosts = () => {
+  //   setIsLoading(true);
 
-    // Post.getPosts(userId, size, 10)
-    //   .then(data => {
+  //   Post.getPosts(userId, size, 10)
+  //     .then(data => {
 
-    //     console.log("posts",posts,"data",data);
-    //     setPosts(posts => [...posts, ...data]);
-    //     setSize(size + 1);
-    //     setHasMore(data.length > 9);
-    //     gridRef.current.updateLayout();
-    //     setIsLoading(false);
-    //   })
-  }
+  //       console.log("posts",posts,"data",data);
+  //       setPosts(posts => [...posts, ...data]);
+  //       setSize(size + 1);
+  //       setHasMore(data.length > 9);
+  //       gridRef.current.updateLayout();
+  //       setIsLoading(false);
+  //     })
+  // }
 
   return (
     <>

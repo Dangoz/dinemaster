@@ -48,13 +48,12 @@ export const checkUser: () => void = () => {
 
 export const login = (event) => {
   event.preventDefault();
-  api.post('/auth/login', {
+  return api.post('/auth/login', {
     email: event.target[0].value,
     password: event.target[1].value
   },
     { withCredentials: true }).then(response => {
 
-      console.log(response.status);
       if (response.status == 200) {
         return router.push('/home');
       }
@@ -66,7 +65,7 @@ export const login = (event) => {
 
 export const register = (event) => {
   event.preventDefault();
-  api.post('/auth/register', {
+  return api.post('/auth/register', {
     email: event.target[1].value,
     password: event.target[2].value,
     username: event.target[0].value,
@@ -74,11 +73,19 @@ export const register = (event) => {
     { withCredentials: true }).then(response => {
 
       console.log(response.status);
-      if (response.status == 200) { 
+      if (response.status == 200) {
         return router.push('/passport/signin');
       }
 
       event.target.reset();
       return response.data.err;
+    })
+}
+
+export const logout = () => {
+  console.log('logging out~!');
+  api.get('/auth/logout')
+    .then(response => {
+      return router.push('/')
     })
 }

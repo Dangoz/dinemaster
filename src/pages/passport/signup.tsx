@@ -1,18 +1,24 @@
 import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
 import { checkUser, register } from "../../api/require.authen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const signup = () => {
+  const [message, setMessage] = useState(null);
   useEffect(() => {
     checkUser();
   }, [])
 
+  const signup = async (event) => {
+    const msg = await register(event);
+    setMessage(msg);
+  }
+
   return (
     <div className={landingStyles.white}>
-      <form className={landingStyles.registerForm} onSubmit={register}>
-
-        <label className={landingStyles.registerLabel}>Username</label><br />
+      <form className={landingStyles.registerForm} onSubmit={signup}>
+      {message && <span className={landingStyles.errMessage2}>{message}</span>}
+        <label className={landingStyles.registerLabel}>Username </label><br />
         <input className={landingStyles.landingInput + " " + landingStyles.registerInput}
           type="username"
           id="username"
@@ -41,7 +47,6 @@ const signup = () => {
           maxLength={50}
           required
         /> <br />
-
 
         <input className={landingStyles.coloredLink}
           type="submit"
