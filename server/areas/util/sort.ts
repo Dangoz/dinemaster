@@ -1,4 +1,5 @@
 import IHasId from "./IHasId";
+import IHasCreatedAt from "./IHasCreatedAt";
 
 export default class Sort {
 
@@ -43,5 +44,18 @@ export default class Sort {
         return index;
       }
     }
+  }
+
+  // sort by time of creation DESC
+  public static async sortByCreatedAt<T>(items: IHasCreatedAt[], asc: boolean = false): Promise<T[]> {
+
+    items.sort((a, b) => {
+      if (asc) return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    })
+
+    let result;
+    result = items;
+    return result;
   }
 }

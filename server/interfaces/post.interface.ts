@@ -12,6 +12,6 @@ export default interface IPost {
   comments?: number;
   username?: string;
 
-  likesList?: Likes[];
   likedByUser?: boolean;
+  likesList?: { createdAt?: Date; userId?: string; postId?: string }[];
 }
