@@ -48,7 +48,6 @@ export default class PostService {
     const options = userId == hostId ? {} : { likedByHost: true }
     for (let i = 0; i < posts.length; i++) {
       posts[i] = await PostViewModel.build(posts[i], options);
-      // posts[i] = await PostViewModel.build(posts[i]);
     }
     return posts;
   }

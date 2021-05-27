@@ -1,5 +1,5 @@
 import Menu from "../components/menu";
-// import 
+import Search from "../components/search/search";
 import { requireAuthen } from "../api/require.authen";
 import Content from "../components/search/content";
 import { useState } from "react";
@@ -14,7 +14,7 @@ const search = ({ user }) => {
 
   return (
     <>
-      <input type="text" placeholder="Search" value={query} onChange={parseQuery}></input>
+      {/* <Search /> */}
 
       <Content userId={user.id} />
         <Menu/>
