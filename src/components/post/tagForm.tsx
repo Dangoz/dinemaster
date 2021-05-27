@@ -1,7 +1,7 @@
 import PostStyle from "../../styles/post/post.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const TagForm = ({ pushTag, removeTag }) => {
+const TagForm = ({ pushTag, removeTag, isReset }) => {
   const [formValue, setFormValue] = useState('');
   const [count, setCount] = useState(0);
   const [tags, setTags] = useState([]);
@@ -34,6 +34,10 @@ const TagForm = ({ pushTag, removeTag }) => {
     removeTag(tag);
     setCount(count - 1);
   }
+
+  useEffect(() => {
+    if (isReset) return setTags([]);
+  }, [isReset])
 
   return (
     <>
