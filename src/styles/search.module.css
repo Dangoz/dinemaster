@@ -5,13 +5,17 @@
 }
 
 .searchWrapper {
-  
+    margin: 20px;
+    max-width: 500px;
 }
 
 /* before typing */
 .tagPoolWrapper {
     margin-top: 15px;
     margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-width: 500px;
     border-top: 1px solid #dadada;
 }
 
@@ -49,17 +53,20 @@
 }
 
 .tags {
-    display: flex;
+    max-width: 800px;
     margin-top: 8px;
 }
 
 .individualTag {
-    background-color: #dadada;
+    display: inline-block;
+    background-color: black;
+    color: white;
     margin-left: 10px;
     margin-right: 5px;
-    border-radius: 15px;
+    border-radius: 5px;
     font-size: medium;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom: 8px;
 }
 
 @media (min-width: 800px) {
