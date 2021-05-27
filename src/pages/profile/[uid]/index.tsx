@@ -26,7 +26,7 @@ const profile = ({ user, visitor }) => {
           <div className={ProfileStyle.username}> {user.username} </div>
         </div>
 
-        <div className={ProfileStyle.content}>
+        <div className={visitorStatus ? ProfileStyle.contentVisitor : ProfileStyle.content}>
           <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
 
           {/* {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>} */}
@@ -34,7 +34,7 @@ const profile = ({ user, visitor }) => {
             {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle} changeCount={changeCount}/>}
           </div>
 
-          <div className={ProfileStyle.follow}>             
+          <div className={visitorStatus ? ProfileStyle.followVisitor : ProfileStyle.follow}>             
             <div className={ProfileStyle.follower}>{followerCount}<br />Followers</div>
             <div className={ProfileStyle.following}>{user.following.length}<br />Following</div> 
           </div>
@@ -44,7 +44,7 @@ const profile = ({ user, visitor }) => {
           </div>
       
 
-          <div className={ProfileStyle.posts}>
+          <div className={visitorStatus ? ProfileStyle.postsVisitor : ProfileStyle.posts}>
             <div className={ProfileStyle.options}>
               <button className={postState !== 'post' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
