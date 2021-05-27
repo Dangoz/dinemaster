@@ -39,7 +39,7 @@ const profile = ({ user }) => {
               <button className={postState !== 'visit' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
                   setPostState('visit')
-                }}>Likes</button>
+                }}>Visits</button>
             </div>
 
 

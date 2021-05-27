@@ -1,36 +1,24 @@
-/* .preview {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-}
-
-.tagList {
-  display: grid;
-  grid-template-columns: auto;
-}
-.tagListItem {
-  cursor: pointer;
-}
-.tagListItem:hover {
-  text-decoration: line-through;
-} */
-
 .wrapper {
   margin: 20px;
   display: grid;
   grid-template-rows: 50px auto;
+  border-radius: 15px;
+  background-color: white;
 }
 
 .title {
   justify-self: center;
+  margin-top: 10px;
 }
 
 .postArea {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.5fr;
   grid-template-rows: auto 50px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  padding: 10px;
+  border-top: 1px solid #DADADA;
 }
 
 .preview {
@@ -42,11 +30,12 @@
 }
 
 .choosePic {
-  width: 120px;
-  height: 50px;
+  width: 0px;
+  height: 0px;
   grid-column: 1/2;
   grid-row: 2/3;
-  margin: 0 auto;
+  margin-left: 0px;
+  /* margin: 0 auto; */
 }
 
 .content {
@@ -55,16 +44,21 @@
   grid-column: 2/3;
   grid-row: 1/2;
   border: none;
-  
+}
+
+.contentCount {
+  justify-self: end;
 }
 
 
 .tagWrapper {
   display: grid;
   grid-template-columns: 5fr 1fr;
-  grid-template-rows: 30px 2fr 1fr;
-  border: 1px solid black;
+  grid-template-rows: 30px 1fr 0.3fr;
+  border-top: 1px solid #DADADA;
+  border-bottom: 1px solid #DADADA;
   margin-top: 5px;
+  padding: 10px;
 }
 
 .tagTitle {
@@ -72,8 +66,11 @@
 }
 
 .tagList {
-  grid-column: 1/3;
+  grid-column: 1/2;
   grid-row: 2/3;
+  /* border-top: 1px solid #DADADA; */
+  display: inline-flex;
+  /* width: 400px; */
 }
 
 .typeTags {
@@ -86,10 +83,11 @@
 }
 
 .tagListItem {
+  height: 30px;
   cursor: pointer;
   margin-top: 5px;
   margin-right: 5px;
-  border: none;
+  
   border-radius: 5px;
   background-color:#F0F0F0;
   padding: 8px;
@@ -102,9 +100,10 @@
 
 .greenBtn {
   margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   height: 47px;
   width: 123px;
-  justify-self: end;
   border-radius: 5px;
   background: #54B970;
   color: white;
@@ -113,6 +112,33 @@
   justify-self: end;
 }
 
+.greenChoose {
+  height: 40px;
+  width: 123px;
+  /* justify-self: end; */
+  border-radius: 5px;
+  background: #54B970;
+  color: white;
+  font-size: medium;
+  border: none;
+  /* justify-self: center; */
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
 .formWrapper {
   display: grid;
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .window {
+    background-color: #DADADA;
+    height: 100vh;
+    width: 100vw;
+  }
 }

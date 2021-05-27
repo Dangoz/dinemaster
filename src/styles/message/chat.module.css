@@ -1,21 +1,133 @@
-.myChat {
-  color: green;
+.wrapper {
+  margin: 20px;
+  flex-grow: 1;
 }
-.otherChat {
-  color: #0096fa;
+
+/* header */
+.contentHeader {
+  display: flex;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dadada;
+  align-items: center;
 }
+
 .profilePhoto {
   width: 50px;
   height: 50px;
   border-radius: 15px;
   object-fit: cover;
+  margin-left: 10px;
 }
-.myProfilePhoto {
- 
-}
-.otherProfilePhoto {
 
-}
 .backButton {
   cursor: pointer;
+}
+
+.username {
+  margin-left: 10px;
+}
+
+/* body */
+.myChat {
+  padding: 10px;
+  background-color: black;
+  border-radius: 15px;
+  border: none;
+  text-align: center;
+  font-size: x-large;
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.myChat::content {
+  width: 100%;
+}
+
+.myChatWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.otherChat {
+  padding: 10px;
+  background-color: #54B970;
+  border-radius: 15px;
+  border: none;
+  text-align: center;
+  font-size: x-large;
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.otherChatWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 80%;
+}
+
+.contentBody {
+  max-height: calc(100vh - calc(100vh/3.5));
+  overflow: auto;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #dadada;
+}
+
+
+/* footer */
+.textArea {
+  grid-column: 1/2;
+  width: 100%;
+  font-size: large;
+  border: none;
+  background: #dadada;
+  padding-left: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.sendBtn {
+  grid-column: 2/3;
+  width: 100%;
+  font-size: large;
+  border: none;
+  background: #dadada;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.contentFooter {
+  position: fixed;
+  bottom: 10px;
+  height: 100px;
+  width: 90%;
+
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+ 
+}
+
+
+@media (min-width: 500px) {
+  .wrapper {
+    width: 500px;
+    margin: 0 auto;
+    /* border-right: 1px solid #dadada;
+    border-left: 1px solid #dadada; */
+  }
+
+  .contentHeader {
+    margin-top: 20px;
+  }
+
+  .contentFooter {
+    /* border: 1px solid #dadada; */
+    width: 500px;
+    margin-left: 0;
+  }
 }

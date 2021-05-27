@@ -3,6 +3,8 @@ import Menu from "../components/menu";
 import { requireAuthen } from "../api/require.authen";
 import Content from "../components/search/content";
 import { useState } from "react";
+import SearchStyle from "../styles/search.module.css"
+
 
 const search = ({ user }) => {
   const [query, setQuery] = useState('');
@@ -14,7 +16,11 @@ const search = ({ user }) => {
 
   return (
     <>
-      <input type="text" placeholder="Search" value={query} onChange={parseQuery}></input>
+      <div className={SearchStyle.wrapper}>
+        <input className={SearchStyle.search} type="text" placeholder="Search" value={query} onChange={parseQuery}></input>
+        <h3 className={SearchStyle.title}>See What Others Are Posting</h3>
+        <Content userId={user.id} />
+      </div>
 
       <Content userId={user.id} />
         <Menu/>
