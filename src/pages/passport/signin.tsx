@@ -2,12 +2,18 @@ import landingStyles from "../../styles/landing/landing.module.css";
 import Link from "next/link";
 import router from "next/router"
 import { checkUser, login } from "../../api/require.authen";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const signin = () => {
+  const [message, setMessage] = useState(null);
   useEffect(() => {
     checkUser();
   }, [])
+
+  const signin = async (event) => {
+    const msg = await login(event);
+    setMessage(msg);
+  }
 
   return (
     <div className={landingStyles.wrapper}>
@@ -20,8 +26,8 @@ const signin = () => {
 
       <div className={landingStyles.options}>
 
-        <form className={landingStyles.signinForm} onSubmit={login} >
-
+        <form className={landingStyles.signinForm} onSubmit={signin} >
+        {message && <span className={landingStyles.errMessage}>{message}</span>}
           <input className={landingStyles.landingInput}
             type="email"
             id="email"

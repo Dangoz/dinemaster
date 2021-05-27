@@ -5,13 +5,26 @@ import Menu from "../components/menu";
 import Photo from "../components/profile/photo";
 import Content from "../components/profile/content";
 import { useState, useEffect } from "react";
-import { VisibilityOffRounded } from "@material-ui/icons";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { logout } from "../api/require.authen";
+
+const styles = {
+  exitIcon: {
+    width: '45px',
+    height: '45px'
+  }
+}
 
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
 
+  const signout = () => {
+
+  }
+
   return (
     <>
+      <div className={ProfileStyle.exitIcon} onClick={logout}><ExitToAppIcon style={styles.exitIcon} /></div>
       <div className={ProfileStyle.wrapper}>
         <div className={ProfileStyle.imageBackground}>
           <div className={ProfileStyle.username}> {user.username} </div>
