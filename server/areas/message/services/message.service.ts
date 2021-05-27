@@ -2,6 +2,7 @@ import IUser from "../../../interfaces/user.interface";
 import UserModel from "../../../model/user.model";
 import RoomModel from "../../../model/room.model";
 import User_RoomModel from "../../../model/user_room.model";
+import MessageModel from "../../../model/message.model";
 import UserViewModel from "../../../viewmodel/user.viewmodel";
 import Sort from "../../util/sort";
 
@@ -9,6 +10,7 @@ export default class MessageService {
   private _roomdb: RoomModel = new RoomModel();
   private _user_roomdb: User_RoomModel = new User_RoomModel();
   private _userdb: UserModel = new UserModel();
+  private _messagedb: MessageModel = new MessageModel();
 
   async getRoom(uid1: string, uid2: string): Promise<string> {
     const existingRoom = await this._user_roomdb.getRoomByTwoUsers(uid1, uid2);
@@ -32,7 +34,7 @@ export default class MessageService {
     for (let i = 0; i < users.length; i++) {
       users[i] = await UserViewModel.build(users[i]);
     }
-    console.log("users", users);
+
     return users;
   }
 
@@ -58,5 +60,25 @@ export default class MessageService {
       users[i] = await UserViewModel.build(users[i]);
     }
     return users;
+  }
+
+  async getRecentChats(userId: string): Promise<IUser[]> {
+    const rooms = await this._user_roomdb.getRoomsByUser(userId);
+    const roomIds = rooms.map(room => room.roomId);
+    const messages = await this._messagedb.mostRecentMessageByRoom(roomIds, userId);
+
+    let chats: IUser[] = [];
+    for (let message of messages) {
+      message.User.id !== userId
+        ? chats.push(message.User)
+        : chats.push((await this._user_roomdb.getOtherUserByRoom(userId, message.roomId)).user);
+    }
+
+
+    for (let i = 0; i < chats.length; i++) {
+      chats[i] = await UserViewModel.build(chats[i]);
+    }
+    console.log("chats", chats, chats.length)
+    return chats;
   }
 }

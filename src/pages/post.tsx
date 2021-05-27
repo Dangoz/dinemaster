@@ -16,7 +16,10 @@ const post = ({ user }) => {
     console.log('creating post! with: ' + tags)
     event.preventDefault();
     const data = { caption, file, tags }
-    const response = await Post.createImagePost(data, user);
+    await Post.createImagePost(data, user)
+      .then(response => {
+        
+      })
   }
 
   const pushTag = (tag) => {

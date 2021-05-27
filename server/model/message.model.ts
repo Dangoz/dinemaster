@@ -1,5 +1,5 @@
 import prisma from "./prisma.client";
-import { Message } from "@prisma/client";
+import { Message, User } from "@prisma/client";
 
 export default class MessageModel {
 
@@ -22,6 +22,24 @@ export default class MessageModel {
       },
       orderBy: {
         createdAt: 'asc'
+      }
+    })
+    return messages;
+  }
+
+  async mostRecentMessageByRoom(roomIds: string[], userId: string): Promise<(Message & { User: User; })[]> {
+    const messages = await prisma.message.findMany({
+      where: {
+        AND: [
+          { roomId: { in: roomIds } }
+        ]
+      },
+      distinct: ['roomId'],
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        User: true
       }
     })
     return messages;
