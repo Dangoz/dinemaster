@@ -16,7 +16,8 @@ class PostController implements IController {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/home/:uid`, ensureAuthenticated, this.getPosts);
-    this.router.get(`${this.path}/user/:uid`, ensureAuthenticated, this.getUserPosts);
+    this.router.get(`${this.path}/user/:uid/:hid`, ensureAuthenticated, this.getUserPosts);
+    this.router.get(`${this.path}/user-likes/:uid/:hid`, ensureAuthenticated, this.getUserLikes);
     this.router.post(`${this.path}/create`, ensureAuthenticated, this.createPost);
     this.router.get('/s3url', ensureAuthenticated, this.createUrl);
   }
@@ -43,10 +44,16 @@ class PostController implements IController {
   }
 
   private getUserPosts = async (req: express.Request, res: express.Response) => {
-    const posts: IPost[] = await this.postService.getUserPosts(req.params.uid)
+    const { uid, hid } = req.params;
+    const posts: IPost[] = await this.postService.getUserPosts(uid, hid);
     res.status(200).json({ posts });
   }
 
+  private getUserLikes = async (req: express.Request, res: express.Response) => {
+    const { uid, hid } = req.params;
+    const posts: IPost[] = await this.postService.getUserLikes(uid, hid);
+    res.status(200).json({ posts });
+  }
 }
 
 export default PostController;

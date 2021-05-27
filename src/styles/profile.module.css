@@ -164,6 +164,15 @@
   border-radius: inherit;
   object-fit: cover;
 }
+.circularProgressContent {
+  grid-row: 2 / 3;
+  grid-column: 1 / 4;
+  margin-top: 50px;
+  display: block;
+}
+.circularProgress {
+  color: black;
+}
 
 @media (min-width: 800px) {
   .wrapper {

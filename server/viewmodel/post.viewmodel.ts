@@ -31,14 +31,18 @@ export default class PostViewModel implements IPost {
    * @param options - options for mapping optional post attributes
    * 
    */
-  static async build(post: IPost, options?: {}): Promise<PostViewModel> {
-    post = await PostViewModel.mapLikedByUser(post);
+  static async build(post: IPost, options?: { likedByHost?: boolean }): Promise<PostViewModel> {
+    let likedByCount = 1;
+    if (options) {
+      if (options.likedByHost) likedByCount = 2;
+    }
 
+    post = await PostViewModel.mapLikedByUser(post, likedByCount);
     return new PostViewModel(post);
   }
 
-  private static async mapLikedByUser(post: IPost): Promise<IPost> {
-    post.likedByUser = post.likesList.length == 1;
+  private static async mapLikedByUser(post: IPost, likedByCount: number): Promise<IPost> {
+    post.likedByUser = post.likesList.length == likedByCount;
     return post;
   }
 }

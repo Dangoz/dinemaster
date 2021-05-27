@@ -45,14 +45,14 @@ const profile = ({ user, visitor }) => {
                 onClick={() => {
                   setPostState('post')
                 }}>Posts</button>
-              <button className={postState !== 'visit' ? ProfileStyle.optionInactive : undefined}
+              <button className={postState !== 'like' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
-                  setPostState('visit')
-                }}>Visits</button>
+                  setPostState('like')
+                }}>Likes</button>
             </div>
 
 
-            <Content userId={user.id} />
+            <Content userId={user.id} hostId={visitor.id} postState={postState}/>
 
           </div>
 

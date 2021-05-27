@@ -15,7 +15,8 @@ export default class PostModel {
     return newPost;
   }
 
-  async getUserPosts(userId: string): Promise<IPost[]> {
+  async getUserPosts(userId: string, hostId: string): Promise<IPost[]> {
+    const likedById = userId == hostId ? userId : hostId;
     const posts = await prisma.post.findMany({
       where: { userId },
       orderBy: {
@@ -23,7 +24,7 @@ export default class PostModel {
       },
       include: {
         likesList: {
-          where: { userId }
+          where: { userId: likedById }
         }
       }
     })
@@ -46,6 +47,29 @@ export default class PostModel {
     return posts;
   }
 
+  async getPostsLikedByUser(userId: string, hostId: string): Promise<IPost[]> {
+    const posts = await prisma.post.findMany({
+      where: {
+        likesList: {
+          some: {
+            userId
+          }
+        }
+      },
+      include: {
+        likesList: {
+          where: {
+            OR: [
+              { userId },
+              { userId: hostId }
+            ]
+          }
+        }
+      }
+    })
+    return posts;
+  }
+
   // async getPostById(id: string): Promise<IPost> {
   //   const post = await this._prisma.post.findUnique({
   //     where: { id }
@@ -56,7 +80,7 @@ export default class PostModel {
   // async deletePostById(id: string): Promise<void> {
   //   await this._prisma.post.delete({
   //     where: { id },
-      
+
   //   })
   // }
 

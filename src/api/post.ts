@@ -1,6 +1,7 @@
 import IPost from "../interface/post.interface";
 import IUser from "../interface/user.interface"
 import api from "../config/axios";
+import { RepeatOneSharp } from "@material-ui/icons";
 
 export default class Post {
 
@@ -39,15 +40,22 @@ export default class Post {
    * @param id 
    * @returns 
    */
-  static async getUserPosts(id: string): Promise<IPost[]> {
+  static async getUserPosts(userId: string, hostId: string): Promise<IPost[]> {
     const response = await api({
       method: 'get',
-      url: `/post/user/${id}`,
+      url: `/post/user/${userId}/${hostId}`,
       withCredentials: true
     });
-    const posts = response.data.posts;
- 
-    return posts;
+    return response.data.posts;
+  }
+
+  static async getUserLikes(userId: string, hostId: string): Promise<IPost[]> {
+    const response = await api({
+      method: 'get',
+      url: `/post/user-likes/${userId}/${hostId}`,
+      withCredentials: true
+    });
+    return response.data.posts;
   }
 
   /**
