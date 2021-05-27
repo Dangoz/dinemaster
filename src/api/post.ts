@@ -1,7 +1,6 @@
 import IPost from "../interface/post.interface";
 import IUser from "../interface/user.interface"
 import api from "../config/axios";
-import { RepeatOneSharp } from "@material-ui/icons";
 
 export default class Post {
 

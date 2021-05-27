@@ -2,7 +2,7 @@ import { Tag } from "@prisma/client";
 import prisma from "./prisma.client";
 
 export default class TagModel {
-  
+
   async getOrCreateTagsByNames(names: string[]): Promise<Tag[]> {
 
     // find tags
@@ -32,5 +32,30 @@ export default class TagModel {
     });
   }
 
+  async getTagsByKeyword(query: string): Promise<Tag[]> {
+    return await prisma.tag.findMany({
+      where: {
+        name: { contains: query }
+      }
+    })
+  }
 
+  async getTagsByPostCount(): Promise<Tag[]> {
+    const tags = await prisma.tag.findMany({
+      orderBy: {
+        posts: {
+          count: 'desc'
+        }
+      },
+      include: {
+        posts: {
+          select: {
+            postId: true
+          }
+        }
+      },
+      take: 20
+    })
+    return tags;
+  }
 }

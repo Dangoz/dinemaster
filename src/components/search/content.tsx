@@ -3,24 +3,48 @@ import { useState, useEffect, useRef } from "react";
 import Post from "../../api/post";
 import StackGrid, { transitions } from "react-stack-grid";
 import ImageItem from "../imageItem";
+import { CircularProgress } from "@material-ui/core";
 
-const Content = ({ userId }) => {
+const Content = ({ userId, posts }) => {
   const [isMobile, setIsMobile] = useState(null);
-  const [posts, setPosts] = useState(null);
-  const [animation, setAnimation] = useState(0);
+  const [animation, setAnimation] = useState(0.45);
+  const gridRef = useRef(null);
+
+  // const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [size, setSize] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    Post.getPosts(userId, 0, 20)
-      .then(data => setPosts(data))
-
     // detect if device is mobile
     setIsMobile(require("../../config/isMobile")(navigator.userAgent));
+    // loadMorePosts();
   }, [])
+
+  useEffect(() => {
+    console.log('posts', posts);
+  }, [posts])
+
+  const loadMorePosts = () => {
+    // setIsLoading(true);
+
+    // Post.getPosts(userId, size, 10)
+    //   .then(data => {
+
+    //     console.log("posts",posts,"data",data);
+    //     setPosts(posts => [...posts, ...data]);
+    //     setSize(size + 1);
+    //     setHasMore(data.length > 9);
+    //     gridRef.current.updateLayout();
+    //     setIsLoading(false);
+    //   })
+  }
 
   return (
     <>
       <StackGrid className={HomeStyle.content}
-        columnWidth={isMobile ? 155: 205}
+        gridRef={element => gridRef.current = element}
+        columnWidth={isMobile ? 155 : 205}
         gutterWidth={25}
         gutterHeight={13}
         component="div"
@@ -34,17 +58,23 @@ const Content = ({ userId }) => {
         // enter={scaleDown.enter}
         // entered={scaleDown.entered}
         // leaved={scaleDown.leaved}
-        duration={animation}
+        // duration={animation}
       >
 
         {posts ? posts.map((post, index) => (
           <ImageItem key={index} post={post} userId={userId} />
         )) :
-          []
+          <p>oh no</p>
         }
       </StackGrid>
 
-
+      {/* <div className={HomeStyle.loadMore}>
+        {!hasMore
+          ? <button className={HomeStyle.theEndButton}>Reached the End</button>
+          : isLoading
+            ? <CircularProgress className={HomeStyle.loadMoreProgress} value={100} color="inherit" size={33} />
+            : <button className={HomeStyle.loadMoreButton} onClick={loadMorePosts}>Load More</button>}
+      </div> */}
     </>
   )
 }
