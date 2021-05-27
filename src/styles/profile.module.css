@@ -18,6 +18,17 @@
   height: 25vh;
 }
 
+.contentVisitor {
+  background-color: white;
+  border-top: 5px solid #c4c4c4;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
+  border-style: none;
+  text-align: center;
+
+  display: grid;
+  grid-template-rows: 55px 30px 50px 50px auto;
+}
 .content {
   background-color: white;
   border-top: 5px solid #c4c4c4;
@@ -27,7 +38,7 @@
   text-align: center;
 
   display: grid;
-  grid-template-rows: 55px 30px 55px 60px auto;
+  grid-template-rows: 55px 50px 50px auto;
 }
 .photo {
   width: 145px;
@@ -77,10 +88,18 @@
   grid-row: 2/3;
 }
 
-.follow {
+.followVisitor {
   font-size: 18.5px;
   padding-top: 10px;
   grid-row: 3 / 4;
+
+  display: grid;
+  grid-template-columns: auto 100px 100px auto;
+}
+.follow {
+  font-size: 18.5px;
+  padding-top: 10px;
+  grid-row: 2 / 3;
 
   display: grid;
   grid-template-columns: auto 100px 100px auto;
@@ -98,8 +117,7 @@
 .bio {
   font-size: 15px;
   padding-top: 15px;
-  grid-row: 4 / 5;
-  /* background-color: red; */
+  grid-row: 3 / 4;
   width: 390px;
   height: 50px;
 
@@ -117,9 +135,18 @@
   padding-top: 0;
   padding-left: 15px
 }
-.posts {
+.postsVisitor {
   margin-top: 25px;
   grid-row: 5 / 6;
+
+  display: grid;
+  grid-template-columns: auto 300px auto;
+  grid-template-rows: 36px auto;
+  margin-bottom: 100px;
+}
+.posts {
+  margin-top: 25px;
+  grid-row: 4 / 5;
 
   display: grid;
   grid-template-columns: auto 300px auto;
