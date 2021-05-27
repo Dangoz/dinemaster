@@ -1,5 +1,7 @@
 .title {
   top: 18px;
+  display: grid;
+  justify-items: center;
 }
 .title, .messageSearch {
   position: relative;
@@ -7,9 +9,21 @@
   margin: 0 auto;
   width: 420px;
 }
+
+.window {
+  display: grid;
+  justify-items: flex-start;
+  margin-left: 20px;
+}
+
+.messageSearch input {
+  width: 100%;
+}
+
 .swipper {
   margin-top: 10px ;
 }
+
 
 .wrapper {
   width: 460px;
@@ -19,50 +33,53 @@
   margin-right: auto;
   margin-bottom: 50px;
 
-  border-top-left-radius: 20px;
+  /* border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  box-shadow: 0px 0px 1px black;
+  box-shadow: 0px 0px 1px black; */
   padding-top: 0px;
 }
 .mobileWrapper {
-  width: 350px;
-  height: 70vh;
+  height: 60vh;
   overflow:scroll;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 50px;
-
-  border-top-left-radius: 20px;
+  display: grid;
+  justify-items: center;
+  /* border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  box-shadow: 0px 0px 3px black;
+  box-shadow: 0px 0px 3px black; */
   padding-top: 0px;
+  width: 100%;
 }
 
 .item {
   cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 20px;
   margin-bottom: 20px;
   height: 100px;
-  width: 430px;
+  width: 50;
   border-radius: 20px;
   box-shadow: 0px 0px 2px black;
-  display: grid;
-  grid-template-columns: 150px 1fr auto;
+  /* display: grid;
+  grid-template-columns: 150px 1fr auto; */
+  display: flex;
+  flex-direction: row;
 }
 .mobileItem {
   cursor: pointer;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  margin-bottom: 20px;
-  height: 90px;
-  width: 320px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 2px black;
-  display: grid;
-  grid-template-columns: 150px 1fr auto;
+  margin-bottom: 5px;
+  height: 60px;
+  /* border-bottom: 1px solid #dadada; */
+  /* width: 320px; */
+  /* border-radius: 20px;
+  box-shadow: 0px 0px 2px black; */
+  /* display: grid;
+  grid-template-columns: 150px 1fr auto; */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 .mobileItem:hover, .item:hover {
   background-color: #c9c7c7;
@@ -72,19 +89,24 @@
   grid-column: 1 / 2;
   height: 60px;
   width: 60px;
-  margin: auto;
+  /* margin: auto; */
+  margin-right: 30px;
 
   border-radius: 9px;
   object-fit: cover;
 }
 .description {
-  grid-column: 2 / 3;
-  padding-top: 8%;
+  /* grid-column: 2 / 3;
+  padding-top: 8%; */
+  display: grid;
+  grid-template-rows: 20px 20px;
 }
 .username {
+  grid-row: 1/2;
   position: relative;
 }
 .bio {
+  grid-row: 2/3;
   color: #646464;
   font-size: small;
   position: relative;
@@ -95,19 +117,32 @@
   .title, .messageSearch {
     width: 330px;
   }
+
+  .window {
+    margin: 0 auto;
+    width: 330px;
+  }
 }
 @media (min-width: 670px) {
   .title, .messageSearch {
     width: 620px;
   }
 
+  .window {
+    margin: 0 auto;
+    width: 620px;
+  }
 }
-@media (min-width: 905px) {
+@media (min-width: 808px) {
   .title, .messageSearch {
     width: 800px;
   }
-}
 
+  .window {
+    margin: 0 auto;
+    width: 800px;
+  }
+}
 
 
 .search {
