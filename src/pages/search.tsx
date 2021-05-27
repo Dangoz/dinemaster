@@ -9,6 +9,7 @@ import SearchStyle from "../styles/search.module.css";
 import { CircularProgress } from "@material-ui/core";
 import Search from "../api/search";
 
+
 const search = ({ user }) => {
   const [tagPool, setTagPool] = useState(null);
   const [tags, setTags] = useState(null);
@@ -50,7 +51,6 @@ const search = ({ user }) => {
               <Content userId={user.id} posts={posts} />
             </div>
         }
-
       </div>
 
       <Menu />

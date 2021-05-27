@@ -30,14 +30,19 @@ const profile = ({ user, visitor }) => {
           <Photo id={user.id} photo={user.photo} visitorStatus={visitorStatus} />
 
           {/* {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle}/>} */}
-
-          <div className={ProfileStyle.follow}>
+          <div className={ProfileStyle.followBtn}>
             {<FollowUnfollow user={user} hostId={visitor.id} style={ProfileStyle} changeCount={changeCount}/>}
-            <div className={ProfileStyle.follower}>{followerCount}<br />Followers</div>
-            <div className={ProfileStyle.following}>{user.following.length}<br />Following</div>
           </div>
 
-          <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus} />
+          <div className={ProfileStyle.follow}>             
+            <div className={ProfileStyle.follower}>{followerCount}<br />Followers</div>
+            <div className={ProfileStyle.following}>{user.following.length}<br />Following</div> 
+          </div>
+
+          <div className={ProfileStyle.bioWrapper}>
+            <Bio id={user.id} bio={user.bio} visitorStatus={visitorStatus} />
+          </div>
+      
 
           <div className={ProfileStyle.posts}>
             <div className={ProfileStyle.options}>

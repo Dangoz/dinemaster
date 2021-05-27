@@ -65,23 +65,36 @@ const messageRoom = ({ user, visitor, }) => {
 
   return (
     <>
-      {visitor.username} arrived at {user.username} <br />
-      <ArrowBackIosIcon onClick={backToMessage} className={ChatStyle.backButton} />
-      <input type="text" placeholder="message" value={message} onChange={handleChange} onKeyDown={enterKey} />
+      <div className={ChatStyle.wrapper}>
 
-      <input type="button" onClick={handleSubmit} value='send' /> <br />
+        <div className={ChatStyle.contentHeader}>
+          <ArrowBackIosIcon onClick={backToMessage} className={ChatStyle.backButton} />
+          {<img src={user.photo} className={ChatStyle.otherProfilePhoto + " " + ChatStyle.profilePhoto} />}
+          <h3 className={ChatStyle.username}>{user.username}</h3>
+        </div>
 
-      {chat.map((msg, index) => (
-        msg.userId === visitor.id
-          ? <div key={index}>
-            <img src={visitor.photo} className={ChatStyle.myProfilePhoto + " " + ChatStyle.profilePhoto} />
-            <div className={ChatStyle.myChat}> {msg.message} </div>
-          </div>
-          : <div key={index}>
-            <img src={user.photo} className={ChatStyle.otherProfilePhoto + " " + ChatStyle.profilePhoto} />
-            <div className={ChatStyle.otherChat}> {msg.message} </div>
-          </div>
-      ))}
+        <div className={ChatStyle.contentBody}>
+          
+            {chat.map((msg, index) => (
+            msg.userId === visitor.id
+              ? <div className={ChatStyle.myChatWrapper} key={index}>
+                  <div className={ChatStyle.myChat}> {msg.message} </div>
+                  {/* <img src={visitor.photo} className={ChatStyle.myProfilePhoto + " " + ChatStyle.profilePhoto} /> */}
+              </div>
+              : <div className={ChatStyle.otherChatWrapper} key={index}>
+                  <div className={ChatStyle.otherChat}> {msg.message} </div>
+                  {/* <img src={user.photo} className={ChatStyle.otherProfilePhoto + " " + ChatStyle.profilePhoto} /> */}
+              </div>
+            ))}
+          
+        </div>
+
+        <div className={ChatStyle.contentFooter}>
+          <input className={ChatStyle.textArea} type="text" placeholder="message" value={message} onChange={handleChange} onKeyDown={enterKey} />
+          <input className={ChatStyle.sendBtn} type="button" onClick={handleSubmit} value='send' />
+        </div>
+      
+      </div>
     </>
   )
 }

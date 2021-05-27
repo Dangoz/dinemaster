@@ -47,25 +47,25 @@ const post = ({ user }) => {
 
   return (
     <>
-      <div className={PostStyle.wrapper}>
-        <h2 className={PostStyle.title}>New Post</h2>
-        <form className={PostStyle.formWrapper} onSubmit={e => e.preventDefault()}>
-          <div className={PostStyle.postArea}>
-            <img className={PostStyle.preview} src={preview}/>
+      <div className={PostStyle.window}>
+        <div className={PostStyle.wrapper}>
+          <h2 className={PostStyle.title}>New Post</h2>
+          <form className={PostStyle.formWrapper} onSubmit={e => e.preventDefault()}>
+            <div className={PostStyle.postArea}>
+              <img className={PostStyle.preview} src={preview}/>
 
-            <button className={PostStyle.greenBtn} type="submit" value="Upload" onMouseDown={upload}>Upload</button>
-            <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange} ref={element => uploadRef.current = element}/>
-            <textarea className={PostStyle.content} name="message" placeholder="Enter content here..." onChange={captionChange} value={caption} maxLength={200}/>
-            <div>{`${caption ? caption.length : 0}/200`}</div>
-          </div>
+              <button className={PostStyle.greenChoose} type="submit" value="Upload" onMouseDown={upload}>Upload Picture</button>
+              <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange} ref={element => uploadRef.current = element}/>
+              <textarea className={PostStyle.content} name="message" placeholder="Enter content here..." onChange={captionChange} value={caption} maxLength={200}/>
+              <div className={PostStyle.contentCount}>{`${caption ? caption.length : 0}/200`}</div>
+            </div>
 
-          <TagForm pushTag={pushTag} removeTag={removeTag}/>
+            <TagForm pushTag={pushTag} removeTag={removeTag}/>
 
-          <button className={PostStyle.greenBtn} type="submit" value="Create" onMouseDown={createPost}>Create</button>
-        </form>
+            <button className={PostStyle.greenBtn} type="submit" value="Create" onMouseDown={createPost}>Create</button>
+          </form>
+        </div>
       </div>
-      
-
 
       <Menu />
     </>
