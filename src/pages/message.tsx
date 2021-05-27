@@ -15,12 +15,9 @@ const message = ({ user }) => {
 
   return (
     <>
-      
         <h2 className={MessageStyle.title}>Messages</h2>
-        <div className={MessageStyle.window}>
         <div className={MessageStyle.swipper}><Swiper userId={user.id} userFollowing={user.following} /></div>
         <RecentChats userId={user.id} />
-        </div>
       <Menu />
     </>
   )
@@ -36,4 +33,3 @@ export const getServerSideProps = requireAuthen(async function (ctx, user) {
 })
 
 export default message
-
