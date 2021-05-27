@@ -8,7 +8,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["orderByRelation"]
 }
 
 model User {
@@ -47,11 +48,12 @@ model Post {
 }
 
 model Likes {
-  id     String @id @default(uuid())
-  userId String
-  User   User   @relation(fields: [userId], references: [id])
-  postId String
-  Post   Post   @relation(fields: [postId], references: [id])
+  id        String   @id @default(uuid())
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  postId    String
+  Post      Post     @relation(fields: [postId], references: [id])
+  createdAt DateTime @default(now())
 
   @@unique([userId, postId])
   @@map(name: "likes")
@@ -93,8 +95,8 @@ model Room {
   id       String      @id @default(uuid())
   userRoom User_Room[]
 
-  @@map("room")
   Message Message[]
+  @@map("room")
 }
 
 model User_Room {
@@ -109,11 +111,11 @@ model User_Room {
 }
 
 model Message {
-  id       String   @id @default(uuid())
-  message  String
+  id        String   @id @default(uuid())
+  message   String
   createdAt DateTime @default(now())
-  userId   String
-  User     User     @relation(fields: [userId], references: [id])
-  roomId   String
-  Room     Room     @relation(fields: [roomId], references: [id])
+  userId    String
+  User      User     @relation(fields: [userId], references: [id])
+  roomId    String
+  Room      Room     @relation(fields: [roomId], references: [id])
 }

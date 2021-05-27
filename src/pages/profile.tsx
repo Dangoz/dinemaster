@@ -4,11 +4,8 @@ import Bio from "../components/profile/bio";
 import Menu from "../components/menu";
 import Photo from "../components/profile/photo";
 import Content from "../components/profile/content";
-import Post from "../api/post";
-import ContentLoader from "react-content-loader";
 import { useState, useEffect } from "react";
-
-import IUser from "../interface/user.interface"
+import { VisibilityOffRounded } from "@material-ui/icons";
 
 const profile = ({ user }) => {
   const [postState, setPostState] = useState('post');
@@ -36,14 +33,14 @@ const profile = ({ user }) => {
                 onClick={() => {
                   setPostState('post')
                 }}>Posts</button>
-              <button className={postState !== 'visit' ? ProfileStyle.optionInactive : undefined}
+              <button className={postState !== 'like' ? ProfileStyle.optionInactive : undefined}
                 onClick={() => {
-                  setPostState('visit')
-                }}>Visits</button>
+                  setPostState('like')
+                }}>Likes</button>
             </div>
 
 
-            <Content userId={user.id}/>
+            <Content userId={user.id} hostId={user.id}postState={postState}/>
 
           </div>
 

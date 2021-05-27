@@ -1,29 +1,15 @@
 .wrapper {
-    margin: 15px;
-    display: grid;
-    align-content: center;
+
 }
 
-.search {
-    font-size: medium;
-    background-color: #ECECEC;
-    border-radius: 29px;
-    border: none #ECECEC;
-    height: 47px;
-    padding-left: 10px;
-    justify-self: center;
+.searchWrapper {
+
 }
 
-.title {
-    padding-left: 10px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    justify-self: center;
+.tagPoolWrapper {
+
 }
 
-@media (min-width: 800px) {
-    .wrapper {
-      width: 800px;  
-      margin: 0 auto;
-    }    
+.contentWrapper {
+
 }

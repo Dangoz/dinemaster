@@ -4,6 +4,7 @@ import AuthenticationController from "./areas/authentication/controllers/authen.
 import PostController from "./areas/post/controllers/post.controller";
 import UserController from "./areas/user/controllers/user.controller";
 import MessageController from "./areas/message/controllers/message.controller";
+import SearchController from "./areas/search/controllers/search.controller";
 
 import nextApp from "./config/next.app";
 
@@ -14,7 +15,8 @@ const serve = async () => {
     new AuthenticationController(new AuthenticationService()),
     new PostController(),
     new UserController(),
-    new MessageController()
+    new MessageController(),
+    new SearchController()
   ]);
   
   server.start();

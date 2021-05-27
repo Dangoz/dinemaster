@@ -30,11 +30,24 @@ export default class PostService {
     return posts;
   }
 
-  async getUserPosts(userId: string): Promise<IPost[]> {
-    let posts = await this._postdb.getUserPosts(userId);
+  async getUserPosts(userId: string, hostId: string): Promise<IPost[]> {
+    let posts = await this._postdb.getUserPosts(userId, hostId);
 
     for (let i = 0; i < posts.length; i++) {
       posts[i] = await PostViewModel.build(posts[i]);
+    }
+    return posts;
+  }
+
+  async getUserLikes(userId: string, hostId: string): Promise<IPost[]> {
+    let posts = await this._postdb.getPostsLikedByUser(userId, hostId);
+    posts.sort((a, b) => {
+      return new Date(b.likesList[0].createdAt).getTime() - new Date(a.likesList[0].createdAt).getTime();
+    })
+
+    const options = userId == hostId ? {} : { likedByHost: true }
+    for (let i = 0; i < posts.length; i++) {
+      posts[i] = await PostViewModel.build(posts[i], options);
     }
     return posts;
   }
