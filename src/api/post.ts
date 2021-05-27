@@ -26,12 +26,13 @@ export default class Post {
 
     // make create post request to server
     console.log("creating post")
-    await api.post('/post/create', {
+    const result = await api.post('/post/create', {
       message: data.caption,
       source: url.split('?')[0],
       userId: user.id,
       tags: data.tags
     });
+    return result;
   }
 
   /**
