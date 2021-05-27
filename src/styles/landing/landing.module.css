@@ -46,6 +46,9 @@
   border-radius: 5px;
   cursor: pointer;
 }
+.coloredLink:hover {
+  background-color: #30a14e;
+}
 
 .uncoloredLink {
   margin-left: auto;
@@ -97,6 +100,12 @@
   cursor: pointer;
   margin-top: 25px;
   color: black;
+}
+.black:hover {
+  color: #0096fa;
+}
+.blackRegister:hover {
+  color: #0096fa;
 }
 .registerForm {
 

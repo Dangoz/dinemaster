@@ -110,12 +110,16 @@
   font-size: medium;
   border: none;
   justify-self: end;
+  cursor: pointer;
+}
+.greenBtn:hover {
+  background-color: #30a14e;
 }
 
 .greenChoose {
   height: 40px;
   width: 123px;
-  /* justify-self: end; */
+  cursor: pointer;
   border-radius: 5px;
   background: #54B970;
   color: white;
@@ -124,6 +128,9 @@
   /* justify-self: center; */
   grid-column: 1/2;
   grid-row: 2/3;
+}
+.greenChoose:hover {
+  background-color: #30a14e;
 }
 
 .formWrapper {

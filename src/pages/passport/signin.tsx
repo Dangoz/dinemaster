@@ -27,6 +27,7 @@ const signin = () => {
             id="email"
             name="email"
             placeholder="Email"
+            required
           /> <br />
 
           <input className={landingStyles.landingInput}
@@ -34,6 +35,7 @@ const signin = () => {
             id="password"
             name="password"
             placeholder="Password"
+            required
           /> <br />
 
 
