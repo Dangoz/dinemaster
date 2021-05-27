@@ -3,10 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { requireAuthen } from "../api/require.authen";
 import MessageStyle from "../styles/message/message.module.css";
 import Swiper from "../components/message/swiper";
+import RecentChats from "../components/message/recentChats";
 import router from "next/router";
 import Link from "next/link";
-
-import socket from "../config/socket";
 
 const message = ({ user }) => {
 
@@ -16,41 +15,15 @@ const message = ({ user }) => {
 
   return (
     <>
-      <div className={MessageStyle.wrapper}>
         <h2 className={MessageStyle.title}>Messages</h2>
-
-
-
-        <div className={MessageStyle.closeFri}>
-          <div className={MessageStyle.closeFriText}>{}</div>
-          <Swiper userId={user.id} userFollowing={user.following}/>
-        </div>
-
-        <div className={MessageStyle.item} onClick={e => {openChat(e, '123')}}>
-          
-          <img className={MessageStyle.itemImg}/>
-          <div className={MessageStyle.itemName}>{}</div>
-          {/* <div className={MessageStyle.itemTime}>{new Date().toString()}</div> */} 
-        </div>
-
-        <div className={MessageStyle.item}>
-          <div className={MessageStyle.itemImg}>img</div>
-          <div className={MessageStyle.itemName}>Name</div>
-          <div className={MessageStyle.itemTime}>Time</div>
-        </div>
-        <div className={MessageStyle.item}>
-          <div className={MessageStyle.itemImg}>img</div>
-          <div className={MessageStyle.itemName}>Name</div>
-          <div className={MessageStyle.itemTime}>Time</div>
-        </div>
-      </div>
-    
+        <div className={MessageStyle.swipper}><Swiper userId={user.id} userFollowing={user.following} /></div>
+        <RecentChats userId={user.id} />
       <Menu />
     </>
   )
 }
 
-export const getServerSideProps = requireAuthen(async function(ctx, user) {
+export const getServerSideProps = requireAuthen(async function (ctx, user) {
 
   return {
     props: {

@@ -18,6 +18,7 @@ class MessageController implements IController {
     this.router.get(`${this.path}/room/:uid1/:uid2`, ensureAuthenticated, this.getRoom);
     this.router.post(`${this.path}/default-swiper/:uid`, ensureAuthenticated, this.generateDefaultSwiper);
     this.router.post(`${this.path}/search`, ensureAuthenticated, this.searchUser);
+    this.router.get(`${this.path}/recent-chats/:uid`, ensureAuthenticated, this.recentChats);
   }
 
   private getRoom = async (req: express.Request, res: express.Response) => {
@@ -37,6 +38,11 @@ class MessageController implements IController {
     const queryList: string[] = req.body.queryList;
     const users: IUser[] = await this.messageService.searchUser(queryList);
     res.status(200).json({ users });
+  }
+
+  private recentChats = async (req: express.Request, res: express.Response) => {
+    const chats: IUser[] = await this.messageService.getRecentChats(req.params.uid);
+    res.status(200).json({ chats })
   }
 }
 

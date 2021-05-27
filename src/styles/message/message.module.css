@@ -1,7 +1,104 @@
-.wrapper {
-  display: grid;
-  margin: 20px;
+.title {
+  top: 18px;
 }
+.title, .messageSearch {
+  position: relative;
+  transition: 1s;
+  margin: 0 auto;
+  width: 420px;
+}
+.swipper {
+  margin-top: 10px ;
+}
+
+.wrapper {
+  width: 460px;
+  height: 61vh;
+  overflow:scroll;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px 0px 1px black;
+  padding-top: 0px;
+}
+.mobileWrapper {
+  width: 350px;
+  height: 70vh;
+  overflow:scroll;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px 0px 3px black;
+  padding-top: 0px;
+}
+
+.item {
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 100px;
+  width: 430px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 2px black;
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+}
+.mobileItem {
+
+}
+.mobileItem:hover, .item:hover {
+  background-color: #c9c7c7;
+}
+
+.photo {
+  grid-column: 1 / 2;
+  height: 60px;
+  width: 60px;
+  margin: auto;
+
+  border-radius: 9px;
+  object-fit: cover;
+}
+.description {
+  grid-column: 2 / 3;
+  padding-top: 8%;
+}
+.username {
+  position: relative;
+}
+.bio {
+  color: #646464;
+  font-size: small;
+  position: relative;
+  top: 10px;
+}
+
+@media (max-width: 440px) {
+  .title, .messageSearch {
+    width: 330px;
+  }
+}
+@media (min-width: 670px) {
+  .title, .messageSearch {
+    width: 620px;
+  }
+
+}
+@media (min-width: 905px) {
+  .title, .messageSearch {
+    width: 800px;
+  }
+}
+
+
 
 .search {
   font-size: medium;
@@ -10,45 +107,8 @@
   border: none #ECECEC;
   
   height: 50px;
-  padding-left: 12px;
+  padding-left: 13px;
 }
-
-
-.closeFri {
-  margin-top: 10px;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  background-color: grey;
-  margin-top: 10px;
-  margin-right: 10px;
-  height: 100px;
-}
-
-.itemImg {
-  height: 60px;
-  width: 60px;
-  background-color: white;
-  margin: 5px;
-}
-
-.itemName {
-  margin: 5px;
-  background-color: white;
-}
-
-.itemTime {
-  background-color: white;
-  margin: 5px;
-}
-
-@media (min-width: 800px) {
-  .wrapper {
-    width: 800px;  
-    margin: 0 auto;
-  }
-
-  
+.progress {
+  padding-top: 100px;
 }
