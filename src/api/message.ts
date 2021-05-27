@@ -21,4 +21,9 @@ export default class Message {
     const response = await api.post('/message/search', { queryList });
     return response.data.users;
   }
+
+  static async getRecentChats(userId: string) {
+    const response = await api.get(`/message/recent-chats/${userId}`);
+    return response.data.chats;
+  }
 }

@@ -16,10 +16,10 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
 
     const queryList = query.trim().split(" ").filter(word => word != "")
     Message.searchUser(queryList)
-    .then(users => {
-      setUsers(users);
-      setIsLoading(false);
-    })
+      .then(users => {
+        setUsers(users);
+        setIsLoading(false);
+      })
   }
 
   useEffect(() => {
@@ -32,8 +32,10 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
 
   return (
     <>
-      <input onChange={searchInput}
-        value={input} className={MessageStyle.search} type="text" placeholder="Search" maxLength={50}/>
+      <div className={MessageStyle.messageSearch}>
+        <input onChange={searchInput}
+          value={input} className={MessageStyle.search} type="text" placeholder="Search" maxLength={50} />
+      </div>
     </>
   )
 }

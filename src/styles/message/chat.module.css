@@ -101,6 +101,10 @@
   background: #dadada;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  cursor: pointer;
+}
+.sendBtn:hover {
+  background-color: #646464;
 }
 
 .contentFooter {

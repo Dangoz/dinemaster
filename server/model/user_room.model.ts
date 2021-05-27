@@ -1,4 +1,4 @@
-import { User_Room } from "@prisma/client";
+import { User_Room, User } from "@prisma/client";
 import prisma from "./prisma.client";
 
 export default class User_RoomModel {
@@ -31,5 +31,31 @@ export default class User_RoomModel {
       ]
     });
     console.log('result', result.count);
+  }
+
+  async getRoomsByUser(userId: string): Promise<{ roomId: string }[]> {
+    const rooms = await prisma.user_Room.findMany({
+      where: {
+        userId
+      },
+      select: {
+        roomId: true
+      }
+    })
+    return rooms;
+  }
+
+  async getOtherUserByRoom(userId: string, roomId: string): Promise<(User_Room & { user: User; })> {
+    const room = await prisma.user_Room.findMany({
+      where: {
+        roomId,
+        NOT: { userId }
+      },
+      include: {
+        user: true
+      },
+      take: 1
+    })
+    return room[0];
   }
 }
