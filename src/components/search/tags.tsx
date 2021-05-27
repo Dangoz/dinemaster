@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+import SearchStyle from "../../styles/search.module.css";
 
 const Tags = ({ tags }) => {
   return (
-    <div>
+    <div className={SearchStyle.tags}>
        {tags.map((tag, index) => (
-         <div key={index}>#{tag.name}</div>
+         <div className={SearchStyle.individualTag} key={index}>#{tag.name}</div>
        ))}
     </div>
   )

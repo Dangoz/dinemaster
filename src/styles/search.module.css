@@ -1,15 +1,70 @@
 .wrapper {
-
+    margin: 20px;
+    display: grid;
+    align-items: center;
 }
 
 .searchWrapper {
-
+  
 }
 
+/* before typing */
 .tagPoolWrapper {
-
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 1px solid #dadada;
 }
 
-.contentWrapper {
+.tagItems {
+    display: grid;
+    margin-top: 10px;
+}
 
+.tagItem {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tagItemName {
+    font-size: medium;
+}
+
+.tagItemCount {
+    font-size: small;
+    color: #646464;
+}
+
+/* loading */
+.CircularProgressContainer {
+    justify-self: center;
+    margin-top: 200px;
+}
+
+
+/* after typing */
+.contentWrapper {
+    display: grid;
+    border-top: 1px solid #dadada;
+    margin-top: 15px;
+}
+
+.tags {
+    display: flex;
+    margin-top: 8px;
+}
+
+.individualTag {
+    background-color: #dadada;
+    margin-left: 10px;
+    margin-right: 5px;
+    border-radius: 15px;
+    font-size: medium;
+    padding: 5px;
+}
+
+@media (min-width: 800px) {
+    .wrapper {
+      width: 800px;
+      margin: 0 auto;  
+    }
 }

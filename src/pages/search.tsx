@@ -39,7 +39,7 @@ const search = ({ user }) => {
 
         {isLoading
           ? <div className={SearchStyle.CircularProgressContainer}>
-            <CircularProgress className={SearchStyle.CircularProgress} value={100} color="inherit" size={33} />
+            <CircularProgress className={SearchStyle.CircularProgress} value={100} color="inherit" size={80} />
           </div>
 
           : isDefault
