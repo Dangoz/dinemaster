@@ -23,6 +23,7 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
   }
 
   useEffect(() => {
+    console.log('query', query);
     if (query.trim() === '') return setIsDefault(true);
 
     setIsDefault(false);

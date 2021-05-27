@@ -1,8 +1,9 @@
 import MessageStyle from "../../styles/message/message.module.css";
 import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
+import Search from "../../api/search";
 
-const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
+const SearchBar = ({ setPosts, setTags, setIsLoading, setIsDefault }) => {
   const [input, setInput] = useState('');
   const [query] = useDebounce(input, 1000);
 
@@ -13,12 +14,14 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
   const parseQuery = () => {
     setIsLoading(true);
 
-    // const queryList = query.trim().split(" ").filter(word => word != "")
-    // Message.searchUser(queryList)
-    // .then(users => {
-    //   setUsers(users);
-    //   setIsLoading(false);
-    // })
+    const queryList = query.trim().split(" ").filter(word => word != "")
+    Search.searchQuery(queryList)
+      .then(({ tags, posts}) => {
+        console.log("tags", tags, "posts", posts);
+        setTags(tags);
+        setPosts(posts);
+        setIsLoading(false);
+      })
   }
 
   useEffect(() => {
@@ -36,4 +39,4 @@ const Search = ({ setUsers, setIsLoading, setIsDefault }) => {
   )
 }
 
-export default Search
+export default SearchBar

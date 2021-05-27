@@ -5,12 +5,12 @@ import StackGrid, { transitions } from "react-stack-grid";
 import ImageItem from "../imageItem";
 import { CircularProgress } from "@material-ui/core";
 
-const Content = ({ userId }) => {
+const Content = ({ userId, posts }) => {
   const [isMobile, setIsMobile] = useState(null);
   const [animation, setAnimation] = useState(0.45);
   const gridRef = useRef(null);
 
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [size, setSize] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -18,23 +18,26 @@ const Content = ({ userId }) => {
   useEffect(() => {
     // detect if device is mobile
     setIsMobile(require("../../config/isMobile")(navigator.userAgent));
-    loadMorePosts();
+    // loadMorePosts();
   }, [])
 
+  useEffect(() => {
+    console.log('posts', posts);
+  }, [posts])
+
   const loadMorePosts = () => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    Post.getPosts(userId, size, 10)
-      .then(data => {
+    // Post.getPosts(userId, size, 10)
+    //   .then(data => {
 
-        console.log("posts",posts,"data",data);
-        setPosts(posts => [...posts, ...data]);
-        setSize(size + 1);
-        setHasMore(data.length > 9);
-        gridRef.current.updateLayout();
-        setIsLoading(false);
-      })
-
+    //     console.log("posts",posts,"data",data);
+    //     setPosts(posts => [...posts, ...data]);
+    //     setSize(size + 1);
+    //     setHasMore(data.length > 9);
+    //     gridRef.current.updateLayout();
+    //     setIsLoading(false);
+    //   })
   }
 
   return (
@@ -61,17 +64,17 @@ const Content = ({ userId }) => {
         {posts ? posts.map((post, index) => (
           <ImageItem key={index} post={post} userId={userId} />
         )) :
-          []
+          <p>oh no</p>
         }
       </StackGrid>
 
-      <div className={HomeStyle.loadMore}>
+      {/* <div className={HomeStyle.loadMore}>
         {!hasMore
           ? <button className={HomeStyle.theEndButton}>Reached the End</button>
           : isLoading
             ? <CircularProgress className={HomeStyle.loadMoreProgress} value={100} color="inherit" size={33} />
             : <button className={HomeStyle.loadMoreButton} onClick={loadMorePosts}>Load More</button>}
-      </div>
+      </div> */}
     </>
   )
 }
