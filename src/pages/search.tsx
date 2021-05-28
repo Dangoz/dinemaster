@@ -8,9 +8,12 @@ import { useState, useEffect } from "react";
 import SearchStyle from "../styles/search.module.css";
 import { CircularProgress } from "@material-ui/core";
 import Search from "../api/search";
+import { useRouter } from "next/router";
 
 
 const search = ({ user }) => {
+  const router = useRouter();
+  // const [firstRender, setFirstRender] = useState(true);
   const [tagPool, setTagPool] = useState(null);
   const [tags, setTags] = useState(null);
   const [posts, setPosts] = useState(null);
@@ -29,6 +32,10 @@ const search = ({ user }) => {
   useEffect(() => {
     if (isDefault) generateTagPool()
   }, [isDefault])
+
+  useEffect(() => {
+    if (router.query.tags) setIsDefault(false);
+  }, [])
 
   return (
     <>

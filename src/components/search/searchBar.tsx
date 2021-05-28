@@ -9,10 +9,14 @@ const SearchBar = ({ setPosts, setTags, setIsLoading, setIsDefault }) => {
   const [input, setInput] = useState('');
   const [query] = useDebounce(input, 1000);
 
+  // http://localhost:3000/search?tags=yummy
+
   useEffect(() => {
-    const { tags } = router.query;
-    console.log("router", tags);
-    parseQuery(tags);
+    if (router.query.tags) {
+      const { tags } = router.query;
+      console.log("router", tags);
+      parseQuery(tags);
+    }
   }, [router.query])
 
   const searchInput = async (event) => {
@@ -23,8 +27,8 @@ const SearchBar = ({ setPosts, setTags, setIsLoading, setIsDefault }) => {
     setIsLoading(true);
     if (tags) setIsDefault(false);
     const queryList = tags
-    ? tags.trim().split(" ").filter(word => word != "")
-    : query.trim().split(" ").filter(word => word != "")
+      ? tags.trim().split(" ").filter(word => word != "")
+      : query.trim().split(" ").filter(word => word != "")
     Search.searchQuery(queryList)
       .then(({ tags, posts }) => {
         console.log("tags", tags, "posts", posts);
