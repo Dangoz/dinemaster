@@ -13,12 +13,12 @@ import { useRouter } from "next/router";
 
 const search = ({ user }) => {
   const router = useRouter();
-  // const [firstRender, setFirstRender] = useState(true);
+  const [firstRender, setFirstRender] = useState(true);
   const [tagPool, setTagPool] = useState(null);
   const [tags, setTags] = useState(null);
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDefault, setIsDefault] = useState(true);
+  const [isDefault, setIsDefault] = useState(null);
 
   const generateTagPool = () => {
     setIsLoading(true)
