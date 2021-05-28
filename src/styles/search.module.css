@@ -22,11 +22,16 @@
 .tagItems {
     display: grid;
     margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .tagItem {
     margin-top: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+.tagItem:hover > .tagItemName {
+    color: #0096fa;
 }
 
 .tagItemName {
@@ -67,6 +72,11 @@
     font-size: medium;
     padding: 10px;
     margin-bottom: 8px;
+    cursor: pointer;
+}
+.individualTag:hover {
+    color: black;
+    background-color: #0096fa;
 }
 
 @media (min-width: 800px) {
