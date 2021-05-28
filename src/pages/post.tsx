@@ -36,6 +36,7 @@ const post = ({ user }) => {
         setCaption('');
         setPreview('/logo_black_vertical.svg');
 
+        setIsReset(false);
         setIsLoading(false);
       })
   }
