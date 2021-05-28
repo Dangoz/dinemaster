@@ -1,6 +1,7 @@
 import IPost from "../interface/post.interface";
 import IUser from "../interface/user.interface"
 import api from "../config/axios";
+import { GetServerSidePropsContext } from "next";
 
 export default class Post {
 
@@ -61,16 +62,27 @@ export default class Post {
   /**
    * get home page posts for a user
    */
-   static async getPosts(id: string, size: number, limit: number): Promise<IPost[]> {
+  static async getPosts(id: string, size: number, limit: number): Promise<IPost[]> {
     const response = await api({
       method: 'get',
       url: `/post/home/${id}?size=${size}&limit=${limit}`,
       withCredentials: true
     });
     const posts = response.data.posts;
- 
+
     return posts;
   }
 
-  
+  static async getPostById(ctx: GetServerSidePropsContext, pid: string): Promise<IPost> {
+    const response = await api.get(`post/get/${pid}`,
+      { headers: ctx.req.headers.cookie ? { cookie: ctx.req.headers.cookie } : undefined });
+    return response.data.post;
+  }
+
+  static async getPostsByTags(tags: string[], pid: string): Promise<IPost[]> {
+    const response = await api.post(`post/tags/`,
+      { tags, pid },
+      { withCredentials: true });
+    return response.data.posts;
+  }
 }

@@ -11,4 +11,5 @@ export default interface IPost {
   comments?: number;
   username?: string;
   // commentList?: Array<IComment>;
+  tags?: String[];
 }

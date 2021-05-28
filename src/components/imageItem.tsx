@@ -3,6 +3,8 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useState } from "react";
 import User from "../api/user";
+import router from "next/router";
+import Link from "next/link";
 
 const styles = {
   likedIcon: {
@@ -34,9 +36,14 @@ const ImageItem = ({ post, userId }) => {
     console.log("open post!")
   }
 
+  const showPost = async (event) => {
+    console.log(`TO ${post.id}!`);
+    router.push(`/post/${post.id}`);
+  }
+
   return (
     <>
-      <div className={HomeStyle.itemBox} >
+      <div className={HomeStyle.itemBox} onClick={showPost}>
 
         <img className={HomeStyle.item} src={post.source} onClick={openPost}/>
         

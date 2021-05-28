@@ -1,5 +1,5 @@
 // import IComment from "./comment.interface";
-import { Likes } from "@prisma/client";
+import { Likes, Post_Tag } from "@prisma/client";
 
 export default interface IPost {
   id: string;
@@ -14,4 +14,5 @@ export default interface IPost {
 
   likedByUser?: boolean;
   likesList?: { createdAt?: Date; userId?: string; postId?: string }[];
+  tags?: string[];
 }

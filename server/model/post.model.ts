@@ -1,6 +1,7 @@
 import prisma from "./prisma.client";
 import ITag from "../interfaces/tag.interface";
 import IPost from "../interfaces/post.interface";
+import { Post, Likes, Post_Tag, Tag } from "@prisma/client";
 
 export default class PostModel {
 
@@ -87,6 +88,41 @@ export default class PostModel {
       }
     })
     return posts;
+  }
+
+  async getPostsByTagName(name: string, userId: string, postId: string): Promise<IPost[]> {
+    const posts = await prisma.post.findMany({
+      where: {
+        tags: {
+          some: {
+            Tag: {
+              name
+            }
+          }
+        },
+        NOT: { id: postId }
+      },
+      include: {
+        likesList: {
+          where: { userId }
+        }
+      }
+    })
+    return posts;
+  }
+
+  async getPostById(id: string, userId: string): Promise<IPost> {
+    const post = await prisma.post.findUnique({
+      where: {
+        id
+      },
+      include: {
+        likesList: {
+          where: { userId }
+        }
+      }
+    })
+    return post;
   }
 
   // async deletePostById(id: string): Promise<void> {

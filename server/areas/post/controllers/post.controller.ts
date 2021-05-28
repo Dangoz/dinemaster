@@ -15,10 +15,12 @@ class PostController implements IController {
   }
 
   private initializeRoutes() {
+    this.router.get(`${this.path}/get/:pid`, ensureAuthenticated, this.getPostById);
     this.router.get(`${this.path}/home/:uid`, ensureAuthenticated, this.getPosts);
     this.router.get(`${this.path}/user/:uid/:hid`, ensureAuthenticated, this.getUserPosts);
     this.router.get(`${this.path}/user-likes/:uid/:hid`, ensureAuthenticated, this.getUserLikes);
     this.router.post(`${this.path}/create`, ensureAuthenticated, this.createPost);
+    this.router.post(`${this.path}/tags/`, ensureAuthenticated, this.getPostsByTags);
     this.router.get('/s3url', ensureAuthenticated, this.createUrl);
   }
 
@@ -28,6 +30,12 @@ class PostController implements IController {
     status
       ? res.status(200).json({ message: "post created" })
       : res.status(300).json({ error: "post not created" })
+  }
+
+  private getPostById = async (req: express.Request, res: express.Response) => {
+    const { pid } = req.params;
+    const post: IPost = await this.postService.getPostById(pid, req.user.id);
+    res.status(200).json({ post });
   }
 
   private createUrl = async (req: express.Request, res: express.Response) => {
@@ -52,6 +60,13 @@ class PostController implements IController {
   private getUserLikes = async (req: express.Request, res: express.Response) => {
     const { uid, hid } = req.params;
     const posts: IPost[] = await this.postService.getUserLikes(uid, hid);
+    res.status(200).json({ posts });
+  }
+
+  private getPostsByTags = async (req: express.Request, res: express.Response) => {
+    const { tags, pid } = req.body;
+    const posts: IPost[] = await this.postService.getPostsByTags(tags, req.user.id, pid);
+
     res.status(200).json({ posts });
   }
 }

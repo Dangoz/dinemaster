@@ -1,9 +1,9 @@
 import PostModel from "../../../model/post.model";
 import TagModel from "../../../model/tag.model";
 import Post_TagModel from "../../../model/post_tag.model";
-import express from "express";
 import IPost from "../../../interfaces/post.interface";
 import PostViewModel from "../../../viewmodel/post.viewmodel";
+import Sort from "../../util/sort";
 
 export default class PostService {
   private _postdb: PostModel = new PostModel();
@@ -19,6 +19,12 @@ export default class PostService {
 
     if (newPost === undefined) return false;
     return true;
+  }
+
+  async getPostById(pid: string, userId: string): Promise<IPost> {
+    let post = await this._postdb.getPostById(pid, userId);
+    post = await PostViewModel.build(post, { tags: true });
+    return post;
   }
 
   async getPosts(userId: string, size: number, limit: number): Promise<IPost[]> {
@@ -49,6 +55,21 @@ export default class PostService {
     for (let i = 0; i < posts.length; i++) {
       posts[i] = await PostViewModel.build(posts[i], options);
     }
+    return posts;
+  }
+
+  async getPostsByTags(tags: string[], userId: string, postId: string): Promise<IPost[]> {
+    let posts: IPost[] = [];
+    for (let tag of tags) {
+      posts = [...posts, ...(await this._postdb.getPostsByTagName(tag, userId, postId))];
+    }
+
+    posts = await Sort.sortByFrequency(posts);
+
+    for (let i = 0; i < posts.length; i++) {
+      posts[i] = await PostViewModel.build(posts[i]);
+    }
+    console.log("postsByTag", posts);
     return posts;
   }
 }

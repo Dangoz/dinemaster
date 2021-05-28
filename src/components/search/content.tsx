@@ -62,7 +62,7 @@ const Content = ({ userId, posts }) => {
         {posts ? posts.map((post, index) => (
           <ImageItem key={index} post={post} userId={userId} />
         )) :
-          <p>oh no</p>
+          <p>No Post Found</p>
         }
       </StackGrid>
 
