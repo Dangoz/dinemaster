@@ -13,7 +13,6 @@ import { useRouter } from "next/router";
 
 const search = ({ user }) => {
   const router = useRouter();
-  const [firstRender, setFirstRender] = useState(true);
   const [tagPool, setTagPool] = useState(null);
   const [tags, setTags] = useState(null);
   const [posts, setPosts] = useState(null);
@@ -30,6 +29,7 @@ const search = ({ user }) => {
   }
 
   useEffect(() => {
+    console.log('isdefault', isDefault);
     if (isDefault) generateTagPool()
   }, [isDefault])
 
@@ -50,7 +50,7 @@ const search = ({ user }) => {
           </div>
 
           : isDefault
-            ? <div className={SearchStyle.tagPoolWrapper}>
+            ? tagPool && <div className={SearchStyle.tagPoolWrapper}>
               <TagPool tagPool={tagPool} />
             </div>
             : <div className={SearchStyle.contentWrapper}>
