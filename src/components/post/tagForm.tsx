@@ -36,7 +36,10 @@ const TagForm = ({ pushTag, removeTag, isReset }) => {
   }
 
   useEffect(() => {
-    if (isReset) return setTags([]);
+    if (isReset) {
+      setTags([]);
+      setCount(0);
+    }
   }, [isReset])
 
   return (

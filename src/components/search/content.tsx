@@ -4,6 +4,7 @@ import Post from "../../api/post";
 import StackGrid, { transitions } from "react-stack-grid";
 import ImageItem from "../imageItem";
 import { CircularProgress } from "@material-ui/core";
+import SearchStyle from "../../styles/search.module.css";
 
 const Content = ({ userId, posts }) => {
   const [isMobile, setIsMobile] = useState(null);
@@ -40,7 +41,7 @@ const Content = ({ userId, posts }) => {
 
   return (
     <>
-      <StackGrid className={HomeStyle.content}
+      <StackGrid className={HomeStyle.content + " " + SearchStyle.stackGridContent}
         gridRef={element => gridRef.current = element}
         columnWidth={isMobile ? 155 : 205}
         gutterWidth={25}

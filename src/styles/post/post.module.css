@@ -30,12 +30,7 @@
 }
 
 .choosePic {
-  width: 0px;
-  height: 0px;
-  grid-column: 1/2;
-  grid-row: 2/3;
-  margin-left: 0px;
-  /* margin: 0 auto; */
+  display: none;
 }
 
 .content {
@@ -44,6 +39,7 @@
   grid-column: 2/3;
   grid-row: 1/2;
   border: none;
+  z-index: 3;
 }
 
 .contentCount {
@@ -138,9 +134,11 @@
   color: white;
   font-size: medium;
   border: none;
-  /* justify-self: center; */
+  position: relative;
+  display: block;
   grid-column: 1/2;
   grid-row: 2/3;
+  z-index: 7;
 }
 .greenChoose:hover {
   background-color: #30a14e;
@@ -162,30 +160,29 @@
     width: 100vw;
   }
 }
-
 /* prompt */
 .prompt {
   width: 200px;
   height: 200px;
-  z-index: 10;
-
-  position: fixed;
-  top: 20%;
-  left: 30%;
+  z-index: 5;
+  /* position: absolute; */
   opacity: 0;
-  /* transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s; */
   transition: 1s;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 20vh;
+  pointer-events: none;
 }
 .promptShow {
-  opacity: 1;
-  
   width: 200px;
   height: 200px;
-  z-index: 10;
-
-  position: fixed;
-  top: 20%;
-  left: 30%;
-  /* transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s; */
+  z-index: 5;
+  /* position: absolute; */
+  opacity: 1;
   transition: 1s;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 20vh;
 }

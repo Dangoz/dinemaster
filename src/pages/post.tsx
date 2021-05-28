@@ -73,9 +73,9 @@ const post = ({ user }) => {
 
   return (
     <>
-      <img className={isPrompt ? PostStyle.promptShow : PostStyle.prompt} src={'/prompt.png'} />
       <div className={PostStyle.window}>
         <div className={PostStyle.wrapper}>
+        <img className={isPrompt ? PostStyle.promptShow : PostStyle.prompt} src={'/prompt.png'} />
           <h2 className={PostStyle.title}>New Post</h2>
           <form className={PostStyle.formWrapper} onSubmit={e => e.preventDefault()}>
             <div className={PostStyle.postArea}>
@@ -83,7 +83,7 @@ const post = ({ user }) => {
 
               <button className={PostStyle.greenChoose} type="submit" value="Upload" onMouseDown={upload}>Upload Picture</button>
               <input className={PostStyle.choosePic} type="file" accept="image/*" name="image" onChange={fileChange} ref={element => uploadRef.current = element} />
-              <textarea className={PostStyle.content} name="message" placeholder="Enter content here..." onChange={captionChange} value={caption} maxLength={200} />
+              <textarea className={PostStyle.content} name="message" placeholder="Enter description here..." onChange={captionChange} value={caption} maxLength={200} />
               <div className={PostStyle.contentCount}>{`${caption ? caption.length : 0}/200`}</div>
             </div>
 

@@ -24,7 +24,7 @@ const Content = ({ userId }) => {
   const loadMorePosts = () => {
     setIsLoading(true);
 
-    Post.getPosts(userId, size, 10)
+    Post.getPosts(userId, size, 15)
       .then(data => {
 
         console.log("posts",posts,"data",data);
